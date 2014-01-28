@@ -2,7 +2,7 @@ NAME
     Faker - Extensible Fake Data Generator
 
 VERSION
-    version 0.001
+    version 0.01
 
 DESCRIPTION
     Faker is a Perl library that generates fake data for you. The design is
@@ -66,39 +66,39 @@ FORMATTERS
     locale.
 
   Faker::Provider::en_US::Address
-        city_prefix                        East
-        secondary_address                  Suite 666
-        state_name                         Utah
-        state_abbr                         SD
-        city_suffix                        bury
-        street_suffix                      Avenue
-        building_number                    32
-        city                               Lake Christopville
-        street_name                        Norene Circle
-        street_address                     28 Maritza Avenue Apt. 436
-        postal_code                        84049
-        address                            2556 Wuckert Street, Dale, PR 48375-4904
-        country_name                       Russian Federation
-        latitude                           -51.511412
-        longitude                          -72.341657
+        city_prefix                          East
+        secondary_address                    Suite 666
+        state_name                           Utah
+        state_abbr                           SD
+        city_suffix                          bury
+        street_suffix                        Avenue
+        building_number                      32
+        city                                 Lake Christopville
+        street_name                          Norene Circle
+        street_address                       28 Maritza Avenue Apt. 436
+        postal_code                          84049
+        address                              2556 Wuckert Street, Dale, PR 48375-4904
+        country_name                         Russian Federation
+        latitude                             -51.511412
+        longitude                            -72.341657
 
   Faker::Provider::en_US::Color
-        color_name                         DeepPink
-        hex_color                          #bbab85
-        rgbcolors                          50,251,69
-        rgbcolors_css                      rgb(220,14,160)
-        safe_color_name                    blue
-        safe_hex_color                     #ff00b6
+        color_name                           DeepPink
+        hex_color                            #bbab85
+        rgbcolors                            50,251,69
+        rgbcolors_css                        rgb(220,14,160)
+        safe_color_name                      blue
+        safe_hex_color                       #ff00b6
 
   Faker::Provider::en_US::Company
-        buzzword_type1                      implement
-        buzzword_type2                      viral
-        buzzword_type3                      supply-chains
-        catch_phase                         paradigms user-centric evolve
-        company                             Lockman, Feeney and Collier
-        company_suffix                      Inc.
-        jargon_buzz_word                    synergy
-        jargon_edge_word                    Enterprise-wide
+        buzzword_type1                       implement
+        buzzword_type2                       viral
+        buzzword_type3                       supply-chains
+        catch_phase                          paradigms user-centric evolve
+        company                              Lockman, Feeney and Collier
+        company_suffix                       Inc.
+        jargon_buzz_word                     synergy
+        jargon_edge_word                     Enterprise-wide
 
   Faker::Provider::en_US::DateTime
         century                              XIX

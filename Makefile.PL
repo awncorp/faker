@@ -29,7 +29,7 @@ my %WriteMakefileArgs = (
     "Moo" => 0
   },
   "TEST_REQUIRES" => {},
-  "VERSION" => "0.001",
+  "VERSION" => "0.01",
   "test" => {
     "TESTS" => "t/*.t t/faker/*.t t/faker/generator/*.t"
   }

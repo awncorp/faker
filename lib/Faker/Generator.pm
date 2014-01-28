@@ -87,4 +87,8 @@ method AUTOLOAD (@arguments) {
     );
 }
 
+method DESTROY {
+    # noop
+}
+
 1;

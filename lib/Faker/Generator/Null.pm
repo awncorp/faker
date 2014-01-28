@@ -9,4 +9,8 @@ method AUTOLOAD {
     return undef;
 }
 
+method DESTROY {
+    # noop
+}
+
 1;
