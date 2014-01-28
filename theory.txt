@@ -1,0 +1,10 @@
+Fake data with semantics for your testing needs with an awesome benefit
+, a better (more organic) approach towards testing.
+
+Typically you'll write a at-least one test using "good" data which you expect to
+pass, and another test using "bad" data which you expect to fail. what if
+instead you wrote a single test-case which is fed "generated" data, which has
+the ability to pass or fail at random, and you design the test to verify
+whatever the outcome is, leaving the test only fail on exceptions.
+
+... to be continued
