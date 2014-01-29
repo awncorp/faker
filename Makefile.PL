@@ -24,12 +24,13 @@ my %WriteMakefileArgs = (
     "DateTime" => 0,
     "DateTime::TimeZone" => 0,
     "Exception::Tiny" => 0,
+    "Function::Parameters" => 0,
     "Hash::Merge::Simple" => 0,
     "Module::Find" => 0,
     "Moo" => 0
   },
   "TEST_REQUIRES" => {},
-  "VERSION" => "0.01",
+  "VERSION" => "0.02",
   "test" => {
     "TESTS" => "t/*.t t/faker/*.t t/faker/generator/*.t"
   }
@@ -41,6 +42,7 @@ my %FallbackPrereqs = (
   "DateTime" => 0,
   "DateTime::TimeZone" => 0,
   "Exception::Tiny" => 0,
+  "Function::Parameters" => 0,
   "Hash::Merge::Simple" => 0,
   "Module::Find" => 0,
   "Moo" => 0
