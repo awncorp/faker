@@ -17,6 +17,7 @@ MYMETA.yml
 nytprof.out
 pm_to_blib
 .vim/.netrwhist
+tags
 /.carton
 /.vagrant
 /eg
