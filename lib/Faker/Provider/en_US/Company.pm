@@ -251,6 +251,9 @@ methodologies
 
 @@ company_suffix_data
 Co.
+Consulting
+Electronics
+Entertainment
 Inc.
 Incorporated
 and Sons
@@ -258,6 +261,7 @@ LLC
 Group
 PLC
 Ltd.
+Ventures
 Worldwide
 
 @@ jargon_edge_data
