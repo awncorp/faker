@@ -27,10 +27,11 @@ my %WriteMakefileArgs = (
     "Function::Parameters" => 0,
     "Hash::Merge::Simple" => 0,
     "Module::Find" => 0,
-    "Moo" => 0
+    "Moo" => 0,
+    "Type::Tiny" => 0
   },
   "TEST_REQUIRES" => {},
-  "VERSION" => "0.02",
+  "VERSION" => "0.03",
   "test" => {
     "TESTS" => "t/*.t t/faker/*.t t/faker/generator/*.t"
   }
@@ -45,7 +46,8 @@ my %FallbackPrereqs = (
   "Function::Parameters" => 0,
   "Hash::Merge::Simple" => 0,
   "Module::Find" => 0,
-  "Moo" => 0
+  "Moo" => 0,
+  "Type::Tiny" => 0
 );
 
 
