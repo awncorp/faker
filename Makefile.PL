@@ -31,7 +31,7 @@ my %WriteMakefileArgs = (
     "Type::Tiny" => 0
   },
   "TEST_REQUIRES" => {},
-  "VERSION" => "0.03",
+  "VERSION" => "0.04",
   "test" => {
     "TESTS" => "t/*.t t/faker/*.t t/faker/generator/*.t"
   }

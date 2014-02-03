@@ -1,6 +1,7 @@
 package Faker::Role::Provider;
 
 use 5.14.0;
+use feature 'switch';
 use feature 'unicode_strings';
 use Faker::Generator::Null;
 use Faker::Generator::Unique;
