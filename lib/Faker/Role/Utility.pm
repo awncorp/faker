@@ -1,60 +1,74 @@
 package Faker::Role::Utility;
 
-use 5.14.0;
-use feature 'unicode_strings';
-use Moo::Role;
-use Function::Parameters;
+use Bubblegum::Role;
+use Bubblegum::Syntax -types;
 
-method bothify ($string='### ???') {
+sub bothify {
+    my $self   = type_obj shift;
+    my $string = type_str shift // '### ???';
     return $self->lexify($self->numerify($string));
 }
 
-method lexify ($string='????') {
-    $string =~ s/\?/$self->random_letter/ueg;
+sub lexify {
+    my $self   = type_obj shift;
+    my $string = type_str shift // '????';
+    $string =~ s/\?/$self->random_letter/eg;
     return $string;
 }
 
-method linify ($string) {
-    $string =~ s/\\n/\n/ug;
+sub linify {
+    my $self   = type_obj shift;
+    my $string = type_str shift;
+    $string =~ s/\\n/\n/g;
     return $string;
 }
 
-method numerify ($string='###') {
-    $string =~ s/\#/$self->random_digit/ueg;
-    $string =~ s/\%/$self->random_digit_not_zero/ueg;
+sub numerify {
+    my $self   = type_obj shift;
+    my $string = type_str shift // '###';
+    $string =~ s/\#/$self->random_digit/eg;
+    $string =~ s/\%/$self->random_digit_not_zero/eg;
     return $string;
 }
 
-method random_between ($from, $to) {
+sub random_between {
+    my $self = type_obj shift;
+    my $from = type_int shift;
+    my $to   = type_int shift // 0;
     $to   = 2147483647 if !$to || $to > 2147483647; # 32bit compat default
     $from = 0 if $from > 2147483647;
-
-    my $int = $from + int rand($to - $from);
-    return $int;
+    return $from + int rand($to - $from);
 }
 
-method random_digit {
+sub random_digit {
     return int rand(10); # 0-9
 }
 
-method random_digit_not_zero {
+sub random_digit_not_zero {
     return 1 + int rand(8); # 1-9
 }
 
-method random_number ($range, $upto) {
+sub random_number {
+    my $self  = type_obj shift;
+    my $range = type_int shift // 0;
+    my $upto  = type_int shift // 0;
     $range //= $self->random_digit;
-
     return $self->number_between($range, $upto) if $upto;
     return int rand(10**$range-1);
 }
 
-method random_element ($hash) {
-    return $hash ? $hash->{$self->random_item(keys %{$hash})} : undef;
+sub random_element {
+    my $self = type_obj shift;
+    my $hash = type_href shift // {};
+    return $hash->keys->count ?
+        $hash->get($self->random_item($hash->keys)) : undef;
 }
 
-method random_float ($decimals, $min, $max) {
-    $decimals //= $self->random_digit;
-    $max      //= $self->random_number;
+sub random_float {
+    my $self     = type_obj shift;
+    my $decimals = type_int shift // $self->random_digit;
+    my $min      = type_int shift;
+    my $max      = type_int shift // $self->random_number;
 
     if ($min > $max) {
         my $tmp = $min;
@@ -62,14 +76,18 @@ method random_float ($decimals, $min, $max) {
         $max = $tmp;
     }
 
-    return sprintf "%.${decimals}f", $min + rand() * ($max - $min);
+    return sprintf "%.${decimals}f",
+        $min + rand() * ($max - $min);
 }
 
-method random_item (@items) {
-    return $items[rand @items];
+sub random_item {
+    my $self  = type_obj  shift;
+    my $items = type_aref shift;
+    return $items->random;
 }
 
-method random_letter {
+sub random_letter {
+    my $self = type_obj shift;
     return chr $self->random_between(97, 122);
 }
 

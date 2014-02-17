@@ -1,20 +1,17 @@
 package Faker::Role::Data;
 
-use 5.14.0;
-use feature 'unicode_strings';
-use Moo::Role;
-use Function::Parameters;
-use Hash::Merge::Simple qw(merge);
-use Types::Standard qw(HashRef);
+use Bubblegum::Role;
+use Bubblegum::Syntax -types, -typesof, 'merge';
 
 has data => (
     is       => 'ro',
-    isa      => HashRef,
+    isa      => typeof_href,
     lazy     => 1,
     builder  => 1
 );
 
-method _build_data {
+sub _build_data {
+    my $self    = shift;
     my $class   = ref $self;
     my @parents = do { no strict 'refs'; @{"${class}::ISA"} };
     my @data    = {};
@@ -26,8 +23,9 @@ method _build_data {
     return merge reverse @data;
 }
 
-method get_token_data ($class) {
-    $class //= ref $self;
+sub get_token_data {
+    my $self  = type_obj shift;
+    my $class = shift // ref $self;
 
     my $handle  = do { no strict 'refs'; \*{"${class}::DATA"} };
     return {} if !fileno $handle;

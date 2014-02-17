@@ -1,21 +1,21 @@
 package Faker::Provider::File;
 
-use 5.14.0;
-use feature 'unicode_strings';
-use Moo;
-use Function::Parameters;
+use Bubblegum::Class;
+use Bubblegum::Syntax -types;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
 
-method mime_type {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{mime_type_data}});
+sub mime_type {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{mime_type_data});
 }
 
-method file_extension {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{file_extension_data}});
+sub file_extension {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{file_extension_data});
 }
 
 1;

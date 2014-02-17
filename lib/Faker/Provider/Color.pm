@@ -1,16 +1,14 @@
 package Faker::Provider::Color;
 
-use 5.14.0;
-use feature 'switch';
-use feature 'unicode_strings';
-use Moo;
-use Function::Parameters;
+use Bubblegum::Class;
+use Bubblegum::Syntax -types;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
 
 around guesser => sub {
-    my ($orig, $self, $format) = @_;
+    my ($orig, $self, $format) =
+        (shift, type_obj(shift), type_str(shift));
 
     given ($format) {
         when (/^(color)$/) {
@@ -21,21 +19,25 @@ around guesser => sub {
     $self->$orig($format);
 };
 
-method color_name {
-    my $data = $self->data;
-    $self->random_item(@{$data->{all_color_data}});
+sub color_name {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    $self->random_item($data->{all_color_data});
 }
 
-method hex_color {
+sub hex_color {
+    my $self   = type_obj shift;
     my $number = $self->random_between(1, 16777215);
     return '#' . sprintf('%06s', sprintf('%02x', $number));
 }
 
-method rgbcolors {
+sub rgbcolors {
+    my $self = type_obj shift;
     return join ',', @{$self->rgbcolors_array};
 }
 
-method rgbcolors_array {
+sub rgbcolors_array {
+    my $self  = type_obj shift;
     my $color = $self->hex_color;
     return [
         hex(substr($color, 1, 2)),
@@ -44,16 +46,19 @@ method rgbcolors_array {
     ]
 }
 
-method rgbcolors_css {
+sub rgbcolors_css {
+    my $self = type_obj shift;
     return sprintf 'rgb(%s)', $self->rgbcolors;
 }
 
-method safe_color_name {
-    my $data = $self->data;
-    $self->random_item(@{$data->{safe_color_data}});
+sub safe_color_name {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    $self->random_item($data->{safe_color_data});
 }
 
-method safe_hex_color {
+sub safe_hex_color {
+    my $self   = type_obj shift;
     my $number = $self->random_between(0, 255);
     return '#' . sprintf("ff00%02x", $number);
 }

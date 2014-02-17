@@ -1,15 +1,14 @@
 package Faker::Provider::Company;
 
-use 5.14.0;
-use feature 'unicode_strings';
-use Moo;
-use Function::Parameters;
+use Bubblegum::Class;
+use Bubblegum::Syntax -types;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
 
-method company {
-    my $data   = $self->data;
+sub company {
+    my $self   = type_obj shift;
+    my $data   = type_href $self->data;
     my $format = $self->random_item(@{$data->{company_data_formats}});
     return $self->generator->parse($format);
 }

@@ -1,37 +1,38 @@
 package Faker::Provider::en_US::Company;
 
-use 5.14.0;
-use feature 'unicode_strings';
-use Moo;
-use Function::Parameters;
+use Bubblegum::Class;
+use Bubblegum::Syntax -types;
 
 extends 'Faker::Provider::Company';
 
-method buzzword_type1 {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{buzzword_type1_data}});
+sub buzzword_type1 {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{buzzword_type1_data});
 }
 
-method buzzword_type2 {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{buzzword_type2_data}});
+sub buzzword_type2 {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{buzzword_type2_data});
 }
 
-method buzzword_type3 {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{buzzword_type3_data}});
+sub buzzword_type3 {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{buzzword_type3_data});
 }
 
-method catch_phase {
-    my $data = $self->data;
+sub catch_phase {
+    my $self = type_obj shift;
     return join ' ',
-        $self->buzzword_type3,
-        $self->buzzword_type2,
+        $self->buzzword_type3, $self->buzzword_type2,
         $self->buzzword_type1;
 }
 
-method company_description {
-    my $data = $self->data;
+sub company_description {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
     my $does = $self->random_item(
         'Delivers',
         'Excels at',
@@ -40,29 +41,32 @@ method company_description {
     );
 
     return join ' ', $does,
-        $self->jargon_prop_word,
-        $self->jargon_edge_word,
+        $self->jargon_prop_word, $self->jargon_edge_word,
         $self->jargon_buzz_word;
 }
 
-method company_suffix {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{company_suffix_data}});
+sub company_suffix {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{company_suffix_data});
 }
 
-method jargon_buzz_word {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{jargon_buzz_data}});
+sub jargon_buzz_word {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{jargon_buzz_data});
 }
 
-method jargon_edge_word {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{jargon_edge_data}});
+sub jargon_edge_word {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{jargon_edge_data});
 }
 
-method jargon_prop_word {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{jargon_prop_data}});
+sub jargon_prop_word {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{jargon_prop_data});
 }
 
 1;

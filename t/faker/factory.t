@@ -6,8 +6,8 @@ ok $fact, 'factory instantiated';
 can_ok $fact, 'locale';
 can_ok $fact, 'providers';
 can_ok $fact, 'create';
-can_ok $fact, 'get_provider_class';
-can_ok $fact, 'find_provider_class';
+can_ok $fact, 'load_provider';
+can_ok $fact, 'locate_provider';
 
 my $providers = [qw(
     Faker::Provider::Address

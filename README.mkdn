@@ -4,7 +4,7 @@ Faker - Extensible Fake Data Generator
 
 # VERSION
 
-version 0.04
+version 0.05
 
 # DESCRIPTION
 
@@ -34,7 +34,7 @@ semantics.
 
     $fake->paragraph;
     # Rerum atque repellat voluptatem quia rerum. Numquam excepturi beatae sint
-    # laudantium consequatur. Magni occaecati itaque sint et sit tempore. Nesciunt
+    # laudantium consequatur. Magni occaecati itaque sint et sit tempore. Nescit
     # amet quidem. Iusto deleniti cum autem ad quia aperiam.
 
     for (0..10) {

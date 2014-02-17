@@ -20,18 +20,12 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Faker",
   "PREREQ_PM" => {
-    "Class::Load" => 0,
+    "Bubblegum" => "0.10",
     "DateTime" => 0,
-    "DateTime::TimeZone" => 0,
-    "Exception::Tiny" => 0,
-    "Function::Parameters" => 0,
-    "Hash::Merge::Simple" => 0,
-    "Module::Find" => 0,
-    "Moo" => 0,
-    "Type::Tiny" => 0
+    "DateTime::TimeZone" => 0
   },
   "TEST_REQUIRES" => {},
-  "VERSION" => "0.04",
+  "VERSION" => "0.05",
   "test" => {
     "TESTS" => "t/*.t t/faker/*.t t/faker/generator/*.t"
   }
@@ -39,15 +33,9 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
-  "Class::Load" => 0,
+  "Bubblegum" => "0.10",
   "DateTime" => 0,
-  "DateTime::TimeZone" => 0,
-  "Exception::Tiny" => 0,
-  "Function::Parameters" => 0,
-  "Hash::Merge::Simple" => 0,
-  "Module::Find" => 0,
-  "Moo" => 0,
-  "Type::Tiny" => 0
+  "DateTime::TimeZone" => 0
 );
 
 

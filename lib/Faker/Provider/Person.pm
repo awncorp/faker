@@ -1,16 +1,14 @@
 package Faker::Provider::Person;
 
-use 5.14.0;
-use feature 'switch';
-use feature 'unicode_strings';
-use Moo;
-use Function::Parameters;
+use Bubblegum::Class;
+use Bubblegum::Syntax -types;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
 
 around guesser => sub {
-    my ($orig, $self, $format) = @_;
+    my ($orig, $self, $format) =
+        (shift, type_obj(shift), type_str(shift));
 
     given ($format) {
         when (/^(firstname|fname)$/) {
@@ -24,20 +22,23 @@ around guesser => sub {
     $self->$orig($format);
 };
 
-method name {
-    my $data   = $self->data;
-    my $format = $self->random_item(@{$data->{name_data_formats}});
-    $self->generator->parse($format);
+sub name {
+    my $self   = type_obj shift;
+    my $data   = type_href $self->data;
+    my $format = $self->random_item($data->{name_data_formats});
+    return $self->generator->parse($format);
 }
 
-method first_name {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{first_name_data}});
+sub first_name {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{first_name_data});
 }
 
-method last_name {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{last_name_data}});
+sub last_name {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{last_name_data});
 }
 
 1;

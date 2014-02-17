@@ -1,15 +1,12 @@
 package Faker::Generator::Null;
 
-use 5.14.0;
-use feature 'unicode_strings';
-use Moo;
-use Function::Parameters;
+use Bubblegum::Class;
 
-method AUTOLOAD {
+sub AUTOLOAD {
     return undef;
 }
 
-method DESTROY {
+sub DESTROY {
     # noop
 }
 

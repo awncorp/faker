@@ -1,10 +1,7 @@
 package Faker::Provider::DateTime;
 
-use 5.14.0;
-use feature 'switch';
-use feature 'unicode_strings';
-use Moo;
-use Function::Parameters;
+use Bubblegum::Class;
+use Bubblegum::Syntax -types;
 use DateTime;
 use DateTime::TimeZone;
 
@@ -12,7 +9,8 @@ with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
 
 around guesser => sub {
-    my ($orig, $self, $format) = @_;
+    my ($orig, $self, $format) =
+        (shift, type_obj(shift), type_str(shift));
 
     given ($format) {
         when (/(_at|_on)$/) {
@@ -26,21 +24,24 @@ around guesser => sub {
     $self->$orig($format);
 };
 
-method century {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{century_data}});
+sub century {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{century_data});
 }
 
-method date {
+sub date {
+    my $self = type_obj shift;
     return DateTime->from_epoch(
         epoch => $self->random_between(0, time))->iso8601;
 }
 
-method date_now {
+sub date_now {
     return DateTime->now->iso8601;
 }
 
-method date_this_century {
+sub date_this_century {
+    my $self   = type_obj shift;
     my $date   = DateTime->now;
     my $years  = $self->random_between(1, 95);
     my $months = $self->random_between(1, 11);
@@ -50,7 +51,8 @@ method date_this_century {
         years => $years, months => $months, days => $days)->iso8601;
 }
 
-method date_this_decade {
+sub date_this_decade {
+    my $self   = type_obj shift;
     my $date   = DateTime->now;
     my $years  = $self->random_between(1, 10);
     my $months = $self->random_between(1, 11);
@@ -60,18 +62,20 @@ method date_this_decade {
         years => $years, months => $months, days => $days)->iso8601;
 }
 
-method date_this_year {
+sub date_this_year {
+    my $self   = type_obj shift;
     my $date   = DateTime->now;
     my $months = $self->random_between(1, 10);
     my $days   = $self->random_between(1, 30);
     return $date->subtract(months => $months, days => $days)->iso8601;
 }
 
-method time_unix {
+sub time_unix {
     return int rand time;
 }
 
-method timezone {
+sub timezone {
+    my $self = type_obj shift;
     return $self->random_item(DateTime::TimeZone->all_names);
 }
 

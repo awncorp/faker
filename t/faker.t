@@ -1,6 +1,5 @@
 use Test::More;
 use Faker;
-use feature 'say';
 
 my $fake = maker Faker;
 

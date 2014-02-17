@@ -1,100 +1,109 @@
 package Faker::Factory;
 
-use 5.14.0;
-use feature 'unicode_strings';
-use Faker::Exception;
+use Bubblegum::Class;
+use Bubblegum::Syntax -types, -typesof, 'load', 'raise';
 use Faker::Generator;
-use Moo;
-use Function::Parameters;
-use Class::Load qw(:all);
-use Module::Find qw(findsubmod);
-use Types::Standard qw(ArrayRef ClassName Str);
+
+use Class::Load 'try_load_class';
+use Module::Find 'findsubmod';
 
 has locale => (
     is      => 'ro',
-    isa     => Str,
+    isa     => typeof_str,
     default => 'en_US'
 );
 
 has namespace => (
     is      => 'ro',
-    isa     => ClassName
+    isa     => typeof_class
 );
 
 has providers => (
     is      => 'ro',
-    isa     => ArrayRef,
+    isa     => typeof_aref,
     lazy    => 1,
-    default => sub {[sort map load_class($_), findsubmod 'Faker::Provider']}
+    default => sub {[
+        sort map load($_), findsubmod 'Faker::Provider'
+    ]}
 );
 
-method create ($locale) {
-    $locale = shift // $self->locale;
-
+sub create {
+    my $self      = type_obj shift;
+    my $locale    = type_str (shift // $self->locale);
     my $generator = Faker::Generator->new;
 
-    for my $provider (@{$self->providers}) {
+    for my $provider ($self->providers->list) {
         $provider =~ s/^Faker::Provider:://;
-        my $provider_class = $self->get_provider_class($provider, $locale);
-        $generator->add_provider($provider_class->new(generator => $generator));
+        my $provider_class =
+            $self->load_provider($provider, $locale);
+        $generator->register_provider(
+            $provider_class->new(generator => $generator)
+        );
     }
 
     return $generator;
 }
 
-method get_provider_class ($provider, $locale) {
+sub load_provider {
+    my $self     = type_obj shift;
+    my $provider = type_str shift;
+    my $locale   = type_str shift;
     my $provider_class;
 
     if ($self->namespace) {
         return $provider_class
-            if $provider_class = $self->get_provider_class_in_namespace(
+            if $provider_class = $self->load_provider_from_namespace(
                 $provider, $locale
             );
     }
 
     return $provider_class
-        if $provider_class = $self->find_provider_class(
+        if $provider_class = $self->locate_provider(
                 $provider, $locale
             );
 
     return $provider_class
-        if $provider_class = $self->find_provider_class(
+        if $provider_class = $self->locate_provider(
                 $provider, 'en_US'
             );
 
     return $provider_class
-        if $provider_class = $self->find_provider_class(
+        if $provider_class = $self->locate_provider(
                 $provider
             );
 
-    Faker::Exception->throw(
-        sprintf 'Unable to find provider "%s" with locale "%s"',
-            $provider, $locale
-    );
+    raise sprintf 'Unable to find provider "%s" with locale "%s"',
+        $provider, $locale;
 }
 
-method get_provider_class_in_namespace ($provider, $locale) {
+sub load_provider_from_namespace {
+    my $self     = type_obj shift;
+    my $provider = type_str shift;
+    my $locale   = type_str shift;
     my $provider_class;
 
     return $provider_class
-        if $provider_class = $self->find_provider_class_in_namespace(
+        if $provider_class = $self->locate_provider_in_namespace(
                 $provider, $locale
             );
 
     return $provider_class
-        if $provider_class = $self->find_provider_class_in_namespace(
+        if $provider_class = $self->locate_provider_in_namespace(
                 $provider, 'en_US'
             );
 
     return $provider_class
-        if $provider_class = $self->find_provider_class_in_namespace(
+        if $provider_class = $self->locate_provider_in_namespace(
                 $provider
             );
 
     return undef;
 }
 
-method find_provider_class ($provider, $locale) {
+sub locate_provider {
+    my $self     = type_obj shift;
+    my $provider = type_str shift;
+    my $locale   = shift;
     my $provider_class = join '::', 'Faker::Provider',
         $locale ? ($locale, $provider) : ($provider);
 
@@ -102,7 +111,10 @@ method find_provider_class ($provider, $locale) {
     return undef;
 }
 
-method find_provider_class_in_namespace ($provider, $locale) {
+sub locate_provider_in_namespace {
+    my $self     = type_obj shift;
+    my $provider = type_str shift;
+    my $locale   = type_str shift;
     my $provider_class = join '::', $self->namespace,
         $locale ? ($locale, $provider) : ($provider);
 

@@ -1,8 +1,6 @@
 package Faker::Provider::en_US::PhoneNumber;
 
-use 5.14.0;
-use feature 'unicode_strings';
-use Moo;
+use Bubblegum::Class;
 
 extends 'Faker::Provider::PhoneNumber';
 

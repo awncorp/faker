@@ -1,43 +1,49 @@
 package Faker::Provider::Miscellaneous;
 
-use 5.14.0;
-use feature 'unicode_strings';
-use Moo;
-use Function::Parameters;
+use Bubblegum::Class;
+use Bubblegum::Syntax -types;
 use Digest::MD5 qw(md5_hex);
 use Digest::SHA qw(sha1_hex sha256_hex);
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
 
-method boolean ($chance=50) {
+sub boolean {
+    my $self = type_obj shift;
+    my $chance = type_int shift // 50;
     return $self->random_between(1, 100) <= $chance ? 1 : 0;
 }
 
-method country_code {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{country_code_data}});
+sub country_code {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{country_code_data});
 }
 
-method language_code {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{language_code_data}});
+sub language_code {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{language_code_data});
 }
 
-method locale {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{locale_data}});
+sub locale {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{locale_data});
 }
 
-method md5 {
+sub md5 {
+    my $self = type_obj shift;
     return md5_hex rand;
 }
 
-method sha1 {
+sub sha1 {
+    my $self = type_obj shift;
     return sha1_hex rand;
 }
 
-method sha256 {
+sub sha256 {
+    my $self = type_obj shift;
     return sha256_hex rand;
 }
 

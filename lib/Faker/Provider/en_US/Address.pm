@@ -1,31 +1,33 @@
 package Faker::Provider::en_US::Address;
 
-use 5.14.0;
-use feature 'unicode_strings';
-use Moo;
-use Function::Parameters;
+use Bubblegum::Class;
+use Bubblegum::Syntax -types;
 
 extends 'Faker::Provider::Address';
 
-method city_prefix {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{city_prefix_data}});
+sub city_prefix {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{city_prefix_data});
 }
 
-method secondary_address {
-    my $data   = $self->data;
-    my $format = $self->random_item(@{$data->{secondary_address_data_formats}});
+sub secondary_address {
+    my $self   = type_obj shift;
+    my $data   = type_href $self->data;
+    my $format = $self->random_item($data->{secondary_address_data_formats});
     return $self->generator->parse($format);
 }
 
-method state_abbr {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{state_abbr_data}});
+sub state_abbr {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{state_abbr_data});
 }
 
-method state_name {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{state_name_data}});
+sub state_name {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{state_name_data});
 }
 
 1;

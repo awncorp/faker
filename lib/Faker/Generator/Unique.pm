@@ -1,52 +1,47 @@
 package Faker::Generator::Unique;
 
-use 5.14.0;
-use feature 'unicode_strings';
-use Faker::Exception;
-use Moo;
-use Function::Parameters;
-use Types::Standard qw(InstanceOf Str);
-use Digest::MD5 qw(md5_hex);
+use Bubblegum::Class;
+use Bubblegum::Syntax -types, -typesof, 'raise';
 
 has generator => (
     is       => 'ro',
-    isa      => InstanceOf['Faker::Generator'],
+    isa      => typeof_obj,
     required => 1
 );
 
 has max_retries => (
     is      => 'ro',
-    isa     => Str,
+    isa     => typeof_str,
     default => 10000
 );
 
 my $values = {};
 
-method AUTOLOAD (@arguments) {
-    my ($package, $formatter) = split /::(\w+)$/, our $AUTOLOAD;
+sub AUTOLOAD {
+    my $self = type_obj shift;
+    my ($package, $formatter) =
+        split /::(\w+)$/, our $AUTOLOAD;
 
     if ($formatter) {
         my $count = -1;
         while ($count++ <= $self->max_retries) {
-            my $data   = $self->generator->format($formatter, @arguments);
-            my $chksum = md5_hex $data;
-
+            my $data   = $self->generator->format($formatter, @_);
+            my $chksum = $data->digest->encode;
             next if exists $values->{$formatter}{$chksum};
             return $values->{$formatter}{$chksum} = $data;
         }
-
-        Faker::Exception->throw(qq{
+        raise qq{
             Maximum retries of "$count" reached without finding a unique value
-        });
+        };
     }
     else {
-        Faker::Exception->throw(qq{
+        raise qq{
             Can't locate object method "$formatter" via package "$package"
-        });
+        };
     }
 }
 
-method DESTROY {
+sub DESTROY {
     # noop
 }
 

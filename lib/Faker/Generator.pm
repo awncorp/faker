@@ -1,44 +1,40 @@
 package Faker::Generator;
 
-use 5.14.0;
-use feature 'switch';
-use feature 'unicode_strings';
-use Faker::Exception;
-use Moo;
-use Function::Parameters;
-use Types::Standard qw(ArrayRef HashRef);
+use Bubblegum::Class;
+use Bubblegum::Syntax -types, -typesof, 'raise';
 
 with 'Faker::Role::Utility';
 
 has formatters => (
     is      => 'ro',
-    isa     => HashRef,
+    isa     => typeof_href,
     lazy    => 1,
     default => sub {{}}
 );
 
 has providers => (
     is      => 'ro',
-    isa     => ArrayRef,
+    isa     => typeof_aref,
     lazy    => 1,
     default => sub {[]}
 );
 
-method add_provider ($provider) {
-    return unshift @{$self->providers}, $provider;
+sub format {
+    my $self      = type_obj shift;
+    my $formatter = type_str shift;
+    my @arguments = map type_def($_), @_;
+    return $self->find_formatter($formatter)->(@arguments);
 }
 
-method format ($formatter, @arguments) {
-    return $self->get_formater($formatter)->(@arguments);
-}
-
-method get_formater ($formatter) {
+sub find_formatter {
+    my $self       = type_obj shift;
+    my $formatter  = type_str shift;
     my $formatters = $self->formatters;
 
     return $formatters->{$formatter}
         if defined $formatters->{$formatter};
 
-    for my $provider (@{$self->providers}) {
+    for my $provider ($self->providers->list) {
         if (my $code = $provider->can($formatter)) {
             return $formatters->{$formatter} = sub {
                 return $code->($provider, @_);
@@ -46,7 +42,7 @@ method get_formater ($formatter) {
         }
     }
 
-    for my $provider (@{$self->providers}) {
+    for my $provider ($self->providers->list) {
         my $guessed_formatter = $provider->guesser($formatter) or next;
         if (my $code = $provider->can($guessed_formatter)) {
             return $formatters->{$formatter} =
@@ -56,38 +52,46 @@ method get_formater ($formatter) {
         }
     }
 
-    Faker::Exception->throw(sprintf('Unknown formatter "%s"', $formatter));
+    raise sprintf 'Unknown formatter "%s"', $formatter;
 }
 
-method get_providers {
-    return $self->providers;
-}
+sub parse {
+    my $self   = type_obj shift;
+    my $string = type_str shift // '';
 
-method parse ($string) {
     if ($string) {
-        $string =~ s/\{\{\s?(\w+)\s?\}\}/$self->format($1)/ueg;
+        $string =~ s/\{\{\s?(\w+)\s?\}\}/$self->format($1)/eg;
         $string = $self->bothify($string);
     }
+
     return $string;
 }
 
-method seed ($seed) {
-    return srand $seed;
+sub register_provider {
+    my $self     = type_obj shift;
+    my $provider = type_obj shift;
+    return $self->providers->unshift($provider);
 }
 
-method AUTOLOAD (@arguments) {
+sub seed {
+    return srand pop;
+}
+
+sub AUTOLOAD {
+    my $self      = type_obj shift;
+    my @arguments = map type_def($_), @_;
     my ($package, $formatter) = split /::(\w+)$/, our $AUTOLOAD;
 
     if ($formatter) {
         return $self->format($formatter, @arguments);
     }
 
-    Faker::Exception->throw(
-        qq{Can't locate object method "$formatter" via package "$package"}
-    );
+    raise qq{
+        Can't locate object method "$formatter" via package "$package"
+    };
 }
 
-method DESTROY {
+sub DESTROY {
     # noop
 }
 

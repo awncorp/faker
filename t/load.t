@@ -2,7 +2,6 @@ use Test::More;
 
 # core
 use_ok 'Faker';
-use_ok 'Faker::Exception';
 use_ok 'Faker::Factory';
 use_ok 'Faker::Generator';
 

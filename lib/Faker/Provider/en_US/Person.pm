@@ -1,20 +1,20 @@
 package Faker::Provider::en_US::Person;
 
-use 5.14.0;
-use feature 'unicode_strings';
-use Moo;
-use Function::Parameters;
+use Bubblegum::Class;
+use Bubblegum::Syntax -types;
 
 extends 'Faker::Provider::Person';
 
-method name_prefix {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{name_prefix_data}});
+sub name_prefix {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{name_prefix_data});
 }
 
-method name_suffix {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{name_suffix_data}});
+sub name_suffix {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{name_suffix_data});
 }
 
 1;
@@ -699,7 +699,7 @@ Dan
 Dana
 Dandre
 Dane
-D\angelo
+D'angelo
 Dangelo
 Danial
 Daniela
@@ -3112,7 +3112,7 @@ Cruickshank
 Cummerata
 Cummings
 Dach
-D\Amore
+D'Amore
 Daniel
 Dare
 Daugherty
@@ -3338,15 +3338,15 @@ Nikolaus
 Nitzsche
 Nolan
 Oberbrunner
-O\Connell
-O\Conner
-O\Hara
-O\Keefe
-O\Kon
+O'Connell
+O'Conner
+O'Hara
+O'Keefe
+O'Kon
 Okuneva
 Olson
 Ondricka
-O\Reilly
+O'Reilly
 Orn
 Ortiz
 Osinski

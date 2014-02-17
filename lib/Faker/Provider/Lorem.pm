@@ -1,29 +1,22 @@
 package Faker::Provider::Lorem;
 
-use 5.14.0;
-use feature 'switch';
-use feature 'unicode_strings';
-use Moo;
-use Function::Parameters;
+use Bubblegum::Class;
+use Bubblegum::Syntax -types;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
 
-around guesser => sub {
-    my ($orig, $self, $format) = @_;
-
-    given ($format) {
-        # ...
-    }
-
-    $self->$orig($format);
-};
-
-method paragraph ($n_sentences=4) {
+sub paragraph {
+    my $self        = type_obj shift;
+    my $n_sentences = type_int shift // 4;
     return $self->sentences($n_sentences) . "\n\n";
 }
 
-method paragraphs ($n_paragraphs=2, $v_length=5) {
+sub paragraphs {
+    my $self         = type_obj shift;
+    my $n_paragraphs = type_int shift // 2;
+    my $v_length     = type_int shift // 5;
+
     return join "", map {
         $v_length > 4 ?
             $self->paragraph($self->random_between(4, $v_length)) :
@@ -31,11 +24,17 @@ method paragraphs ($n_paragraphs=2, $v_length=5) {
     }   1..$n_paragraphs;
 }
 
-method sentence ($n_words=5) {
+sub sentence {
+    my $self    = type_obj shift;
+    my $n_words = type_int shift // 5;
     return $self->words($n_words) . '.';
 }
 
-method sentences ($n_sentences=3, $v_length=10) {
+sub sentences {
+    my $self        = type_obj shift;
+    my $n_sentences = type_int shift // 3;
+    my $v_length    = type_int shift // 10;
+
     return join ' ', map {
         $v_length > 3 ?
             $self->sentence($self->random_between(3, $v_length)) :
@@ -43,15 +42,19 @@ method sentences ($n_sentences=3, $v_length=10) {
     }   1..$n_sentences;
 }
 
-method word {
-    my $data = $self->data;
-    return $self->random_item(@{$data->{word_data}});
+sub word {
+    my $self = type_obj shift;
+    my $data = type_href $self->data;
+    return $self->random_item($data->{word_data});
 }
 
-method words ($count=5) {
-    my $data = $self->data;
+sub words {
+    my $self  = type_obj shift;
+    my $count = type_int shift // 5;
+    my $data  = type_href $self->data;
+
     return join ' ', map {
-        $self->random_item(@{$data->{word_data}})
+        $self->random_item($data->{word_data})
     }   1..$count;
 }
 
