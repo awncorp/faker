@@ -25,7 +25,7 @@ my %WriteMakefileArgs = (
     "DateTime::TimeZone" => 0
   },
   "TEST_REQUIRES" => {},
-  "VERSION" => "0.05",
+  "VERSION" => "0.06",
   "test" => {
     "TESTS" => "t/*.t t/faker/*.t t/faker/generator/*.t"
   }

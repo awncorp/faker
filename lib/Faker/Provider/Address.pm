@@ -10,17 +10,9 @@ around guesser => sub {
     my ($orig, $self, $format) =
         (shift, type_obj(shift), type_str(shift));
 
-    given ($format) {
-        when (/^(street)$/) {
-            return 'street_name';
-        }
-        when (/^(streetaddress)$/) {
-            return 'address';
-        }
-        when (/^(zip_code|zipcode|zip|postalcode|postcode)$/) {
-            return 'postal_code';
-        }
-    }
+    return 'street_name' if $format =~ /^(street)$/;
+    return 'address'     if $format =~ /^(streetaddress)$/;
+    return 'postal_code' if $format =~ /^(zip(_)?code?|postalcode|postcode)$/;
 
     $self->$orig($format);
 };

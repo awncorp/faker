@@ -1,9 +1,9 @@
 package Faker::Factory;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -types, -typesof, 'load', 'raise';
 use Faker::Generator;
 
+use Bubblegum::Syntax -types, -typesof, 'load', 'raise';
 use Class::Load 'try_load_class';
 use Module::Find 'findsubmod';
 
@@ -80,6 +80,7 @@ sub load_provider_from_namespace {
     my $self     = type_obj shift;
     my $provider = type_str shift;
     my $locale   = type_str shift;
+
     my $provider_class;
 
     return $provider_class
@@ -104,6 +105,7 @@ sub locate_provider {
     my $self     = type_obj shift;
     my $provider = type_str shift;
     my $locale   = shift;
+
     my $provider_class = join '::', 'Faker::Provider',
         $locale ? ($locale, $provider) : ($provider);
 
@@ -115,6 +117,7 @@ sub locate_provider_in_namespace {
     my $self     = type_obj shift;
     my $provider = type_str shift;
     my $locale   = type_str shift;
+
     my $provider_class = join '::', $self->namespace,
         $locale ? ($locale, $provider) : ($provider);
 

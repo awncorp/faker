@@ -10,11 +10,7 @@ around guesser => sub {
     my ($orig, $self, $format) =
         (shift, type_obj(shift), type_str(shift));
 
-    given ($format) {
-        when (/^(phonenumber|phone|telephone)$/) {
-            return 'phone_number';
-        }
-    }
+    return 'phone_number' if $format =~ /^(phonenumber|phone|telephone)$/;
 
     $self->$orig($format);
 };

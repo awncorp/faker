@@ -10,11 +10,7 @@ around guesser => sub {
     my ($orig, $self, $format) =
         (shift, type_obj(shift), type_str(shift));
 
-    given ($format) {
-        when (/^(color)$/) {
-            return 'safe_color_name';
-        }
-    }
+    return 'safe_color_name' if $format =~ /^(color)$/;
 
     $self->$orig($format);
 };

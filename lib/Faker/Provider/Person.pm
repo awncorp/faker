@@ -10,14 +10,8 @@ around guesser => sub {
     my ($orig, $self, $format) =
         (shift, type_obj(shift), type_str(shift));
 
-    given ($format) {
-        when (/^(firstname|fname)$/) {
-            return 'name';
-        }
-        when (/^(lastname|lname)$/) {
-            return 'name';
-        }
-    }
+    return 'name' if $format =~ /^(firstname|fname)$/;
+    return 'name' if $format =~ /^(lastname|lname)$/;
 
     $self->$orig($format);
 };

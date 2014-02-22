@@ -1,9 +1,10 @@
 package Faker::Provider::DateTime;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -types;
-use DateTime;
 use DateTime::TimeZone;
+use DateTime;
+
+use Bubblegum::Syntax -types;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
@@ -12,14 +13,8 @@ around guesser => sub {
     my ($orig, $self, $format) =
         (shift, type_obj(shift), type_str(shift));
 
-    given ($format) {
-        when (/(_at|_on)$/) {
-            return 'date_this_year';
-        }
-        when (/(_date)$/) {
-            return 'date';
-        }
-    }
+        return 'date_this_year' if $format =~ /(_at|_on)$/;
+        return 'date'           if $format =~ /(_date)$/;
 
     $self->$orig($format);
 };

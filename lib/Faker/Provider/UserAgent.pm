@@ -10,23 +10,11 @@ around guesser => sub {
     my ($orig, $self, $format) =
         (shift, type_obj(shift), type_str(shift));
 
-    given ($format) {
-        when (/^(chrome)$/) {
-            return 'chrome_user_agent';
-        }
-        when (/^(explorer)$/) {
-            return 'internet_explorer_user_agent';
-        }
-        when (/^(firefox)$/) {
-            return 'firefox_user_agent';
-        }
-        when (/^(opera)$/) {
-            return 'opera_user_agent';
-        }
-        when (/^(safari)$/) {
-            return 'safari_user_agent';
-        }
-    }
+    return 'chrome_user_agent'            if $format =~ /^(chrome)$/;
+    return 'internet_explorer_user_agent' if $format =~ /^(explorer)$/;
+    return 'firefox_user_agent'           if $format =~ /^(firefox)$/;
+    return 'opera_user_agent'             if $format =~ /^(opera)$/;
+    return 'safari_user_agent'            if $format =~ /^(safari)$/;
 
     $self->$orig($format);
 };

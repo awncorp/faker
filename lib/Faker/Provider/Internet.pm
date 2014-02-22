@@ -10,20 +10,10 @@ around guesser => sub {
     my ($orig, $self, $format) =
         (shift, type_obj(shift), type_str(shift));
 
-    given ($format) {
-        when (/^(emailaddress|email)$/) {
-            return 'email_address';
-        }
-        when (/^(ipv4)$/) {
-            return 'ip_address_v4';
-        }
-        when (/^(ipv6)$/) {
-            return 'ip_address_v6';
-        }
-        when (/^(login|nickname|nick|signin)$/) {
-            return 'username';
-        }
-    }
+    return 'email_address' if $format =~ /^(emailaddress|email)$/;
+    return 'ip_address_v4' if $format =~ /^(ipv4)$/;
+    return 'ip_address_v6' if $format =~ /^(ipv6)$/;
+    return 'username'      if $format =~ /^(login|nickname|nick|signin)$/;
 
     $self->$orig($format);
 };

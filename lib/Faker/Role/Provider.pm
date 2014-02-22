@@ -1,10 +1,10 @@
 package Faker::Role::Provider;
 
 use Bubblegum::Role;
-use Bubblegum::Syntax -types, -typesof;
-
 use Faker::Generator::Null;
 use Faker::Generator::Unique;
+
+use Bubblegum::Syntax -types, -typesof;
 
 with 'Faker::Role::Utility';
 
@@ -31,11 +31,7 @@ sub guesser {
     my $self   = type_obj shift;
     my $format = type_str shift;
 
-    given ($format) {
-        when (/^is_/) {
-            return 'boolean';
-        }
-    }
+    return 'boolean' if $format =~ /^is_/;
 }
 
 sub optional {
