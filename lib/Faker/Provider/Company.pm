@@ -9,7 +9,7 @@ with 'Faker::Role::Provider';
 sub company {
     my $self   = type_obj shift;
     my $data   = type_href $self->data;
-    my $format = $self->random_item(@{$data->{company_data_formats}});
+    my $format = $self->random_item($data->{company_data_formats});
     return $self->generator->parse($format);
 }
 
