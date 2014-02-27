@@ -9,6 +9,15 @@ sub bothify {
     return $self->lexify($self->numerify($string));
 }
 
+sub dashify {
+    my $self   = type_obj shift;
+    my $string = type_str shift;
+    $string =~ s/[^\.\w]/-/g;
+    $string =~ s/([\W])[\W]*/$1/g;
+    $string =~ s/(^\W+|\W+$)//g;
+    return $string;
+}
+
 sub lexify {
     my $self   = type_obj shift;
     my $string = type_str shift // '????';
