@@ -1,32 +1,32 @@
 package Faker::Provider::en_US::Address;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -types;
+use Bubblegum::Syntax -minimal;
 
 extends 'Faker::Provider::Address';
 
 sub city_prefix {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{city_prefix_data});
 }
 
 sub secondary_address {
-    my $self   = type_obj shift;
-    my $data   = type_href $self->data;
+    my $self   = _obj shift;
+    my $data   = _href $self->data;
     my $format = $self->random_item($data->{secondary_address_data_formats});
     return $self->generator->parse($format);
 }
 
 sub state_abbr {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{state_abbr_data});
 }
 
 sub state_name {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{state_name_data});
 }
 

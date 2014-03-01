@@ -1,14 +1,14 @@
 package Faker::Provider::Company;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -types;
+use Bubblegum::Syntax -minimal;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
 
 sub company {
-    my $self   = type_obj shift;
-    my $data   = type_href $self->data;
+    my $self   = _obj shift;
+    my $data   = _href $self->data;
     my $format = $self->random_item($data->{company_data_formats});
     return $self->generator->parse($format);
 }

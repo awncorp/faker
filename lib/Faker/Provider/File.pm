@@ -1,20 +1,20 @@
 package Faker::Provider::File;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -types;
+use Bubblegum::Syntax -minimal;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
 
 sub mime_type {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{mime_type_data});
 }
 
 sub file_extension {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{file_extension_data});
 }
 

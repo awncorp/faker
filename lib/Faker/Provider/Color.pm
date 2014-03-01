@@ -1,14 +1,14 @@
 package Faker::Provider::Color;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -types;
+use Bubblegum::Syntax -minimal;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
 
 around guesser => sub {
     my ($orig, $self, $format) =
-        (shift, type_obj(shift), type_str(shift));
+        (shift, _obj(shift), _str(shift));
 
     return 'safe_color_name' if $format =~ /^(color)$/;
 
@@ -16,24 +16,24 @@ around guesser => sub {
 };
 
 sub color_name {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     $self->random_item($data->{all_color_data});
 }
 
 sub hex_color {
-    my $self   = type_obj shift;
+    my $self   = _obj shift;
     my $number = $self->random_between(1, 16777215);
     return '#' . sprintf('%06s', sprintf('%02x', $number));
 }
 
 sub rgbcolors {
-    my $self = type_obj shift;
+    my $self = _obj shift;
     return join ',', @{$self->rgbcolors_array};
 }
 
 sub rgbcolors_array {
-    my $self  = type_obj shift;
+    my $self  = _obj shift;
     my $color = $self->hex_color;
     return [
         hex(substr($color, 1, 2)),
@@ -43,18 +43,18 @@ sub rgbcolors_array {
 }
 
 sub rgbcolors_css {
-    my $self = type_obj shift;
+    my $self = _obj shift;
     return sprintf 'rgb(%s)', $self->rgbcolors;
 }
 
 sub safe_color_name {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     $self->random_item($data->{safe_color_data});
 }
 
 sub safe_hex_color {
-    my $self   = type_obj shift;
+    my $self   = _obj shift;
     my $number = $self->random_between(0, 255);
     return '#' . sprintf("ff00%02x", $number);
 }

@@ -1,14 +1,14 @@
 package Faker::Provider::Person;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -types;
+use Bubblegum::Syntax -minimal;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
 
 around guesser => sub {
     my ($orig, $self, $format) =
-        (shift, type_obj(shift), type_str(shift));
+        (shift, _obj(shift), _str(shift));
 
     return 'name' if $format =~ /^(firstname|fname)$/;
     return 'name' if $format =~ /^(lastname|lname)$/;
@@ -17,21 +17,21 @@ around guesser => sub {
 };
 
 sub name {
-    my $self   = type_obj shift;
-    my $data   = type_href $self->data;
+    my $self   = _obj shift;
+    my $data   = _href $self->data;
     my $format = $self->random_item($data->{name_data_formats});
     return $self->generator->parse($format);
 }
 
 sub first_name {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{first_name_data});
 }
 
 sub last_name {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{last_name_data});
 }
 

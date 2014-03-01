@@ -1,38 +1,38 @@
 package Faker::Provider::en_US::Company;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -types;
+use Bubblegum::Syntax -minimal;
 
 extends 'Faker::Provider::Company';
 
 sub buzzword_type1 {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{buzzword_type1_data});
 }
 
 sub buzzword_type2 {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{buzzword_type2_data});
 }
 
 sub buzzword_type3 {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{buzzword_type3_data});
 }
 
 sub catch_phase {
-    my $self = type_obj shift;
+    my $self = _obj shift;
     return join ' ',
         $self->buzzword_type3, $self->buzzword_type2,
         $self->buzzword_type1;
 }
 
 sub company_description {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     my $does = $self->random_item(
         'Delivers',
         'Excels at',
@@ -46,26 +46,26 @@ sub company_description {
 }
 
 sub company_suffix {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{company_suffix_data});
 }
 
 sub jargon_buzz_word {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{jargon_buzz_data});
 }
 
 sub jargon_edge_word {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{jargon_edge_data});
 }
 
 sub jargon_prop_word {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{jargon_prop_data});
 }
 

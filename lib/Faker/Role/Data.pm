@@ -1,11 +1,11 @@
 package Faker::Role::Data;
 
 use Bubblegum::Role;
-use Bubblegum::Syntax -types, -typesof, 'merge';
+use Bubblegum::Syntax -minimal, 'merge';
 
 has data => (
     is       => 'ro',
-    isa      => typeof_href,
+    isa      => _href,
     lazy     => 1,
     builder  => 1
 );
@@ -24,7 +24,7 @@ sub _build_data {
 }
 
 sub get_token_data {
-    my $self  = type_obj shift;
+    my $self  = _obj shift;
     my $class = shift // ref $self;
 
     my $handle  = do { no strict 'refs'; \*{"${class}::DATA"} };

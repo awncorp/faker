@@ -4,14 +4,14 @@ use Bubblegum::Class;
 use DateTime::TimeZone;
 use DateTime;
 
-use Bubblegum::Syntax -types;
+use Bubblegum::Syntax -minimal;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
 
 around guesser => sub {
     my ($orig, $self, $format) =
-        (shift, type_obj(shift), type_str(shift));
+        (shift, _obj(shift), _str(shift));
 
         return 'date_this_year' if $format =~ /(_at|_on)$/;
         return 'date'           if $format =~ /(_date)$/;
@@ -20,13 +20,13 @@ around guesser => sub {
 };
 
 sub century {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{century_data});
 }
 
 sub date {
-    my $self = type_obj shift;
+    my $self = _obj shift;
     return DateTime->from_epoch(
         epoch => $self->random_between(0, time))->iso8601;
 }
@@ -36,7 +36,7 @@ sub date_now {
 }
 
 sub date_this_century {
-    my $self   = type_obj shift;
+    my $self   = _obj shift;
     my $date   = DateTime->now;
     my $years  = $self->random_between(1, 95);
     my $months = $self->random_between(1, 11);
@@ -47,7 +47,7 @@ sub date_this_century {
 }
 
 sub date_this_decade {
-    my $self   = type_obj shift;
+    my $self   = _obj shift;
     my $date   = DateTime->now;
     my $years  = $self->random_between(1, 10);
     my $months = $self->random_between(1, 11);
@@ -58,7 +58,7 @@ sub date_this_decade {
 }
 
 sub date_this_year {
-    my $self   = type_obj shift;
+    my $self   = _obj shift;
     my $date   = DateTime->now;
     my $months = $self->random_between(1, 10);
     my $days   = $self->random_between(1, 30);
@@ -70,7 +70,7 @@ sub time_unix {
 }
 
 sub timezone {
-    my $self = type_obj shift;
+    my $self = _obj shift;
     return $self->random_item(DateTime::TimeZone->all_names);
 }
 

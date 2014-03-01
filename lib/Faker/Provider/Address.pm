@@ -1,14 +1,14 @@
 package Faker::Provider::Address;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -types;
+use Bubblegum::Syntax -minimal;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
 
 around guesser => sub {
     my ($orig, $self, $format) =
-        (shift, type_obj(shift), type_str(shift));
+        (shift, _obj(shift), _str(shift));
 
     return 'street_name' if $format =~ /^(street)$/;
     return 'address'     if $format =~ /^(streetaddress)$/;
@@ -18,35 +18,35 @@ around guesser => sub {
 };
 
 sub address {
-    my $self   = type_obj shift;
-    my $data   = type_href $self->data;
+    my $self   = _obj shift;
+    my $data   = _href $self->data;
     my $format = $self->random_item($data->{address_data_formats});
     return $self->linify($self->generator->parse($format));
 }
 
 sub building_number {
-    my $self   = type_obj shift;
-    my $data   = type_href $self->data;
+    my $self   = _obj shift;
+    my $data   = _href $self->data;
     my $format = $self->random_item($data->{building_number_data});
     return $self->generator->parse($format);
 }
 
 sub city {
-    my $self   = type_obj shift;
-    my $data   = type_href $self->data;
+    my $self   = _obj shift;
+    my $data   = _href $self->data;
     my $format = $self->random_item($data->{city_data_formats});
     return $self->generator->parse($format);
 }
 
 sub country_name {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{country_name_data});
 }
 
 sub city_suffix {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{city_suffix_data});
 }
 
@@ -63,29 +63,29 @@ sub longitude {
 }
 
 sub postal_code {
-    my $self   = type_obj shift;
-    my $data   = type_href $self->data;
+    my $self   = _obj shift;
+    my $data   = _href $self->data;
     my $format = $self->random_item($data->{postal_code_data});
     return $self->generator->parse($format);
 }
 
 sub street_address {
-    my $self   = type_obj shift;
-    my $data   = type_href $self->data;
+    my $self   = _obj shift;
+    my $data   = _href $self->data;
     my $format = $self->random_item($data->{street_address_data_formats});
     return $self->generator->parse($format);
 }
 
 sub street_name {
-    my $self   = type_obj shift;
-    my $data   = type_href $self->data;
+    my $self   = _obj shift;
+    my $data   = _href $self->data;
     my $format = $self->random_item($data->{street_name_data_formats});
     return $self->generator->parse($format);
 }
 
 sub street_suffix {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{street_suffix_data});
 }
 

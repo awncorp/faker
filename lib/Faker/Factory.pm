@@ -3,24 +3,24 @@ package Faker::Factory;
 use Bubblegum::Class;
 use Faker::Generator;
 
-use Bubblegum::Syntax -types, -typesof, 'load', 'raise';
+use Bubblegum::Syntax -minimal, 'load', 'raise';
 use Class::Load 'try_load_class';
 use Module::Find 'findsubmod';
 
 has locale => (
     is      => 'ro',
-    isa     => typeof_str,
+    isa     => _str,
     default => 'en_US'
 );
 
 has namespace => (
     is      => 'ro',
-    isa     => typeof_class
+    isa     => _class
 );
 
 has providers => (
     is      => 'ro',
-    isa     => typeof_aref,
+    isa     => _aref,
     lazy    => 1,
     default => sub {[
         sort map load($_), findsubmod 'Faker::Provider'
@@ -28,8 +28,8 @@ has providers => (
 );
 
 sub create {
-    my $self      = type_obj shift;
-    my $locale    = type_str (shift // $self->locale);
+    my $self      = _obj shift;
+    my $locale    = _str (shift // $self->locale);
     my $generator = Faker::Generator->new;
 
     for my $provider ($self->providers->list) {
@@ -45,9 +45,9 @@ sub create {
 }
 
 sub load_provider {
-    my $self     = type_obj shift;
-    my $provider = type_str shift;
-    my $locale   = type_str shift;
+    my $self     = _obj shift;
+    my $provider = _str shift;
+    my $locale   = _str shift;
     my $provider_class;
 
     if ($self->namespace) {
@@ -77,9 +77,9 @@ sub load_provider {
 }
 
 sub load_provider_from_namespace {
-    my $self     = type_obj shift;
-    my $provider = type_str shift;
-    my $locale   = type_str shift;
+    my $self     = _obj shift;
+    my $provider = _str shift;
+    my $locale   = _str shift;
 
     my $provider_class;
 
@@ -102,8 +102,8 @@ sub load_provider_from_namespace {
 }
 
 sub locate_provider {
-    my $self     = type_obj shift;
-    my $provider = type_str shift;
+    my $self     = _obj shift;
+    my $provider = _str shift;
     my $locale   = shift;
 
     my $provider_class = join '::', 'Faker::Provider',
@@ -114,9 +114,9 @@ sub locate_provider {
 }
 
 sub locate_provider_in_namespace {
-    my $self     = type_obj shift;
-    my $provider = type_str shift;
-    my $locale   = type_str shift;
+    my $self     = _obj shift;
+    my $provider = _str shift;
+    my $locale   = _str shift;
 
     my $provider_class = join '::', $self->namespace,
         $locale ? ($locale, $provider) : ($provider);

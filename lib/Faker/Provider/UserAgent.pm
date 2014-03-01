@@ -1,14 +1,14 @@
 package Faker::Provider::UserAgent;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -types;
+use Bubblegum::Syntax -minimal;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
 
 around guesser => sub {
     my ($orig, $self, $format) =
-        (shift, type_obj(shift), type_str(shift));
+        (shift, _obj(shift), _str(shift));
 
     return 'chrome_user_agent'            if $format =~ /^(chrome)$/;
     return 'internet_explorer_user_agent' if $format =~ /^(explorer)$/;
@@ -20,32 +20,32 @@ around guesser => sub {
 };
 
 sub chrome_user_agent {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{chrome_user_agent_data});
 }
 
 sub internet_explorer_user_agent {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{explorer_user_agent_data});
 }
 
 sub firefox_user_agent {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{firefox_user_agent_data});
 }
 
 sub opera_user_agent {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{opera_user_agent_data});
 }
 
 sub safari_user_agent {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{safari_user_agent_data});
 }
 

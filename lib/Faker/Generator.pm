@@ -1,34 +1,34 @@
 package Faker::Generator;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -types, -typesof, 'raise';
+use Bubblegum::Syntax -minimal, 'raise';
 
 with 'Faker::Role::Utility';
 
 has formatters => (
     is      => 'ro',
-    isa     => typeof_href,
+    isa     => _href,
     lazy    => 1,
     default => sub {{}}
 );
 
 has providers => (
     is      => 'ro',
-    isa     => typeof_aref,
+    isa     => _aref,
     lazy    => 1,
     default => sub {[]}
 );
 
 sub format {
-    my $self      = type_obj shift;
-    my $formatter = type_str shift;
-    my @arguments = map type_def($_), @_;
+    my $self      = _obj shift;
+    my $formatter = _str shift;
+    my @arguments = map _def($_), @_;
     return $self->find_formatter($formatter)->(@arguments);
 }
 
 sub find_formatter {
-    my $self       = type_obj shift;
-    my $formatter  = type_str shift;
+    my $self       = _obj shift;
+    my $formatter  = _str shift;
     my $formatters = $self->formatters;
 
     return $formatters->{$formatter}
@@ -56,8 +56,8 @@ sub find_formatter {
 }
 
 sub parse {
-    my $self   = type_obj shift;
-    my $string = type_str shift // '';
+    my $self   = _obj shift;
+    my $string = _str shift // '';
 
     if ($string) {
         $string =~ s/\{\{\s?(\w+)\s?\}\}/$self->format($1)/eg;
@@ -68,8 +68,8 @@ sub parse {
 }
 
 sub register_provider {
-    my $self     = type_obj shift;
-    my $provider = type_obj shift;
+    my $self     = _obj shift;
+    my $provider = _obj shift;
     return $self->providers->unshift($provider);
 }
 
@@ -78,8 +78,8 @@ sub seed {
 }
 
 sub AUTOLOAD {
-    my $self      = type_obj shift;
-    my @arguments = map type_def($_), @_;
+    my $self      = _obj shift;
+    my @arguments = map _def($_), @_;
     my ($package, $formatter) = split /::(\w+)$/, our $AUTOLOAD;
 
     if ($formatter) {

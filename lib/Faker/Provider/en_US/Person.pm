@@ -1,19 +1,19 @@
 package Faker::Provider::en_US::Person;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -types;
+use Bubblegum::Syntax -minimal;
 
 extends 'Faker::Provider::Person';
 
 sub name_prefix {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{name_prefix_data});
 }
 
 sub name_suffix {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{name_suffix_data});
 }
 

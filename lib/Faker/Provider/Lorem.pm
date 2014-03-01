@@ -1,21 +1,21 @@
 package Faker::Provider::Lorem;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -types;
+use Bubblegum::Syntax -minimal;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
 
 sub paragraph {
-    my $self        = type_obj shift;
-    my $n_sentences = type_int shift // 4;
+    my $self        = _obj shift;
+    my $n_sentences = _int shift // 4;
     return $self->sentences($n_sentences) . "\n\n";
 }
 
 sub paragraphs {
-    my $self         = type_obj shift;
-    my $n_paragraphs = type_int shift // 2;
-    my $v_length     = type_int shift // 5;
+    my $self         = _obj shift;
+    my $n_paragraphs = _int shift // 2;
+    my $v_length     = _int shift // 5;
 
     return join "", map {
         $v_length > 4 ?
@@ -25,15 +25,15 @@ sub paragraphs {
 }
 
 sub sentence {
-    my $self    = type_obj shift;
-    my $n_words = type_int shift // 5;
+    my $self    = _obj shift;
+    my $n_words = _int shift // 5;
     return $self->words($n_words) . '.';
 }
 
 sub sentences {
-    my $self        = type_obj shift;
-    my $n_sentences = type_int shift // 3;
-    my $v_length    = type_int shift // 10;
+    my $self        = _obj shift;
+    my $n_sentences = _int shift // 3;
+    my $v_length    = _int shift // 10;
 
     return join ' ', map {
         $v_length > 3 ?
@@ -43,15 +43,15 @@ sub sentences {
 }
 
 sub word {
-    my $self = type_obj shift;
-    my $data = type_href $self->data;
+    my $self = _obj shift;
+    my $data = _href $self->data;
     return $self->random_item($data->{word_data});
 }
 
 sub words {
-    my $self  = type_obj shift;
-    my $count = type_int shift // 5;
-    my $data  = type_href $self->data;
+    my $self  = _obj shift;
+    my $count = _int shift // 5;
+    my $data  = _href $self->data;
 
     return join ' ', map {
         $self->random_item($data->{word_data})
