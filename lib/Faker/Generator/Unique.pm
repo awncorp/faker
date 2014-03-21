@@ -1,7 +1,8 @@
 package Faker::Generator::Unique;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -minimal, 'raise';
+use Bubblegum::Constraints -minimal;
+use Bubblegum::Functions 'raise';
 
 has generator => (
     is       => 'ro',

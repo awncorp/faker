@@ -1,7 +1,8 @@
 package Faker::Role::Data;
 
 use Bubblegum::Role;
-use Bubblegum::Syntax -minimal, 'merge';
+use Bubblegum::Constraints -minimal;
+use Bubblegum::Functions 'merge';
 
 has data => (
     is       => 'ro',

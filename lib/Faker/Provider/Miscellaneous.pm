@@ -1,7 +1,7 @@
 package Faker::Provider::Miscellaneous;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -minimal;
+use Bubblegum::Constraints -minimal;
 
 use Digest::MD5 qw(md5_hex);
 use Digest::SHA qw(sha1_hex sha256_hex);

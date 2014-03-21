@@ -4,7 +4,7 @@ use Bubblegum::Role;
 use Faker::Generator::Null;
 use Faker::Generator::Unique;
 
-use Bubblegum::Syntax -minimal;
+use Bubblegum::Constraints -minimal;
 
 with 'Faker::Role::Utility';
 

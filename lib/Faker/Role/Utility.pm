@@ -1,7 +1,7 @@
 package Faker::Role::Utility;
 
 use Bubblegum::Role;
-use Bubblegum::Syntax -minimal;
+use Bubblegum::Constraints -minimal;
 
 sub bothify {
     my $self   = _obj shift;

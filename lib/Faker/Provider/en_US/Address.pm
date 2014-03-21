@@ -1,7 +1,7 @@
 package Faker::Provider::en_US::Address;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -minimal;
+use Bubblegum::Constraints -minimal;
 
 extends 'Faker::Provider::Address';
 

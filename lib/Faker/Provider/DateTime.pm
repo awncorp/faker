@@ -4,7 +4,7 @@ use Bubblegum::Class;
 use DateTime::TimeZone;
 use DateTime;
 
-use Bubblegum::Syntax -minimal;
+use Bubblegum::Constraints -minimal;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';

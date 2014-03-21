@@ -1,7 +1,8 @@
 package Faker::Generator;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -minimal, 'raise';
+use Bubblegum::Constraints -minimal;
+use Bubblegum::Functions 'raise';
 
 with 'Faker::Role::Utility';
 

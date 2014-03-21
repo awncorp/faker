@@ -3,7 +3,8 @@ package Faker::Factory;
 use Bubblegum::Class;
 use Faker::Generator;
 
-use Bubblegum::Syntax -minimal, 'load', 'raise';
+use Bubblegum::Constraints -minimal;
+use Bubblegum::Functions 'load', 'raise';
 use Class::Load 'try_load_class';
 use Module::Find 'findsubmod';
 

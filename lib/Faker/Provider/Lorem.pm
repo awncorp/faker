@@ -1,7 +1,7 @@
 package Faker::Provider::Lorem;
 
 use Bubblegum::Class;
-use Bubblegum::Syntax -minimal;
+use Bubblegum::Constraints -minimal;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
