@@ -2,7 +2,7 @@ NAME
     Faker - Extensible Fake Data Generator
 
 VERSION
-    version 0.07
+    version 0.08
 
 DESCRIPTION
     Faker is a Perl library that generates fake data for you. The design is

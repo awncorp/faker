@@ -21,12 +21,13 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Faker",
   "PREREQ_PM" => {
-    "Bubblegum" => "0.10",
+    "Bubblegum" => "0.20",
+    "Bubblegum::Functions" => "0.01",
     "DateTime" => 0,
     "DateTime::TimeZone" => 0
   },
   "TEST_REQUIRES" => {},
-  "VERSION" => "0.07",
+  "VERSION" => "0.08",
   "test" => {
     "TESTS" => "t/*.t t/faker/*.t t/faker/generator/*.t"
   }
@@ -34,7 +35,8 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
-  "Bubblegum" => "0.10",
+  "Bubblegum" => "0.20",
+  "Bubblegum::Functions" => "0.01",
   "DateTime" => 0,
   "DateTime::TimeZone" => 0
 );
