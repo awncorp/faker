@@ -20,8 +20,10 @@ around guesser => sub {
 
 sub company_email_address {
     my $self   = _obj shift;
-    my $string = $self->username . '@' . $self->domain_name;
-    return $self->dashify($string);
+    my $string = join '@',
+        $self->dashify($self->username),
+        $self->dashify($self->domain_name);
+    return $string;
 }
 
 sub domain_name {
@@ -40,7 +42,7 @@ sub email_address {
     my $data   = _href $self->data;
     my $format = $self->random_item($data->{email_data_formats});
     my $string = $self->generator->parse($format);
-    return $self->dashify($string);
+    return join '@', map $self->dashify($_), split /@/, $string;
 }
 
 sub email_domain {
@@ -84,7 +86,7 @@ sub safe_email_address {
     my $data   = _href $self->data;
     my $format = $self->random_item($data->{email_data_formats});
     my $string = $self->generator->parse($format);
-    return $self->dashify($string);
+    return join '@', map $self->dashify($_), split /@/, $string;
 }
 
 sub top_level_domain {
