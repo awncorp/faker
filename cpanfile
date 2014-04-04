@@ -1,8 +1,8 @@
-requires "Bubblegum" => "0.20";
-requires "Bubblegum::Functions" => "0.01";
+requires "Bubblegum" => "0.25";
+requires "Bubblegum::Functions" => "0.04";
 requires "DateTime" => "0";
 requires "DateTime::TimeZone" => "0";
-requires "perl" => "v5.14.0";
+requires "perl" => "v5.10.0";
 
 on 'configure' => sub {
   requires "ExtUtils::MakeMaker" => "6.30";

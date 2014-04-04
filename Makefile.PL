@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use 5.014000;
+use 5.010000;
 
 use ExtUtils::MakeMaker 6.30;
 
@@ -21,13 +21,13 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Faker",
   "PREREQ_PM" => {
-    "Bubblegum" => "0.20",
-    "Bubblegum::Functions" => "0.01",
+    "Bubblegum" => "0.25",
+    "Bubblegum::Functions" => "0.04",
     "DateTime" => 0,
     "DateTime::TimeZone" => 0
   },
   "TEST_REQUIRES" => {},
-  "VERSION" => "0.08",
+  "VERSION" => "0.09",
   "test" => {
     "TESTS" => "t/*.t t/faker/*.t t/faker/generator/*.t"
   }
@@ -35,8 +35,8 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
-  "Bubblegum" => "0.20",
-  "Bubblegum::Functions" => "0.01",
+  "Bubblegum" => "0.25",
+  "Bubblegum::Functions" => "0.04",
   "DateTime" => 0,
   "DateTime::TimeZone" => 0
 );
