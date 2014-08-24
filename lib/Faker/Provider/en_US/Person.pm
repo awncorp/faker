@@ -1,27 +1,38 @@
 package Faker::Provider::en_US::Person;
 
 use Bubblegum::Class;
-use Bubblegum::Constraints -minimal;
+
+with 'Faker::Role::Data';
+with 'Faker::Role::Provider';
 
 extends 'Faker::Provider::Person';
 
 sub name_prefix {
-    my $self = _obj shift;
-    my $data = _href $self->data;
-    return $self->random_item($data->{name_prefix_data});
+    my $self = shift;
+    return $self->process_random('data_for_name_prefix');
 }
 
 sub name_suffix {
-    my $self = _obj shift;
-    my $data = _href $self->data;
-    return $self->random_item($data->{name_suffix_data});
+    my $self = shift;
+    return $self->process_random('data_for_name_suffix');
 }
 
 1;
 
 __DATA__
 
-@@ first_name_data
+@@ format_for_name
+{{first_name}} {{last_name}}
+{{first_name}} {{last_name}}
+{{first_name}} {{last_name}}
+{{first_name}} {{last_name}}
+{{first_name}} {{last_name}}
+{{first_name}} {{last_name}}
+{{name_prefix}} {{first_name}} {{last_name}}
+{{first_name}} {{last_name}} {{name_suffix}}
+{{name_prefix}} {{first_name}} {{last_name}} {{name_suffix}}
+
+@@ data_for_first_name
 Aaliyah
 Aaron
 Abagail
@@ -3030,7 +3041,7 @@ Zola
 Zora
 Zula
 
-@@ last_name_data
+@@ data_for_last_name
 Abbott
 Abernathy
 Abshire
@@ -3506,25 +3517,14 @@ Ziemann
 Zieme
 Zulauf
 
-@@ name_data_formats
-{{first_name}} {{last_name}}
-{{first_name}} {{last_name}}
-{{first_name}} {{last_name}}
-{{first_name}} {{last_name}}
-{{first_name}} {{last_name}}
-{{first_name}} {{last_name}}
-{{name_prefix}} {{first_name}} {{last_name}}
-{{first_name}} {{last_name}} {{name_suffix}}
-{{name_prefix}} {{first_name}} {{last_name}} {{name_suffix}}
-
-@@ name_prefix_data
+@@ data_for_name_prefix
 Mr.
 Mrs.
 Ms.
 Miss
 Dr.
 
-@@ name_suffix_data
+@@ data_for_name_suffix
 Jr.
 Sr.
 I

@@ -1,26 +1,28 @@
 package Faker::Provider::Company;
 
 use Bubblegum::Class;
-use Bubblegum::Constraints -minimal;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
 
-sub company {
-    my $self   = _obj shift;
-    my $data   = _href $self->data;
-    my $format = $self->random_item($data->{company_data_formats});
-    return $self->generator->parse($format);
+sub name {
+    my $self = shift;
+    return $self->process_random('format_for_name');
+}
+
+sub name_suffix {
+    my $self = shift;
+    return $self->process_random('data_for_name_suffix');
 }
 
 1;
 
 __DATA__
 
-@@ company_data_formats
-{{last_name}} {{company_suffix}}
+@@ format_for_name
+{{Person#last_name}} {{name_suffix}}
 
-@@ company_suffix_data
+@@ data_for_name_suffix
 Pty.
 Ltd.
 Inc.

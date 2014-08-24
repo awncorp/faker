@@ -1,49 +1,78 @@
 package Faker::Provider::en_US::Address;
 
 use Bubblegum::Class;
-use Bubblegum::Constraints -minimal;
+
+with 'Faker::Role::Data';
+with 'Faker::Role::Provider';
 
 extends 'Faker::Provider::Address';
 
 sub city_prefix {
-    my $self = _obj shift;
-    my $data = _href $self->data;
-    return $self->random_item($data->{city_prefix_data});
+    my $self = shift;
+    return $self->process_random('data_for_city_prefix');
 }
 
-sub secondary_address {
-    my $self   = _obj shift;
-    my $data   = _href $self->data;
-    my $format = $self->random_item($data->{secondary_address_data_formats});
-    return $self->generator->parse($format);
+sub country_name {
+    my $self = shift;
+    return $self->process_random('data_for_country_name');
+}
+
+sub line2 {
+    my $self = shift;
+    return $self->format_number_markers(
+        $self->format_line_markers(
+            $self->process_random('format_for_line2')
+        )
+    );
 }
 
 sub state_abbr {
-    my $self = _obj shift;
-    my $data = _href $self->data;
-    return $self->random_item($data->{state_abbr_data});
+    my $self = shift;
+    return $self->format_line_markers(
+        $self->process_random('data_for_state_abbr')
+    );
 }
 
 sub state_name {
-    my $self = _obj shift;
-    my $data = _href $self->data;
-    return $self->random_item($data->{state_name_data});
+    my $self = shift;
+    return $self->format_line_markers(
+        $self->process_random('data_for_state_name')
+    );
 }
 
 1;
 
 __DATA__
 
-@@ address_data_formats
-{{street_address}}\n{{city}}, {{state_abbr}} {{postal_code}}
+@@ format_for_address_data
+{{street_address}}\n{{city_name}}, {{state_abbr}} {{postal_code}}
 
-@@ city_data_formats
-{{city_prefix}} {{first_name}}{{city_suffix}}
-{{city_prefix}} {{first_name}}
-{{first_name}}{{city_suffix}}
-{{last_name}}{{city_suffix}}
+@@ format_for_city_name
+{{city_prefix}} {{Person#first_name}}{{city_suffix}}
+{{city_prefix}} {{Person#first_name}}
+{{Person#first_name}}{{city_suffix}}
+{{Person#last_name}}{{city_suffix}}
 
-@@ city_prefix_data
+@@ format_for_line2
+Apt. ###
+Suite ###
+
+@@ format_for_lines
+{{line1}}, {{city_name}}, {{postal_code}}
+{{line1}}, {{city_name}}, {{state_abbr}} {{postal_code}}
+{{line1}}, {{line2}}, {{city_name}}, {{postal_code}}
+{{line1}}\n{{line2}}\n{{city_name}}, {{postal_code}}
+{{line1}}\n{{line2}}\n{{city_name}}, {{state_abbr}} {{postal_code}}
+
+@@ format_for_street_name
+{{Person#first_name}} {{street_suffix}}
+{{Person#last_name}} {{street_suffix}}
+
+@@ format_for_street_address
+{{number}} {{street_name}}
+{{number}} {{street_name}} {{line2}}
+
+@@ data_for_city_prefix
 North
 East
 West
@@ -52,7 +81,7 @@ New
 Lake
 Port
 
-@@ city_suffix_data
+@@ data_for_city_suffix
 town
 ton
 land
@@ -73,7 +102,7 @@ haven
 side
 shire
 
-@@ country_name_data
+@@ data_for_country_name
 Afghanistan
 Albania
 Algeria
@@ -319,11 +348,7 @@ Yemen
 Zambia
 Zimbabwe
 
-@@ secondary_address_data_formats
-Apt. ###
-Suite ###
-
-@@ state_name_data
+@@ data_for_state_name
 Alabama
 Alaska
 Arizona
@@ -375,7 +400,7 @@ WestVirginia
 Wisconsin
 Wyoming
 
-@@ state_abbr_data
+@@ data_for_state_abbr
 AA
 AE
 AK
@@ -438,11 +463,3 @@ WA
 WI
 WV
 WY
-
-@@ street_name_data_formats
-{{first_name}} {{street_suffix}}
-{{last_name}} {{street_suffix}}
-
-@@ street_address_data_formats
-{{building_number}} {{street_name}}
-{{building_number}} {{street_name}} {{secondary_address}}

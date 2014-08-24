@@ -1,53 +1,41 @@
 package Faker::Provider::Address;
 
 use Bubblegum::Class;
-use Bubblegum::Constraints -minimal;
 
 with 'Faker::Role::Data';
 with 'Faker::Role::Provider';
 
-around guesser => sub {
-    my ($orig, $self, $format) =
-        (shift, _obj(shift), _str(shift));
-
-    return 'street_name' if $format =~ /^(street)$/;
-    return 'address'     if $format =~ /^(streetaddress)$/;
-    return 'postal_code' if $format =~ /^(zip(_)?code?|postalcode|postcode)$/;
-
-    $self->$orig($format);
-};
-
-sub address {
-    my $self   = _obj shift;
-    my $data   = _href $self->data;
-    my $format = $self->random_item($data->{address_data_formats});
-    return $self->linify($self->generator->parse($format));
+sub line1 {
+    my $self = shift;
+    return $self->format_number_markers(
+        $self->format_line_markers(
+            $self->process_random('format_for_line1')
+        )
+    );
 }
 
-sub building_number {
-    my $self   = _obj shift;
-    my $data   = _href $self->data;
-    my $format = $self->random_item($data->{building_number_data});
-    return $self->generator->parse($format);
+sub lines {
+    my $self = shift;
+    return $self->format_number_markers(
+        $self->format_line_markers(
+            $self->process_random('format_for_lines')
+        )
+    );
 }
 
-sub city {
-    my $self   = _obj shift;
-    my $data   = _href $self->data;
-    my $format = $self->random_item($data->{city_data_formats});
-    return $self->generator->parse($format);
+sub number {
+    my $self = shift;
+    return $self->process_random('data_for_number');
 }
 
-sub country_name {
-    my $self = _obj shift;
-    my $data = _href $self->data;
-    return $self->random_item($data->{country_name_data});
+sub city_name {
+    my $self = shift;
+    return $self->process_random('format_for_city_name');
 }
 
 sub city_suffix {
-    my $self = _obj shift;
-    my $data = _href $self->data;
-    return $self->random_item($data->{city_suffix_data});
+    my $self = shift;
+    return $self->process_random('data_for_city_suffix');
 }
 
 sub latitude {
@@ -63,64 +51,54 @@ sub longitude {
 }
 
 sub postal_code {
-    my $self   = _obj shift;
-    my $data   = _href $self->data;
-    my $format = $self->random_item($data->{postal_code_data});
-    return $self->generator->parse($format);
-}
-
-sub street_address {
-    my $self   = _obj shift;
-    my $data   = _href $self->data;
-    my $format = $self->random_item($data->{street_address_data_formats});
-    return $self->generator->parse($format);
+    my $self = shift;
+    return $self->format_number_markers(
+        $self->process_random('data_for_postal_code')
+    );
 }
 
 sub street_name {
-    my $self   = _obj shift;
-    my $data   = _href $self->data;
-    my $format = $self->random_item($data->{street_name_data_formats});
-    return $self->generator->parse($format);
+    my $self = shift;
+    return $self->process_random('format_for_street_name');
 }
 
 sub street_suffix {
-    my $self = _obj shift;
-    my $data = _href $self->data;
-    return $self->random_item($data->{street_suffix_data});
+    my $self = shift;
+    return $self->process_random('data_for_street_suffix');
 }
 
 1;
 
 __DATA__
 
-@@ address_data_formats
-{{street_address}}, {{city}}, {{postal_code}}
+@@ format_for_city_name
+{{Person#first_name}}{{city_suffix}}
 
-@@ building_number_data
+@@ format_for_line1
+{{number}} {{street_name}}
+
+@@ format_for_lines
+{{line1}}, {{city_name}}, {{postal_code}}
+
+@@ format_for_street_name
+{{Person#last_name}} {{street_suffix}}
+
+@@ data_for_number
 %
 %%
 %%%%
 
-@@ city_data_formats
-{{first_name}}{{city_suffix}}
-
-@@ city_suffix_data
+@@ data_for_city_suffix
 burg
 ford
 town
 ville
 
-@@ postal_code_data
+@@ data_for_postal_code
 #####
 #####-####
 
-@@ street_address_data_formats
-{{building_number}} {{street_name}}
-
-@@ street_name_data_formats
-{{last_name}} {{street_suffix}}
-
-@@ street_suffix_data
+@@ data_for_street_suffix
 Avenue
 Circle
 Parkway

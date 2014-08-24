@@ -1,54 +1,66 @@
 package Faker::Role::Provider;
 
 use Bubblegum::Role;
-use Faker::Generator::Null;
-use Faker::Generator::Unique;
+use Faker::Failure;
 
-use Bubblegum::Constraints -minimal;
+use Bubblegum::Constraints -typesof;
 
-with 'Faker::Role::Utility';
+with 'Faker::Role::Formatter';
+with 'Faker::Role::Selector';
 
-has generator => (
+has factory => (
     is       => 'ro',
-    isa      => _obj,
+    isa      => typeof_object,
     required => 1
 );
 
-has unique_generator => (
-    is       => 'ro',
-    isa      => _obj,
-    lazy     => 1,
-    builder  => 1
-);
+sub parse_format {
+    my $self   = shift;
+    my $string = shift // '';
 
-sub _build_unique_generator {
-    return Faker::Generator::Unique->new(
-        generator => shift->generator
-    );
+    if ($string->asa_string) {
+        $string =~ s/\{\{\s?([#\w]+)\s?\}\}/$self->process_format($1)/eg;
+    }
+
+    return $string;
 }
 
-sub guesser {
-    my $self   = _obj shift;
-    my $format = _str shift;
+sub process_format {
+    my $self  = shift;
+    my $token = shift;
+    my @args  = @_;
 
-    return 'boolean' if $format =~ /^is_/;
+    $token->asa_string;
+
+    my $factory = $self->factory;
+    my ($method, $provider) = reverse split /#/, $token;
+
+    my $object = $provider ? $factory->provider($provider) : $self;
+
+    return $object->$method(@args) if $object->can($method);
+    return $object->random($method);
 }
 
-sub optional {
-    my $self   = _obj shift;
-    my $weight = _num shift // 0.5;
-    return $self->generator if rand(100) <= $weight * 100;
-    return Faker::Generator::Null->new;
-}
+sub process_random {
+    my $self = shift;
+    my $name = shift;
 
-sub unique {
-    my $self    = _obj shift;
-    my $reset   = _num shift // 0;
-    my $retries = _num shift // 10000;
-    return $self->unique_generator if !$reset;
+    $name->asa_string;
 
-    my $ugen = Faker::Generator::Unique->new(max_retries => $retries);
-    return $self->unique_generator($ugen);
+    my $data = $self->data;
+    my $samples = [$name, "format_for_${name}", "data_for_${name}"];
+
+    for my $sample (@$samples) {
+        if (my $array = $data->get($sample)) {
+            my $format = $array->random;
+            return $self->parse_format($format);
+        }
+    }
+
+    my $failure;
+    $failure = 'Unable to find method "%s", data, or formats, using (%s)';
+    $failure = sprintf $failure, $name, $samples->join(', ');
+    Faker::Failure->throw(message => $failure);
 }
 
 1;

@@ -1,79 +1,89 @@
 package Faker::Provider::en_US::Company;
 
 use Bubblegum::Class;
-use Bubblegum::Constraints -minimal;
 
 extends 'Faker::Provider::Company';
 
 sub buzzword_type1 {
-    my $self = _obj shift;
-    my $data = _href $self->data;
-    return $self->random_item($data->{buzzword_type1_data});
+    my $self = shift;
+    return $self->process_random('data_for_buzzword_type1');
 }
 
 sub buzzword_type2 {
-    my $self = _obj shift;
-    my $data = _href $self->data;
-    return $self->random_item($data->{buzzword_type2_data});
+    my $self = shift;
+    return $self->process_random('data_for_buzzword_type2');
 }
 
 sub buzzword_type3 {
-    my $self = _obj shift;
-    my $data = _href $self->data;
-    return $self->random_item($data->{buzzword_type3_data});
+    my $self = shift;
+    return $self->process_random('data_for_buzzword_type3');
 }
 
-sub catch_phase {
-    my $self = _obj shift;
-    return join ' ',
-        $self->buzzword_type3, $self->buzzword_type2,
-        $self->buzzword_type1;
-}
+sub description {
+    my $self = shift;
 
-sub company_description {
-    my $self = _obj shift;
-    my $data = _href $self->data;
-    my $does = $self->random_item(
+    my $does = $self->select_random_item([
         'Delivers',
         'Excels at',
         'Offering',
         'Best-in-class for'
-    );
+    ]);
 
     return join ' ', $does,
-        $self->jargon_prop_word, $self->jargon_edge_word,
+        $self->jargon_prop_word,
+        $self->jargon_edge_word,
         $self->jargon_buzz_word;
 }
 
-sub company_suffix {
-    my $self = _obj shift;
-    my $data = _href $self->data;
-    return $self->random_item($data->{company_suffix_data});
-}
-
 sub jargon_buzz_word {
-    my $self = _obj shift;
-    my $data = _href $self->data;
-    return $self->random_item($data->{jargon_buzz_data});
+    my $self = shift;
+    return $self->process_random('data_for_jargon_buzz');
 }
 
 sub jargon_edge_word {
-    my $self = _obj shift;
-    my $data = _href $self->data;
-    return $self->random_item($data->{jargon_edge_data});
+    my $self = shift;
+    return $self->process_random('data_for_jargon_edge');
 }
 
 sub jargon_prop_word {
-    my $self = _obj shift;
-    my $data = _href $self->data;
-    return $self->random_item($data->{jargon_prop_data});
+    my $self = shift;
+    return $self->process_random('data_for_jargon_prop');
+}
+
+sub tagline {
+    my $self = shift;
+
+    return join ' ',
+        $self->buzzword_type3,
+        $self->buzzword_type2,
+        $self->buzzword_type1;
 }
 
 1;
 
 __DATA__
 
-@@ buzzword_type1_data
+@@ format_for_name
+{{last_name}} {{company_suffix}}
+{{last_name}}-{{last_name}}
+{{last_name}}, {{last_name}} and {{last_name}}
+
+@@ data_for_company_suffix
+Co.
+Consulting
+Electronics
+Entertainment
+Inc.
+Incorporated
+and Sons
+LLC
+Group
+PLC
+Ltd.
+Ventures
+Worldwide
+
+@@ data_for_buzzword_type1
 implement
 utilize
 integrate
@@ -135,7 +145,7 @@ productize
 redefine
 recontextualize
 
-@@ buzzword_type2_data
+@@ data_for_buzzword_type2
 clicks-and-mortar
 value-added
 vertical
@@ -202,7 +212,7 @@ compelling
 holistic
 rich
 
-@@ buzzword_type3_data
+@@ data_for_buzzword_type3
 synergies
 web-readiness
 paradigms
@@ -248,27 +258,7 @@ experiences
 webservices
 methodologies
 
-@@ company_data_formats
-{{last_name}} {{company_suffix}}
-{{last_name}}-{{last_name}}
-{{last_name}}, {{last_name}} and {{last_name}}
-
-@@ company_suffix_data
-Co.
-Consulting
-Electronics
-Entertainment
-Inc.
-Incorporated
-and Sons
-LLC
-Group
-PLC
-Ltd.
-Ventures
-Worldwide
-
-@@ jargon_edge_data
+@@ data_for_jargon_edge
 Adaptive
 Advanced
 Ameliorated
@@ -370,7 +360,7 @@ Virtual
 Visionary
 Vision-oriented
 
-@@ jargon_prop_data
+@@ data_for_jargon_prop
 24hour
 24/7
 3rdgeneration
@@ -473,7 +463,7 @@ zeroadministration
 zerodefect
 zerotolerance
 
-@@ jargon_buzz_data
+@@ data_for_jargon_buzz
 ability
 access
 adapter

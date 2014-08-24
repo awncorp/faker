@@ -8,7 +8,7 @@ extends 'Faker::Provider::PhoneNumber';
 
 __DATA__
 
-@@ phone_number_data_formats
+@@ format_for_number
 +##(#)##########
 +##(#)##########
 0##########

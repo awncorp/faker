@@ -1,32 +1,35 @@
 package Faker::Role::Data;
 
 use Bubblegum::Role;
-use Bubblegum::Constraints -minimal;
-use Bubblegum::Functions 'merge';
+
+use Bubblegum::Constraints -typesof;
+use Hash::Merge::Simple 'merge';
 
 has data => (
     is       => 'ro',
-    isa      => _href,
+    isa      => typeof_href,
     lazy     => 1,
     builder  => 1
 );
 
 sub _build_data {
-    my $self    = shift;
-    my $class   = ref $self;
+    my $self  = shift;
+    my $class = ref $self;
+
+    $class->asa_string;
+
     my @parents = do { no strict 'refs'; @{"${class}::ISA"} };
     my @data    = {};
 
-    for my $class ($class, @parents) {
-        push @data, $self->get_token_data($class);
-    }
-
+    map push(@data, $self->token_data($_)), $class, @parents;
     return merge reverse @data;
 }
 
-sub get_token_data {
-    my $self  = _obj shift;
-    my $class = shift // ref $self;
+sub token_data {
+    my $self  = shift;
+    my $class = shift;
+
+    $class->asa_string;
 
     my $handle  = do { no strict 'refs'; \*{"${class}::DATA"} };
     return {} if !fileno $handle;
@@ -41,8 +44,9 @@ sub get_token_data {
     (undef, my @chunks) = split /^@@\s*(.+?)\s*\r?\n/m, $data;
 
     while (@chunks) {
-        my ($name, $data) = splice @chunks, 0, 2;
-        $map->{$name} = [split /\n+/, $data];
+        if (my ($name, $data) = splice @chunks, 0, 2) {
+            $map->{$name} = [split /\n+/, $data];
+        }
     }
 
     return $map;

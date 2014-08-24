@@ -23,6 +23,7 @@ tags
 /.carton
 /.vagrant
 /eg
+!/eg/example
 /share/dumps/*
 /log/*
 cpanfile.*
