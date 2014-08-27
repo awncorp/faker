@@ -4,15 +4,7 @@ NAME
 VERSION
     version 0.10
 
-DESCRIPTION
-    Faker is a Perl library that generates fake data for you. Whether you
-    need to bootstrap your database, create good-looking XML documents,
-    fill-in your persistence to stress test it, or anonymize data taken from
-    a production service, Faker makes it easy to generate fake data with
-    some semantics. Note: This is an early release available for testing and
-    feedback and as such is subject to change.
-
-SYNPOSIS
+SYNOPSIS
         use Faker;
 
         my $faker = Faker->new(locale => 'en_US');
@@ -45,6 +37,14 @@ SYNPOSIS
         say $person->name; # Keegan Thiel
         say $person->name; # Wellington Koelpin II
         say $person->name; # Ms. Karley Kiehn V
+
+DESCRIPTION
+    Faker is a Perl library that generates fake data for you. Whether you
+    need to bootstrap your database, create good-looking XML documents,
+    fill-in your persistence to stress test it, or anonymize data taken from
+    a production service, Faker makes it easy to generate fake data with
+    some semantics. Note: This is an early release available for testing and
+    feedback and as such is subject to change.
 
 AUTHOR
     Al Newkirk <anewkirk@ana.io>

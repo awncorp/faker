@@ -74,7 +74,7 @@ sub provider {
 
 __END__
 
-=head1 SYNPOSIS
+=head1 SYNOPSIS
 
     use Faker;
 

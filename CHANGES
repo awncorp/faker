@@ -1,6 +1,7 @@
 Changelog for Faker
 
-0.10 2014-08-27T04:32:15
+0.10 2014-08-27T04:45:24
+ - Updated POD, Makefile and README.
  - Completely refactored, Reduced size, Less abstractions.
 
 0.09 2014-04-04T04:10:14
