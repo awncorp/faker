@@ -285,7 +285,7 @@ release available for testing and feedback and as such is subject to change.>
 
 =cut
 
-=attributes namespace
+=attribute namespace
 
     $faker->namespace('MyApp::FakeData');
 
@@ -294,7 +294,7 @@ loaded. This attribute defaults to Faker::Provider.
 
 =cut
 
-=attributes locale
+=attribute locale
 
     $faker->locale('en_US');
 

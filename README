@@ -1,0 +1,625 @@
+SYNOPSIS
+
+        use Faker;
+    
+        my $faker = Faker->new;
+    
+        my $company  = $faker->provider('Company');
+        my $address  = $faker->provider('Address');
+    
+        say $company->name;
+        say $address->lines;
+    
+        # or
+    
+        say $faker->company_name;
+        say $faker->address_lines;
+
+DESCRIPTION
+
+    Faker is a Perl library that generates fake data for you. Whether you
+    need to bootstrap your database, create good-looking XML documents,
+    fill-in your persistence to stress test it, or anonymize data taken
+    from a production service, Faker makes it easy to generate fake data.
+    Note: This is an early release available for testing and feedback and
+    as such is subject to change.
+
+        $faker->namespace('MyApp::FakeData');
+
+    The namespace attribute contains the namespace from which providers
+    will be loaded. This attribute defaults to Faker::Provider.
+
+        $faker->locale('en_US');
+
+    The locale attribute contains the locale string which is concatenated
+    with the namespace attribute to load fake data which is
+    locale-specific.
+
+        $faker->provider('Company'); # Faker::Provider::en_US::Company
+
+    The provider method uses the namespace and locale attributes to load a
+    particular provider which provides methods to generate fake data.
+
+        $faker->address_city_name; # Kirkville
+
+    The address_city_name method generates a random ficticious city name.
+    This method is a proxy method which is the equivalent of calling the
+    city_name method on the Faker::Provider::Address class.
+
+        $faker->address_city_prefix; # West
+
+    The address_city_prefix method generates a random ficticious city
+    prefix. This method is a proxy method which is the equivalent of
+    calling the city_prefix method on the Faker::Provider::en_US::Address
+    class.
+
+        $faker->address_city_suffix; # ville
+
+    The address_city_suffix method generates a random ficticious city
+    suffix. This method is a proxy method which is the equivalent of
+    calling the city_suffix method on the Faker::Provider::Address class.
+
+        $faker->address_country_name; # France
+
+    The address_country_name method generates a random ficticious country
+    name. This method is a proxy method which is the equivalent of calling
+    the country_name method on the Faker::Provider::en_US::Address class.
+
+        $faker->address_latitude; # 59.682733
+
+    The address_latitude method generates a random ficticious latitude
+    point. This method is a proxy method which is the equivalent of calling
+    the latitude method on the Faker::Provider::Address class.
+
+        $faker->address_line1; # 4765 Goodwin Street
+
+    The address_line1 method generates a random ficticious street address.
+    This method is a proxy method which is the equivalent of calling the
+    line1 method on the Faker::Provider::Address class.
+
+        $faker->address_line2; # Apt. 835
+
+    The address_line2 method generates a random ficticious address line2.
+    This method is a proxy method which is the equivalent of calling the
+    line2 method on the Faker::Provider::en_US::Address class.
+
+        $faker->address_lines; # 5111 McClure Avenue, Laneville, 29442
+
+    The address_lines method generates a random ficticious stree address.
+    This method is a proxy method which is the equivalent of calling the
+    lines method on the Faker::Provider::Address class.
+
+        $faker->address_longitude; # 73.002746
+
+    The address_longitude method generates a random ficticious longitude
+    point. This method is a proxy method which is the equivalent of calling
+    the longitude method on the Faker::Provider::Address class.
+
+        $faker->address_number; # 4568
+
+    The address_number method generates a random ficticious street number.
+    This method is a proxy method which is the equivalent of calling the
+    number method on the Faker::Provider::Address class.
+
+        $faker->address_postal_code; # 11083-9440
+
+    The address_postal_code method generates a random ficticious postal
+    code. This method is a proxy method which is the equivalent of calling
+    the postal_code method on the Faker::Provider::Address class.
+
+        $faker->address_state_abbr; # AS
+
+    The address_state_abbr method generates a random ficticious state abbr.
+    This method is a proxy method which is the equivalent of calling the
+    state_abbr method on the Faker::Provider::en_US::Address class.
+
+        $faker->address_state_name; # Illinois
+
+    The address_state_name method generates a random ficticious state name.
+    This method is a proxy method which is the equivalent of calling the
+    state_name method on the Faker::Provider::en_US::Address class.
+
+        $faker->address_street_name; # Borer Street
+
+    The address_street_name method generates a random ficticious street
+    name. This method is a proxy method which is the equivalent of calling
+    the street_name method on the Faker::Provider::Address class.
+
+        $faker->address_street_suffix; # Parkway
+
+    The address_street_suffix method generates a random ficticious street
+    suffix. This method is a proxy method which is the equivalent of
+    calling the street_suffix method on the Faker::Provider::Address class.
+
+        $faker->color_hex_code; # #af0573
+
+    The color_hex_code method generates a random ficticious hex color. This
+    method is a proxy method which is the equivalent of calling the
+    hex_code method on the Faker::Provider::Color class.
+
+        $faker->color_name; # PeachPuff
+
+    The color_name method generates a random ficticious color name. This
+    method is a proxy method which is the equivalent of calling the name
+    method on the Faker::Provider::Color class.
+
+        $faker->color_rgbcolors; # 142,63,127
+
+    The color_rgbcolors method generates a random ficticious rgb colors.
+    This method is a proxy method which is the equivalent of calling the
+    rgbcolors method on the Faker::Provider::Color class.
+
+        $faker->color_rgbcolors_array; # ARRAY(0x24d8788)
+
+    The color_rgbcolors_array method generates a random ficticious rgb
+    colors. This method is a proxy method which is the equivalent of
+    calling the rgbcolors_array method on the Faker::Provider::Color class.
+
+        $faker->color_rgbcolors_css; # rgb(214,199,200)
+
+    The color_rgbcolors_css method generates a random ficticious rgbcolors
+    for css. This method is a proxy method which is the equivalent of
+    calling the rgbcolors_css method on the Faker::Provider::Color class.
+
+        $faker->color_safe_hex_code; # #ff0097
+
+    The color_safe_hex_code method generates a random ficticious safe hex
+    color. This method is a proxy method which is the equivalent of calling
+    the safe_hex_code method on the Faker::Provider::Color class.
+
+        $faker->color_safe_name; # white
+
+    The color_safe_name method generates a random ficticious safe color
+    name. This method is a proxy method which is the equivalent of calling
+    the safe_name method on the Faker::Provider::Color class.
+
+        $faker->company_buzzword_type1; # embrace
+
+    The company_buzzword_type1 method generates a random ficticious
+    buzzword type1. This method is a proxy method which is the equivalent
+    of calling the buzzword_type1 method on the
+    Faker::Provider::en_US::Company class.
+
+        $faker->company_buzzword_type2; # frictionless
+
+    The company_buzzword_type2 method generates a random ficticious
+    buzzword type2. This method is a proxy method which is the equivalent
+    of calling the buzzword_type2 method on the
+    Faker::Provider::en_US::Company class.
+
+        $faker->company_buzzword_type3; # channels
+
+    The company_buzzword_type3 method generates a random ficticious
+    buzzword type3. This method is a proxy method which is the equivalent
+    of calling the buzzword_type3 method on the
+    Faker::Provider::en_US::Company class.
+
+        $faker->company_description; # Delivers high-level capability
+
+    The company_description method generates a random ficticious
+    description. This method is a proxy method which is the equivalent of
+    calling the description method on the Faker::Provider::en_US::Company
+    class.
+
+        $faker->company_jargon_buzz_word; # circuit
+
+    The company_jargon_buzz_word method generates a random ficticious
+    jargon buzz word. This method is a proxy method which is the equivalent
+    of calling the jargon_buzz_word method on the
+    Faker::Provider::en_US::Company class.
+
+        $faker->company_jargon_edge_word; # Polarised
+
+    The company_jargon_edge_word method generates a random ficticious
+    jargon edge word. This method is a proxy method which is the equivalent
+    of calling the jargon_edge_word method on the
+    Faker::Provider::en_US::Company class.
+
+        $faker->company_jargon_prop_word; # full-range
+
+    The company_jargon_prop_word method generates a random ficticious
+    jargon proposition word. This method is a proxy method which is the
+    equivalent of calling the jargon_prop_word method on the
+    Faker::Provider::en_US::Company class.
+
+        $faker->company_name; # Kozey Ltd.
+
+    The company_name method generates a random ficticious company name.
+    This method is a proxy method which is the equivalent of calling the
+    name method on the Faker::Provider::Company class.
+
+        $faker->company_name_suffix; # Co.
+
+    The company_name_suffix method generates a random ficticious company
+    name suffix. This method is a proxy method which is the equivalent of
+    calling the name_suffix method on the Faker::Provider::Company class.
+
+        $faker->company_tagline; # infomediaries web-enabled brand
+
+    The company_tagline method generates a random ficticious tagline. This
+    method is a proxy method which is the equivalent of calling the tagline
+    method on the Faker::Provider::en_US::Company class.
+
+        $faker->internet_domain_name; # crooks-swift-and-nolan.org
+
+    The internet_domain_name method generates a random ficticious domain
+    name. This method is a proxy method which is the equivalent of calling
+    the domain_name method on the Faker::Provider::Internet class.
+
+        $faker->internet_domain_word; # orn-lesch-and-spencer
+
+    The internet_domain_word method generates a random ficticious domain
+    word. This method is a proxy method which is the equivalent of calling
+    the domain_word method on the Faker::Provider::Internet class.
+
+        $faker->internet_email_address; # maximo31@balistreri-pty.org
+
+    The internet_email_address method generates a random ficticious email
+    address. This method is a proxy method which is the equivalent of
+    calling the email_address method on the Faker::Provider::Internet
+    class.
+
+        $faker->internet_email_domain; # gmail.com
+
+    The internet_email_domain method generates a random ficticious email
+    domain. This method is a proxy method which is the equivalent of
+    calling the email_domain method on the Faker::Provider::Internet class.
+
+        $faker->internet_ip_address; # 87.129.119.157
+
+    The internet_ip_address method generates a random ficticious ip
+    address. This method is a proxy method which is the equivalent of
+    calling the ip_address method on the Faker::Provider::Internet class.
+
+        $faker->internet_ip_address_v4; # 98.122.126.251
+
+    The internet_ip_address_v4 method generates a random ficticious ip
+    address v4. This method is a proxy method which is the equivalent of
+    calling the ip_address_v4 method on the Faker::Provider::Internet
+    class.
+
+        $faker->internet_ip_address_v6; # 8711:aa2d:654d:65b5:1079:ba06:bbac:d496
+
+    The internet_ip_address_v6 method generates a random ficticious ip
+    address v6. This method is a proxy method which is the equivalent of
+    calling the ip_address_v6 method on the Faker::Provider::Internet
+    class.
+
+        $faker->internet_root_domain; # org
+
+    The internet_root_domain method generates a random ficticious root
+    domain. This method is a proxy method which is the equivalent of
+    calling the root_domain method on the Faker::Provider::Internet class.
+
+        $faker->internet_url; # https://www.medhurst-konopelski-and-prohaska.net/
+
+    The internet_url method generates a random ficticious url. This method
+    is a proxy method which is the equivalent of calling the url method on
+    the Faker::Provider::Internet class.
+
+        $faker->lorem_paragraph; # voluptatibus sit aut culpa et ....
+
+    The lorem_paragraph method generates a random ficticious paragraph.
+    This method is a proxy method which is the equivalent of calling the
+    paragraph method on the Faker::Provider::Lorem class.
+
+        $faker->lorem_paragraphs; # assumenda voluptatibus ....
+
+    The lorem_paragraphs method generates a random ficticious paragraphs.
+    This method is a proxy method which is the equivalent of calling the
+    paragraphs method on the Faker::Provider::Lorem class.
+
+        $faker->lorem_sentence; # consequatur doloremque assumenda optio rerum.
+
+    The lorem_sentence method generates a random ficticious sentence. This
+    method is a proxy method which is the equivalent of calling the
+    sentence method on the Faker::Provider::Lorem class.
+
+        $faker->lorem_sentences; # odit qui provident et quia.
+
+    The lorem_sentences method generates a random ficticious sentences.
+    This method is a proxy method which is the equivalent of calling the
+    sentences method on the Faker::Provider::Lorem class.
+
+        $faker->lorem_word; # utim
+
+    The lorem_word method generates a random ficticious word. This method
+    is a proxy method which is the equivalent of calling the word method on
+    the Faker::Provider::Lorem class.
+
+        $faker->lorem_words; # consequatur suscipit asperiores sed similique
+
+    The lorem_words method generates a random ficticious words. This method
+    is a proxy method which is the equivalent of calling the words method
+    on the Faker::Provider::Lorem class.
+
+        $faker->person_first_name; # Jane
+
+    The person_first_name method generates a random ficticious first name.
+    This method is a proxy method which is the equivalent of calling the
+    first_name method on the Faker::Provider::Person class.
+
+        $faker->person_last_name; # Doe
+
+    The person_last_name method generates a random ficticious last name.
+    This method is a proxy method which is the equivalent of calling the
+    last_name method on the Faker::Provider::Person class.
+
+        $faker->person_name; # Jane Doe
+
+    The person_name method generates a random ficticious full name. This
+    method is a proxy method which is the equivalent of calling the name
+    method on the Faker::Provider::Person class.
+
+        $faker->person_name_prefix; # Ms.
+
+    The person_name_prefix method generates a random ficticious name
+    prefix. This method is a proxy method which is the equivalent of
+    calling the name_prefix method on the Faker::Provider::en_US::Person
+    class.
+
+        $faker->person_name_suffix; # IV
+
+    The person_name_suffix method generates a random ficticious name
+    suffix. This method is a proxy method which is the equivalent of
+    calling the name_suffix method on the Faker::Provider::en_US::Person
+    class.
+
+        $faker->person_username; # John74
+
+    The person_username method generates a random ficticious username. This
+    method is a proxy method which is the equivalent of calling the
+    username method on the Faker::Provider::Person class.
+
+        $faker->telephone_number; # 319-193-6964
+
+    The telephone_number method generates a random ficticious telephone
+    number. This method is a proxy method which is the equivalent of
+    calling the number method on the Faker::Provider::Telephone class.
+
+ACKNOWLEDGEMENTS
+
+    Some parts of this library were adopted from the following
+    implementations.
+
+      * JS Faker https://github.com/Marak/faker.js
+
+      * PHP Faker https://github.com/fzaninotto/Faker
+
+      * Python Faker https://github.com/joke2k/faker
+
+      * Ruby Faker https://github.com/stympy/faker
+
+POD ERRORS
+
+    Hey! The above document had some coding errors, which are explained
+    below:
+
+    Around line 28:
+
+      Unknown directive: =attribute
+
+    Around line 35:
+
+      Unknown directive: =attribute
+
+    Around line 42:
+
+      Unknown directive: =method
+
+    Around line 49:
+
+      Unknown directive: =method
+
+    Around line 57:
+
+      Unknown directive: =method
+
+    Around line 65:
+
+      Unknown directive: =method
+
+    Around line 73:
+
+      Unknown directive: =method
+
+    Around line 81:
+
+      Unknown directive: =method
+
+    Around line 89:
+
+      Unknown directive: =method
+
+    Around line 97:
+
+      Unknown directive: =method
+
+    Around line 105:
+
+      Unknown directive: =method
+
+    Around line 113:
+
+      Unknown directive: =method
+
+    Around line 121:
+
+      Unknown directive: =method
+
+    Around line 129:
+
+      Unknown directive: =method
+
+    Around line 137:
+
+      Unknown directive: =method
+
+    Around line 145:
+
+      Unknown directive: =method
+
+    Around line 153:
+
+      Unknown directive: =method
+
+    Around line 161:
+
+      Unknown directive: =method
+
+    Around line 169:
+
+      Unknown directive: =method
+
+    Around line 177:
+
+      Unknown directive: =method
+
+    Around line 185:
+
+      Unknown directive: =method
+
+    Around line 193:
+
+      Unknown directive: =method
+
+    Around line 201:
+
+      Unknown directive: =method
+
+    Around line 209:
+
+      Unknown directive: =method
+
+    Around line 217:
+
+      Unknown directive: =method
+
+    Around line 225:
+
+      Unknown directive: =method
+
+    Around line 233:
+
+      Unknown directive: =method
+
+    Around line 241:
+
+      Unknown directive: =method
+
+    Around line 249:
+
+      Unknown directive: =method
+
+    Around line 257:
+
+      Unknown directive: =method
+
+    Around line 265:
+
+      Unknown directive: =method
+
+    Around line 273:
+
+      Unknown directive: =method
+
+    Around line 282:
+
+      Unknown directive: =method
+
+    Around line 290:
+
+      Unknown directive: =method
+
+    Around line 298:
+
+      Unknown directive: =method
+
+    Around line 306:
+
+      Unknown directive: =method
+
+    Around line 314:
+
+      Unknown directive: =method
+
+    Around line 322:
+
+      Unknown directive: =method
+
+    Around line 330:
+
+      Unknown directive: =method
+
+    Around line 338:
+
+      Unknown directive: =method
+
+    Around line 346:
+
+      Unknown directive: =method
+
+    Around line 354:
+
+      Unknown directive: =method
+
+    Around line 362:
+
+      Unknown directive: =method
+
+    Around line 370:
+
+      Unknown directive: =method
+
+    Around line 378:
+
+      Unknown directive: =method
+
+    Around line 386:
+
+      Unknown directive: =method
+
+    Around line 394:
+
+      Unknown directive: =method
+
+    Around line 402:
+
+      Unknown directive: =method
+
+    Around line 410:
+
+      Unknown directive: =method
+
+    Around line 418:
+
+      Unknown directive: =method
+
+    Around line 426:
+
+      Unknown directive: =method
+
+    Around line 434:
+
+      Unknown directive: =method
+
+    Around line 442:
+
+      Unknown directive: =method
+
+    Around line 450:
+
+      Unknown directive: =method
+
+    Around line 458:
+
+      Unknown directive: =method
+
+    Around line 466:
+
+      Unknown directive: =method
+
+    Around line 474:
+
+      Unknown directive: =method
+
