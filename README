@@ -149,7 +149,7 @@ DESCRIPTION
     This method is a proxy method which is the equivalent of calling the
     rgbcolors method on the Faker::Provider::Color class.
 
-        $faker->color_rgbcolors_array; # ARRAY(0x24d8788)
+        $faker->color_rgbcolors_array; # [214,199,200]
 
     The color_rgbcolors_array method generates a random ficticious rgb
     colors. This method is a proxy method which is the equivalent of

@@ -78,7 +78,7 @@ method url () {
 =head1 DESCRIPTION
 
 Faker::Provider::Internet is a L<Faker> provider which provides fake Internet
-data.  B<Note: This is an early release available for testing and feedback and
+data. B<Note: This is an early release available for testing and feedback and
 as such is subject to change.>
 
 =method domain_name

@@ -51,7 +51,7 @@ method words (INTEGER :$count = 5) {
     use Faker::Provider::Lorem;
 
     my $faker = Faker->new;
-    my $lorem = Faker::Provider::Internet->new(factory => $faker);
+    my $lorem = Faker::Provider::Lorem->new(factory => $faker);
 
     say $lorem->paragraph;
 

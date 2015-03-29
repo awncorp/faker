@@ -1,4 +1,4 @@
-# ABSTRACT: Faker Localized en_US Telephone Number Provider
+# ABSTRACT: Faker Localized en_US Telephone Provider
 package Faker::Provider::en_US::Telephone;
 
 use Faker::Base;
@@ -14,18 +14,18 @@ extends 'Faker::Provider::Telephone';
 =head1 SYNOPSIS
 
     use Faker;
-    use Faker::Provider::en_US::Person;
+    use Faker::Provider::en_US::Telephone;
 
     my $faker = Faker->new(locale => 'en_US');
-    my $phone = Faker::Provider::en_US::PhoneNumber->new(factory => $faker);
+    my $phone = Faker::Provider::en_US::Telephone->new(factory => $faker);
 
     say $phone->number;
 
 =head1 DESCRIPTION
 
-Faker::Provider::en_US::PhoneNumber is a L<Faker> provider localized under
-en_US, which provides fake phone data. Faker::Provider::en_US::PhoneNumber
-inherits all attributes and methods from L<Faker::Provider::PhoneNumber> and
+Faker::Provider::en_US::Telephone is a L<Faker> provider localized under
+en_US, which provides fake phone data. Faker::Provider::en_US::Telephone
+inherits all attributes and methods from L<Faker::Provider::Telephone> and
 implements the following new ones. B<Note: This is an early release available
 for testing and feedback and as such is subject to change.>
 

@@ -204,7 +204,7 @@ method on the [Faker::Provider::Color](https://metacpan.org/pod/Faker::Provider:
 
 ## color\_rgbcolors\_array
 
-    $faker->color_rgbcolors_array; # ARRAY(0x24d8788)
+    $faker->color_rgbcolors_array; # [214,199,200]
 
 The color\_rgbcolors\_array method generates a random ficticious rgb colors.
 This method is a proxy method which is the equivalent of calling the
