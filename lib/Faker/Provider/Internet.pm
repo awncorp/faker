@@ -15,18 +15,20 @@ method domain_word () {
     my $factory = $self->factory;
     my $company = $factory->provider('Company');
     my $string  = lc $company->name;
+
     $string =~ s/\W+/-/g;
     $string =~ s/^\W+|\W+$//g;
+
     return $string;
 }
 
 method email_address () {
-    return lc $self->process_random('format_for_email');
+    return lc $self->process(random => 'email');
 
 }
 
 method email_domain () {
-    return lc $self->process_random('data_for_email_domain');
+    return lc $self->process(random => 'email_domain');
 }
 
 method ip_address () {
@@ -52,11 +54,11 @@ method ip_address_v6 () {
 }
 
 method root_domain () {
-    return $self->process_random('data_for_root_domain');
+    return $self->process(random => 'root_domain');
 }
 
 method url () {
-    return $self->process_random('format_for_url');
+    return $self->process(random => 'url');
 }
 
 1;

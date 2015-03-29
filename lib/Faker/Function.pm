@@ -6,8 +6,8 @@ use Extorter;
 
 my %functions = (
     confess   => 'Carp::confess',
-    merge     => 'Hash::Merge::Simple::merge',
     load      => 'Class::Load::load',
+    merge     => 'Hash::Merge::Simple::merge',
     tryload   => 'Class::Load::try_load_class',
 );
 
@@ -19,7 +19,6 @@ sub import {
         grep $functions{$_}, @_ if @_;
 
     $class->extort::into($target, $_) for @parameters;
-    $class->extort::into($target, '*namespace::autoclean');
 
     return;
 }

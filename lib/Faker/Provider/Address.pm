@@ -8,59 +8,51 @@ extends 'Faker::Provider';
 # VERSION
 
 method line1 () {
-    return $self->format_number_markers(
-        $self->format_line_markers(
-            $self->process_random('format_for_line1')
-        )
-    );
+    return $self->process(random => 'line1', number_markers => 1,
+        line_markers => 1);
 }
 
 method lines () {
-    return $self->format_number_markers(
-        $self->format_line_markers(
-            $self->process_random('format_for_lines')
-        )
-    );
+    return $self->process(random => 'lines', number_markers => 1,
+        line_markers => 1);
 }
 
 method number () {
-    return $self->format_number_markers(
-        $self->process_random('data_for_number')
-    );
+    return $self->process(random => 'number', number_markers => 1);
 }
 
 method city_name () {
-    return $self->process_random('format_for_city_name');
+    return $self->process(random => 'city_name');
 }
 
 method city_suffix () {
-    return $self->process_random('data_for_city_suffix');
+    return $self->process(random => 'city_suffix');
 }
 
 method latitude () {
     my $string = (int(rand(90000000)), int(rand(-90000000)))[rand 2];
-    $string =~ s/\d*(\d\d)(\d{6})$/$1.$2/;
+       $string =~ s/\d*(\d\d)(\d{6})$/$1.$2/;
+
     return $string;
 }
 
 method longitude () {
     my $string = (int(rand(90000000)), int(rand(-90000000)))[rand 2];
-    $string =~ s/\d*(\d\d)(\d{6})$/$1.$2/;
+       $string =~ s/\d*(\d\d)(\d{6})$/$1.$2/;
+
     return $string;
 }
 
 method postal_code () {
-    return $self->format_number_markers(
-        $self->process_random('data_for_postal_code')
-    );
+    return $self->process(random => 'postal_code', number_markers => 1);
 }
 
 method street_name () {
-    return $self->process_random('format_for_street_name');
+    return $self->process(random => 'street_name');
 }
 
 method street_suffix () {
-    return $self->process_random('data_for_street_suffix');
+    return $self->process(random => 'street_suffix');
 }
 
 1;

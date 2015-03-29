@@ -13,6 +13,22 @@ has factory => (
     required => 1,
 );
 
+method process (
+    STRING :$random,
+    STRING :$all_markers    = '',
+    STRING :$lex_markers    = '',
+    STRING :$line_markers   = '',
+    STRING :$number_markers = ''
+) {
+    my $string = $self->process_random($random);
+       $string = $self->process_markers($string)       if $all_markers;
+       $string = $self->format_lex_markers($string)    if $lex_markers;
+       $string = $self->format_line_markers($string)   if $line_markers;
+       $string = $self->format_number_markers($string) if $number_markers;
+
+    return $string;
+}
+
 method parse_format (STRING $string = '') {
     $string =~ s/\{\{\s?([#\.\w]+)\s?\}\}/$self->process_format($1)/eg;
 

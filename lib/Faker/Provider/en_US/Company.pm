@@ -8,15 +8,15 @@ extends 'Faker::Provider::Company';
 # VERSION
 
 method buzzword_type1 () {
-    return $self->process_random('data_for_buzzword_type1');
+    return $self->process(random => 'buzzword_type1');
 }
 
 method buzzword_type2 () {
-    return $self->process_random('data_for_buzzword_type2');
+    return $self->process(random => 'buzzword_type2');
 }
 
 method buzzword_type3 () {
-    return $self->process_random('data_for_buzzword_type3');
+    return $self->process(random => 'buzzword_type3');
 }
 
 method description () {
@@ -34,15 +34,15 @@ method description () {
 }
 
 method jargon_buzz_word () {
-    return $self->process_random('data_for_jargon_buzz');
+    return $self->process(random => 'jargon_buzz');
 }
 
 method jargon_edge_word () {
-    return $self->process_random('data_for_jargon_edge');
+    return $self->process(random => 'jargon_edge');
 }
 
 method jargon_prop_word () {
-    return $self->process_random('data_for_jargon_prop');
+    return $self->process(random => 'jargon_prop');
 }
 
 method tagline () {

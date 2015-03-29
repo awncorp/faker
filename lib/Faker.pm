@@ -18,10 +18,20 @@ has namespace => (
     default => 'Faker::Provider',
 );
 
+has providers => (
+    is      => 'ro',
+    isa     => HASH,
+    default => fun {{}},
+);
+
 method provider (STRING $name) {
+    my $providers = $self->providers;
     my $namespace = $self->namespace;
     my $locale    = $self->locale;
     my $default   = 'en_US';
+
+    return $providers->{$name}
+        if $providers->{$name};
 
     my @classes;
     my $explicit  = $locale && $locale ne $default;
@@ -31,7 +41,8 @@ method provider (STRING $name) {
     push @classes, join '::', $namespace, $name;
 
     for my $class (@classes) {
-        return $class->new(factory => $self) if tryload $class;
+        next unless tryload $class;
+        return $providers->{$name} = $class->new(factory => $self);
     }
 
     my $classes = join ' or ', @classes;
@@ -435,7 +446,7 @@ C<street_suffix> method on the L<Faker::Provider::Address> class.
 
 =method color_hex_code
 
-    $faker->color_hex_code; # #af0573
+    $faker->color_hex_code; # af0573
 
 The color_hex_code method generates a random ficticious hex color. This method
 is a proxy method which is the equivalent of calling the C<hex_code> method on
@@ -459,7 +470,7 @@ method on the L<Faker::Provider::Color> class.
 
 =method color_rgbcolors_array
 
-    $faker->color_rgbcolors_array; # ARRAY(0x24d8788)
+    $faker->color_rgbcolors_array; # [214,199,200]
 
 The color_rgbcolors_array method generates a random ficticious rgb colors.
 This method is a proxy method which is the equivalent of calling the
@@ -475,7 +486,7 @@ C<rgbcolors_css> method on the L<Faker::Provider::Color> class.
 
 =method color_safe_hex_code
 
-    $faker->color_safe_hex_code; # #ff0097
+    $faker->color_safe_hex_code; # ff0097
 
 The color_safe_hex_code method generates a random ficticious safe hex color.
 This method is a proxy method which is the equivalent of calling the

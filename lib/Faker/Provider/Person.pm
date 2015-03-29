@@ -8,21 +8,19 @@ extends 'Faker::Provider';
 # VERSION
 
 method name () {
-    return $self->process_random('format_for_name');
+    return $self->process(random => 'name');
 }
 
 method first_name () {
-    return $self->process_random('data_for_first_name');
+    return $self->process(random => 'first_name');
 }
 
 method last_name () {
-    return $self->process_random('data_for_last_name');
+    return $self->process(random => 'last_name');
 }
 
 method username () {
-    return $self->process_markers(
-        $self->process_random('format_for_username')
-    );
+    return $self->process(random => 'username', all_markers => 1);
 }
 
 1;

@@ -1,6 +1,6 @@
 @@ format_for_email
-{{Person#username}}@{{domain_name}}
-{{Person#username}}@{{email_domain}}
+{{Person.username}}@{{domain_name}}
+{{Person.username}}@{{email_domain}}
 
 @@ format_for_url
 https://www.{{domain_name}}/

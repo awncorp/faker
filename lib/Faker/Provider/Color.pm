@@ -8,7 +8,7 @@ extends 'Faker::Provider';
 # VERSION
 
 method name () {
-    return $self->process_random('data_for_name');
+    return $self->process(random => 'name');
 }
 
 method hex_code () {
@@ -34,7 +34,7 @@ method rgbcolors_css () {
 }
 
 method safe_name () {
-    $self->process_random('data_for_safe_name');
+    return $self->process(random => 'safe_name');
 }
 
 method safe_hex_code () {

@@ -8,11 +8,11 @@ extends 'Faker::Provider';
 # VERSION
 
 method name () {
-    return $self->process_random('format_for_name');
+    return $self->process(random => 'name');
 }
 
 method name_suffix () {
-    return $self->process_random('data_for_name_suffix');
+    return $self->process(random => 'name_suffix');
 }
 
 1;

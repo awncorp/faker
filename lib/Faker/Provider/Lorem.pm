@@ -32,12 +32,12 @@ method sentences (INTEGER :$n_paragraphs = 3, INTEGER :$v_length = 10) {
 }
 
 method word () {
-    return $self->process_random('data_for_word');
+    return $self->process_random('word');
 }
 
 method words (INTEGER :$count = 5) {
     return join ' ', map {
-        $self->process_random('data_for_word')
+        $self->process(random => 'word')
     }   1..$count;
 }
 

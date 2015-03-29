@@ -8,9 +8,7 @@ extends 'Faker::Provider';
 # VERSION
 
 method number () {
-    return $self->process_markers(
-        $self->process_random('format_for_number')
-    );
+    return $self->process(random => 'number', all_markers => 1);
 }
 
 1;

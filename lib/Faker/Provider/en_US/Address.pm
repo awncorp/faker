@@ -8,31 +8,24 @@ extends 'Faker::Provider::Address';
 # VERSION
 
 method city_prefix () {
-    return $self->process_random('data_for_city_prefix');
+    return $self->process(random => 'city_prefix');
 }
 
 method country_name () {
-    return $self->process_random('data_for_country_name');
+    return $self->process(random => 'country_name');
 }
 
 method line2 () {
-    return $self->format_number_markers(
-        $self->format_line_markers(
-            $self->process_random('format_for_line2')
-        )
-    );
+    return $self->process(random => 'line2', number_markers => 1,
+            line_markers => 1);
 }
 
 method state_abbr () {
-    return $self->format_line_markers(
-        $self->process_random('data_for_state_abbr')
-    );
+    return $self->process(random => 'state_abbr', line_markers => 1);
 }
 
 method state_name () {
-    return $self->format_line_markers(
-        $self->process_random('data_for_state_name')
-    );
+    return $self->process(random => 'state_name', line_markers => 1);
 }
 
 1;
