@@ -6,7 +6,7 @@ Faker - Extensible Fake Data Generator
 
 # VERSION
 
-version 0.10
+version 0.11
 
 # SYNOPSIS
 
@@ -180,7 +180,7 @@ This method is a proxy method which is the equivalent of calling the
 
 ## color\_hex\_code
 
-    $faker->color_hex_code; # #af0573
+    $faker->color_hex_code; # af0573
 
 The color\_hex\_code method generates a random ficticious hex color. This method
 is a proxy method which is the equivalent of calling the `hex_code` method on
@@ -220,7 +220,7 @@ This method is a proxy method which is the equivalent of calling the
 
 ## color\_safe\_hex\_code
 
-    $faker->color_safe_hex_code; # #ff0097
+    $faker->color_safe_hex_code; # ff0097
 
 The color\_safe\_hex\_code method generates a random ficticious safe hex color.
 This method is a proxy method which is the equivalent of calling the

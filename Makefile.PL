@@ -28,7 +28,7 @@ my %WriteMakefileArgs = (
     "Moo" => "2.000001",
     "Type::Tiny" => "1.000005"
   },
-  "VERSION" => "0.10",
+  "VERSION" => "0.11",
   "test" => {
     "TESTS" => "t/*.t t/faker/provider/*.t t/faker/provider/en_us/*.t"
   }

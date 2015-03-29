@@ -131,7 +131,7 @@ DESCRIPTION
     suffix. This method is a proxy method which is the equivalent of
     calling the street_suffix method on the Faker::Provider::Address class.
 
-        $faker->color_hex_code; # #af0573
+        $faker->color_hex_code; # af0573
 
     The color_hex_code method generates a random ficticious hex color. This
     method is a proxy method which is the equivalent of calling the
@@ -161,7 +161,7 @@ DESCRIPTION
     for css. This method is a proxy method which is the equivalent of
     calling the rgbcolors_css method on the Faker::Provider::Color class.
 
-        $faker->color_safe_hex_code; # #ff0097
+        $faker->color_safe_hex_code; # ff0097
 
     The color_safe_hex_code method generates a random ficticious safe hex
     color. This method is a proxy method which is the equivalent of calling
