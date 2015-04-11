@@ -26,16 +26,14 @@ method token_data () {
 }
 
 method token_data_from_file (STRING $class) {
-    my @namespaces  = split /\^|::/, $class;
-    my @directories = split /\/|\\|:/, __FILE__;
-
-    $#directories -= 3;
+    my $file = $class;
+       $file =~ s/::/\//g;
 
     my @data = ();
-    my $path = join '/', @directories, @namespaces;
+    my $path = $INC{"$file.pm"};
 
     for my $ext (qw(dat fmt)) {
-        open(my $handle, "<:encoding(UTF-8)", "$path.pm.$ext") or next;
+        open(my $handle, "<:encoding(UTF-8)", "$path.$ext") or next;
         push @data, (<$handle>);
     }
 
