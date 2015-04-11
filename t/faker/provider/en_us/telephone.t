@@ -13,6 +13,9 @@ ok $provider->does($_) for qw(
     Faker::Role::Random
 );
 
-ok $provider->number, 'number method ok' for 1..50;
+for (1..50) {
+    my $generated = $provider->number;
+    ok $generated, "number method ok using value $generated";
+}
 
 ok 1 and done_testing;

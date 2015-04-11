@@ -13,11 +13,29 @@ ok $provider->does($_) for qw(
     Faker::Role::Random
 );
 
-ok $provider->first_name, 'first_name method ok' for 1..50;
-ok $provider->last_name, 'last_name method ok' for 1..50;
-ok $provider->name, 'name method ok' for 1..50;
-ok $provider->name_prefix, 'name_prefix method ok' for 1..50;
-ok $provider->name_suffix, 'name_suffix method ok' for 1..50;
-ok $provider->username, 'username method ok' for 1..50;
+for (1..50) {
+    my $generated = $provider->first_name;
+    ok $generated, "first_name method ok using value $generated";
+}
+for (1..50) {
+    my $generated = $provider->last_name;
+    ok $generated, "last_name method ok using value $generated";
+}
+for (1..50) {
+    my $generated = $provider->name;
+    ok $generated, "name method ok using value $generated";
+}
+for (1..50) {
+    my $generated = $provider->name_prefix;
+    ok $generated, "name_prefix method ok using value $generated";
+}
+for (1..50) {
+    my $generated = $provider->name_suffix;
+    ok $generated, "name_suffix method ok using value $generated";
+}
+for (1..50) {
+    my $generated = $provider->username;
+    ok $generated, "username method ok using value $generated";
+}
 
 ok 1 and done_testing;
