@@ -1,6 +1,6 @@
 Changelog for Faker
 
-0.12 2015-04-11T06:18:38
+0.12 2015-04-11T06:23:12
  - Update build.
  - Added Payment provider and reworked some tests.
  - Fixed loading token data from subclasses.
