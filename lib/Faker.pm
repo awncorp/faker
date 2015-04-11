@@ -275,16 +275,34 @@ method telephone_number (@args) {
 
     my $faker = Faker->new;
 
-    my $company  = $faker->provider('Company');
-    my $address  = $faker->provider('Address');
+    my $address   = $faker->provider('Address');
+    my $color     = $faker->provider('Color');
+    my $company   = $faker->provider('Company');
+    my $internet  = $faker->provider('Internet');
+    my $lorem     = $faker->provider('Lorem');
+    my $payment   = $faker->provider('Payment');
+    my $person    = $faker->provider('Person');
+    my $telephone = $faker->provider('Telephone');
 
-    say $company->name;
     say $address->lines;
+    say $color->name;
+    say $company->name;
+    say $internet->ip_address;
+    say $lorem->sentences;
+    say $payment->card_number;
+    say $person->username;
+    say $telephone->number;
 
     # or
 
-    say $faker->company_name;
     say $faker->address_lines;
+    say $faker->color_name;
+    say $faker->company_name;
+    say $faker->internet_ip_address;
+    say $faker->lorem_sentences;
+    say $faker->payment_card_number;
+    say $faker->person_username;
+    say $faker->telephone_number;
 
 =head1 DESCRIPTION
 
@@ -323,286 +341,285 @@ particular provider which provides methods to generate fake data.
 
 =cut
 
-
 =method address_city_name
 
-    $faker->address_city_name; # Kirkville
+    $faker->address_city_name; # Leathaville
 
 The address_city_name method generates a random ficticious city name. This
-method is a proxy method which is the equivalent of calling the C<city_name>
+method is a proxy method which is the equivilent of calling the C<city_name>
 method on the L<Faker::Provider::Address> class.
 
 =method address_city_prefix
 
-    $faker->address_city_prefix; # West
+    $faker->address_city_prefix; # East
 
 The address_city_prefix method generates a random ficticious city prefix. This
-method is a proxy method which is the equivalent of calling the C<city_prefix>
+method is a proxy method which is the equivilent of calling the C<city_prefix>
 method on the L<Faker::Provider::en_US::Address> class.
 
 =method address_city_suffix
 
-    $faker->address_city_suffix; # ville
+    $faker->address_city_suffix; # town
 
 The address_city_suffix method generates a random ficticious city suffix. This
-method is a proxy method which is the equivalent of calling the C<city_suffix>
+method is a proxy method which is the equivilent of calling the C<city_suffix>
 method on the L<Faker::Provider::Address> class.
 
 =method address_country_name
 
-    $faker->address_country_name; # France
+    $faker->address_country_name; # Maldives
 
 The address_country_name method generates a random ficticious country name.
-This method is a proxy method which is the equivalent of calling the
+This method is a proxy method which is the equivilent of calling the
 C<country_name> method on the L<Faker::Provider::en_US::Address> class.
 
 =method address_latitude
 
-    $faker->address_latitude; # 59.682733
+    $faker->address_latitude; # 71.339800
 
 The address_latitude method generates a random ficticious latitude point. This
-method is a proxy method which is the equivalent of calling the C<latitude>
+method is a proxy method which is the equivilent of calling the C<latitude>
 method on the L<Faker::Provider::Address> class.
 
 =method address_line1
 
-    $faker->address_line1; # 4765 Goodwin Street
+    $faker->address_line1; # 55 Wolf Street
 
 The address_line1 method generates a random ficticious street address. This
-method is a proxy method which is the equivalent of calling the C<line1> method
+method is a proxy method which is the equivilent of calling the C<line1> method
 on the L<Faker::Provider::Address> class.
 
 =method address_line2
 
-    $faker->address_line2; # Apt. 835
+    $faker->address_line2; # Apt. 097
 
 The address_line2 method generates a random ficticious address line2. This
-method is a proxy method which is the equivalent of calling the C<line2> method
+method is a proxy method which is the equivilent of calling the C<line2> method
 on the L<Faker::Provider::en_US::Address> class.
 
 =method address_lines
 
-    $faker->address_lines; # 5111 McClure Avenue, Laneville, 29442
+    $faker->address_lines; # 23 West Parkway, Antoinetteford, 57654-9772
 
 The address_lines method generates a random ficticious stree address. This
-method is a proxy method which is the equivalent of calling the C<lines> method
+method is a proxy method which is the equivilent of calling the C<lines> method
 on the L<Faker::Provider::Address> class.
 
 =method address_longitude
 
-    $faker->address_longitude; # 73.002746
+    $faker->address_longitude; # 40.987408
 
 The address_longitude method generates a random ficticious longitude point.
-This method is a proxy method which is the equivalent of calling the
+This method is a proxy method which is the equivilent of calling the
 C<longitude> method on the L<Faker::Provider::Address> class.
 
 =method address_number
 
-    $faker->address_number; # 4568
+    $faker->address_number; # 5
 
 The address_number method generates a random ficticious street number. This
-method is a proxy method which is the equivalent of calling the C<number>
+method is a proxy method which is the equivilent of calling the C<number>
 method on the L<Faker::Provider::Address> class.
 
 =method address_postal_code
 
-    $faker->address_postal_code; # 11083-9440
+    $faker->address_postal_code; # 54708-5923
 
 The address_postal_code method generates a random ficticious postal code. This
-method is a proxy method which is the equivalent of calling the C<postal_code>
+method is a proxy method which is the equivilent of calling the C<postal_code>
 method on the L<Faker::Provider::Address> class.
 
 =method address_state_abbr
 
-    $faker->address_state_abbr; # AS
+    $faker->address_state_abbr; # MT
 
 The address_state_abbr method generates a random ficticious state abbr. This
-method is a proxy method which is the equivalent of calling the C<state_abbr>
+method is a proxy method which is the equivilent of calling the C<state_abbr>
 method on the L<Faker::Provider::en_US::Address> class.
 
 =method address_state_name
 
-    $faker->address_state_name; # Illinois
+    $faker->address_state_name; # Missouri
 
 The address_state_name method generates a random ficticious state name. This
-method is a proxy method which is the equivalent of calling the C<state_name>
+method is a proxy method which is the equivilent of calling the C<state_name>
 method on the L<Faker::Provider::en_US::Address> class.
 
 =method address_street_name
 
-    $faker->address_street_name; # Borer Street
+    $faker->address_street_name; # Gottlieb Avenue
 
 The address_street_name method generates a random ficticious street name. This
-method is a proxy method which is the equivalent of calling the C<street_name>
+method is a proxy method which is the equivilent of calling the C<street_name>
 method on the L<Faker::Provider::Address> class.
 
 =method address_street_suffix
 
-    $faker->address_street_suffix; # Parkway
+    $faker->address_street_suffix; # Street
 
 The address_street_suffix method generates a random ficticious street suffix.
-This method is a proxy method which is the equivalent of calling the
+This method is a proxy method which is the equivilent of calling the
 C<street_suffix> method on the L<Faker::Provider::Address> class.
 
 =method color_hex_code
 
-    $faker->color_hex_code; # af0573
+    $faker->color_hex_code; # #f69e17
 
 The color_hex_code method generates a random ficticious hex color. This method
-is a proxy method which is the equivalent of calling the C<hex_code> method on
+is a proxy method which is the equivilent of calling the C<hex_code> method on
 the L<Faker::Provider::Color> class.
 
 =method color_name
 
-    $faker->color_name; # PeachPuff
+    $faker->color_name; # DarkBlue
 
 The color_name method generates a random ficticious color name. This method is
-a proxy method which is the equivalent of calling the C<name> method on the
+a proxy method which is the equivilent of calling the C<name> method on the
 L<Faker::Provider::Color> class.
 
 =method color_rgbcolors
 
-    $faker->color_rgbcolors; # 142,63,127
+    $faker->color_rgbcolors; # 191,5,180
 
 The color_rgbcolors method generates a random ficticious rgb colors. This
-method is a proxy method which is the equivalent of calling the C<rgbcolors>
+method is a proxy method which is the equivilent of calling the C<rgbcolors>
 method on the L<Faker::Provider::Color> class.
 
 =method color_rgbcolors_array
 
-    $faker->color_rgbcolors_array; # [214,199,200]
+    $faker->color_rgbcolors_array; # [217,103,213]
 
-The color_rgbcolors_array method generates a random ficticious rgb colors.
-This method is a proxy method which is the equivalent of calling the
+The color_rgbcolors_array method generates a random ficticious rgb colors. This
+method is a proxy method which is the equivilent of calling the
 C<rgbcolors_array> method on the L<Faker::Provider::Color> class.
 
 =method color_rgbcolors_css
 
-    $faker->color_rgbcolors_css; # rgb(214,199,200)
+    $faker->color_rgbcolors_css; # rgb(173,240,91)
 
 The color_rgbcolors_css method generates a random ficticious rgbcolors for css.
-This method is a proxy method which is the equivalent of calling the
+This method is a proxy method which is the equivilent of calling the
 C<rgbcolors_css> method on the L<Faker::Provider::Color> class.
 
 =method color_safe_hex_code
 
-    $faker->color_safe_hex_code; # ff0097
+    $faker->color_safe_hex_code; # #ff003e
 
 The color_safe_hex_code method generates a random ficticious safe hex color.
-This method is a proxy method which is the equivalent of calling the
+This method is a proxy method which is the equivilent of calling the
 C<safe_hex_code> method on the L<Faker::Provider::Color> class.
 
 =method color_safe_name
 
-    $faker->color_safe_name; # white
+    $faker->color_safe_name; # fuchsia
 
 The color_safe_name method generates a random ficticious safe color name. This
-method is a proxy method which is the equivalent of calling the C<safe_name>
+method is a proxy method which is the equivilent of calling the C<safe_name>
 method on the L<Faker::Provider::Color> class.
 
 =method company_buzzword_type1
 
-    $faker->company_buzzword_type1; # embrace
+    $faker->company_buzzword_type1; # synergize
 
 The company_buzzword_type1 method generates a random ficticious buzzword type1.
-This method is a proxy method which is the equivalent of calling the
+This method is a proxy method which is the equivilent of calling the
 C<buzzword_type1> method on the L<Faker::Provider::en_US::Company> class.
 
 =method company_buzzword_type2
 
-    $faker->company_buzzword_type2; # frictionless
+    $faker->company_buzzword_type2; # vertical
 
 The company_buzzword_type2 method generates a random ficticious buzzword type2.
-This method is a proxy method which is the equivalent of calling the
+This method is a proxy method which is the equivilent of calling the
 C<buzzword_type2> method on the L<Faker::Provider::en_US::Company> class.
 
 =method company_buzzword_type3
 
-    $faker->company_buzzword_type3; # channels
+    $faker->company_buzzword_type3; # methodologies
 
 The company_buzzword_type3 method generates a random ficticious buzzword type3.
-This method is a proxy method which is the equivalent of calling the
+This method is a proxy method which is the equivilent of calling the
 C<buzzword_type3> method on the L<Faker::Provider::en_US::Company> class.
 
 =method company_description
 
-    $faker->company_description; # Delivers high-level capability
+    $faker->company_description; # Delivers discrete processimprovement
 
 The company_description method generates a random ficticious description. This
-method is a proxy method which is the equivalent of calling the C<description>
+method is a proxy method which is the equivilent of calling the C<description>
 method on the L<Faker::Provider::en_US::Company> class.
 
 =method company_jargon_buzz_word
 
-    $faker->company_jargon_buzz_word; # circuit
+    $faker->company_jargon_buzz_word; # encryption
 
 The company_jargon_buzz_word method generates a random ficticious jargon buzz
-word. This method is a proxy method which is the equivalent of calling the
+word. This method is a proxy method which is the equivilent of calling the
 C<jargon_buzz_word> method on the L<Faker::Provider::en_US::Company> class.
 
 =method company_jargon_edge_word
 
-    $faker->company_jargon_edge_word; # Polarised
+    $faker->company_jargon_edge_word; # Public-key
 
 The company_jargon_edge_word method generates a random ficticious jargon edge
-word. This method is a proxy method which is the equivalent of calling the
+word. This method is a proxy method which is the equivilent of calling the
 C<jargon_edge_word> method on the L<Faker::Provider::en_US::Company> class.
 
 =method company_jargon_prop_word
 
-    $faker->company_jargon_prop_word; # full-range
+    $faker->company_jargon_prop_word; # upward-trending
 
 The company_jargon_prop_word method generates a random ficticious jargon
-proposition word. This method is a proxy method which is the equivalent of
+proposition word. This method is a proxy method which is the equivilent of
 calling the C<jargon_prop_word> method on the
 L<Faker::Provider::en_US::Company> class.
 
 =method company_name
 
-    $faker->company_name; # Kozey Ltd.
+    $faker->company_name; # Quitzon Inc.
 
 The company_name method generates a random ficticious company name. This method
-is a proxy method which is the equivalent of calling the C<name> method on the
+is a proxy method which is the equivilent of calling the C<name> method on the
 L<Faker::Provider::Company> class.
 
 =method company_name_suffix
 
-    $faker->company_name_suffix; # Co.
+    $faker->company_name_suffix; # Inc.
 
 The company_name_suffix method generates a random ficticious company name
-suffix. This method is a proxy method which is the equivalent of calling the
+suffix. This method is a proxy method which is the equivilent of calling the
 C<name_suffix> method on the L<Faker::Provider::Company> class.
 
 =method company_tagline
 
-    $faker->company_tagline; # infomediaries web-enabled brand
+    $faker->company_tagline; # mindshare customized seize
 
 The company_tagline method generates a random ficticious tagline. This method
-is a proxy method which is the equivalent of calling the C<tagline> method on
+is a proxy method which is the equivilent of calling the C<tagline> method on
 the L<Faker::Provider::en_US::Company> class.
 
 =method internet_domain_name
 
-    $faker->internet_domain_name; # crooks-swift-and-nolan.org
+    $faker->internet_domain_name; # bauch-co.net
 
-The internet_domain_name method generates a random ficticious domain name.
-This method is a proxy method which is the equivalent of calling the
-C<domain_name> method on the L<Faker::Provider::Internet> class.
+The internet_domain_name method generates a random ficticious domain name. This
+method is a proxy method which is the equivilent of calling the C<domain_name>
+method on the L<Faker::Provider::Internet> class.
 
 =method internet_domain_word
 
-    $faker->internet_domain_word; # orn-lesch-and-spencer
+    $faker->internet_domain_word; # jerde-gulgowski
 
-The internet_domain_word method generates a random ficticious domain word.
-This method is a proxy method which is the equivalent of calling the
-C<domain_word> method on the L<Faker::Provider::Internet> class.
+The internet_domain_word method generates a random ficticious domain word. This
+method is a proxy method which is the equivilent of calling the C<domain_word>
+method on the L<Faker::Provider::Internet> class.
 
 =method internet_email_address
 
-    $faker->internet_email_address; # maximo31@balistreri-pty.org
+    $faker->internet_email_address; # jessy.kunze\@brekke-cartwright.net
 
 The internet_email_address method generates a random ficticious email address.
-This method is a proxy method which is the equivalent of calling the
+This method is a proxy method which is the equivilent of calling the
 C<email_address> method on the L<Faker::Provider::Internet> class.
 
 =method internet_email_domain
@@ -610,103 +627,135 @@ C<email_address> method on the L<Faker::Provider::Internet> class.
     $faker->internet_email_domain; # gmail.com
 
 The internet_email_domain method generates a random ficticious email domain.
-This method is a proxy method which is the equivalent of calling the
+This method is a proxy method which is the equivilent of calling the
 C<email_domain> method on the L<Faker::Provider::Internet> class.
 
 =method internet_ip_address
 
-    $faker->internet_ip_address; # 87.129.119.157
+    $faker->internet_ip_address; # 151.127.26.209
 
 The internet_ip_address method generates a random ficticious ip address. This
-method is a proxy method which is the equivalent of calling the C<ip_address>
+method is a proxy method which is the equivilent of calling the C<ip_address>
 method on the L<Faker::Provider::Internet> class.
 
 =method internet_ip_address_v4
 
-    $faker->internet_ip_address_v4; # 98.122.126.251
+    $faker->internet_ip_address_v4; # 165.132.192.226
 
 The internet_ip_address_v4 method generates a random ficticious ip address v4.
-This method is a proxy method which is the equivalent of calling the
+This method is a proxy method which is the equivilent of calling the
 C<ip_address_v4> method on the L<Faker::Provider::Internet> class.
 
 =method internet_ip_address_v6
 
-    $faker->internet_ip_address_v6; # 8711:aa2d:654d:65b5:1079:ba06:bbac:d496
+    $faker->internet_ip_address_v6; # 8ae5:e9ac:e5fb:4fc2:7763:fa5e:aaf4:8120
 
 The internet_ip_address_v6 method generates a random ficticious ip address v6.
-This method is a proxy method which is the equivalent of calling the
+This method is a proxy method which is the equivilent of calling the
 C<ip_address_v6> method on the L<Faker::Provider::Internet> class.
 
 =method internet_root_domain
 
     $faker->internet_root_domain; # org
 
-The internet_root_domain method generates a random ficticious root domain.
-This method is a proxy method which is the equivalent of calling the
-C<root_domain> method on the L<Faker::Provider::Internet> class.
+The internet_root_domain method generates a random ficticious root domain. This
+method is a proxy method which is the equivilent of calling the C<root_domain>
+method on the L<Faker::Provider::Internet> class.
 
 =method internet_url
 
-    $faker->internet_url; # https://www.medhurst-konopelski-and-prohaska.net/
+    $faker->internet_url; # http://bauch-runte-and-ondricka.info/
 
 The internet_url method generates a random ficticious url. This method is a
-proxy method which is the equivalent of calling the C<url> method on the
+proxy method which is the equivilent of calling the C<url> method on the
 L<Faker::Provider::Internet> class.
 
 =method lorem_paragraph
 
-    $faker->lorem_paragraph; # voluptatibus sit aut culpa et ....
+    $faker->lorem_paragraph;
+    # velit vitae molestiae ut dolores. amet est qui rem placeat accusamus
+    # accusamus labore. qui quidem expedita non.\n\n
 
 The lorem_paragraph method generates a random ficticious paragraph. This method
-is a proxy method which is the equivalent of calling the C<paragraph> method on
+is a proxy method which is the equivilent of calling the C<paragraph> method on
 the L<Faker::Provider::Lorem> class.
 
 =method lorem_paragraphs
 
-    $faker->lorem_paragraphs; # assumenda voluptatibus ....
+    $faker->lorem_paragraphs;
+    # nobis minus aut nam. odio autem fuga et reprehenderit. magnam eius et
+    # possimus.\n\nvelit nam vel nam harum maxime id dolorum. sed ut molestiae
+    # cumque voluptas aspernatur quidem aut dicta. officia laborum dolorem ab
+    # ipsa deleniti.\n\n
 
 The lorem_paragraphs method generates a random ficticious paragraphs. This
-method is a proxy method which is the equivalent of calling the C<paragraphs>
+method is a proxy method which is the equivilent of calling the C<paragraphs>
 method on the L<Faker::Provider::Lorem> class.
 
 =method lorem_sentence
 
-    $faker->lorem_sentence; # consequatur doloremque assumenda optio rerum.
+    $faker->lorem_sentence; # animi iure quo assumenda est.
 
 The lorem_sentence method generates a random ficticious sentence. This method
-is a proxy method which is the equivalent of calling the C<sentence> method on
+is a proxy method which is the equivilent of calling the C<sentence> method on
 the L<Faker::Provider::Lorem> class.
 
 =method lorem_sentences
 
-    $faker->lorem_sentences; # odit qui provident et quia.
+    $faker->lorem_sentences;
+    # placeat beatae qui aliquid. distinctio quasi repudiandae hic id.
+    # explicabo culpa debitis excepturi aliquam quo ea.
 
 The lorem_sentences method generates a random ficticious sentences. This method
-is a proxy method which is the equivalent of calling the C<sentences> method on
+is a proxy method which is the equivilent of calling the C<sentences> method on
 the L<Faker::Provider::Lorem> class.
 
 =method lorem_word
 
-    $faker->lorem_word; # utim
+    $faker->lorem_word; # quidem
 
 The lorem_word method generates a random ficticious word. This method is a
-proxy method which is the equivalent of calling the C<word> method on the
+proxy method which is the equivilent of calling the C<word> method on the
 L<Faker::Provider::Lorem> class.
 
 =method lorem_words
 
-    $faker->lorem_words; # consequatur suscipit asperiores sed similique
+    $faker->lorem_words; # voluptatibus officia delectus unde sed
 
-The lorem_words method generates a random ficticious words. This method is a
-proxy method which is the equivalent of calling the C<words> method on the
-L<Faker::Provider::Lorem> class.
+The lorem_words method generates a random ficticious words. This method
+is a proxy method which is the equivilent of calling the C<words> method on
+the L<Faker::Provider::Lorem> class.
+
+=method payment_card_expiration
+
+    $faker->payment_card_expiration; # 02/17
+
+The payment_card_expiration method generates a random ficticious credit card
+expiration date. This method is a proxy method which is the equivilent of
+calling the C<card_expiration> method on the L<Faker::Provider::Payment> class.
+
+=method payment_card_number
+
+    $faker->payment_card_number; # 37814449158323
+
+The payment_card_number method generates a random ficticious credit card
+number. This method is a proxy method which is the equivilent of calling the
+C<card_number> method on the L<Faker::Provider::Payment> class.
+
+=method payment_vendor
+
+    $faker->payment_vendor; # MasterCard
+
+The payment_vendor method generates a random ficticious credit card vendor.
+This method is a proxy method which is the equivilent of calling the C<vendor>
+method on the L<Faker::Provider::Payment> class.
 
 =method person_first_name
 
-    $faker->person_first_name; # Jane
+    $faker->person_first_name; # John
 
 The person_first_name method generates a random ficticious first name. This
-method is a proxy method which is the equivalent of calling the C<first_name>
+method is a proxy method which is the equivilent of calling the C<first_name>
 method on the L<Faker::Provider::Person> class.
 
 =method person_last_name
@@ -714,7 +763,7 @@ method on the L<Faker::Provider::Person> class.
     $faker->person_last_name; # Doe
 
 The person_last_name method generates a random ficticious last name. This
-method is a proxy method which is the equivalent of calling the C<last_name>
+method is a proxy method which is the equivilent of calling the C<last_name>
 method on the L<Faker::Provider::Person> class.
 
 =method person_name
@@ -722,39 +771,39 @@ method on the L<Faker::Provider::Person> class.
     $faker->person_name; # Jane Doe
 
 The person_name method generates a random ficticious full name. This method is
-a proxy method which is the equivalent of calling the C<name> method on the
+a proxy method which is the equivilent of calling the C<name> method on the
 L<Faker::Provider::Person> class.
 
 =method person_name_prefix
 
-    $faker->person_name_prefix; # Ms.
+    $faker->person_name_prefix; # Miss
 
 The person_name_prefix method generates a random ficticious name prefix. This
-method is a proxy method which is the equivalent of calling the C<name_prefix>
+method is a proxy method which is the equivilent of calling the C<name_prefix>
 method on the L<Faker::Provider::en_US::Person> class.
 
 =method person_name_suffix
 
-    $faker->person_name_suffix; # IV
+    $faker->person_name_suffix; # III
 
 The person_name_suffix method generates a random ficticious name suffix. This
-method is a proxy method which is the equivalent of calling the C<name_suffix>
+method is a proxy method which is the equivilent of calling the C<name_suffix>
 method on the L<Faker::Provider::en_US::Person> class.
 
 =method person_username
 
-    $faker->person_username; # John74
+    $faker->person_username; # Jane.Doe
 
 The person_username method generates a random ficticious username. This method
-is a proxy method which is the equivalent of calling the C<username> method on
+is a proxy method which is the equivilent of calling the C<username> method on
 the L<Faker::Provider::Person> class.
 
 =method telephone_number
 
-    $faker->telephone_number; # 319-193-6964
+    $faker->telephone_number; # (111) 456-1127
 
 The telephone_number method generates a random ficticious telephone number.
-This method is a proxy method which is the equivalent of calling the C<number>
+This method is a proxy method which is the equivilent of calling the C<number>
 method on the L<Faker::Provider::Telephone> class.
 
 =cut
