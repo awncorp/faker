@@ -114,6 +114,63 @@ service, Faker makes it easy to generate fake data.
 
 =cut
 
+=scenario autoloading
+
+This package supports the auto-loading of plugins, which means that anyone can
+create non-core plugins (fake data generators) and load and control them using
+Faker.
+
+=example autoloading
+
+  package Faker::Plugin::FileExt;
+
+  use Data::Object::Class;
+  use Data::Object::ClassHas;
+
+  has 'faker';
+
+  sub execute {
+    'video/mpeg'
+  }
+
+  package main;
+
+  use Faker;
+
+  my $f = Faker->new;
+
+  $f->_file_ext
+
+=cut
+
+=scenario autoloading-under
+
+This package also supports auto-loading plugins under a specific sub-namespace
+which is typical in creating fake data plugins for locales.
+
+=example autoloading-under
+
+  package Faker::Plugin::JaJp::PersonName;
+
+  use Data::Object::Class;
+  use Data::Object::ClassHas;
+
+  has 'faker';
+
+  sub execute {
+    '鈴木 陽一'
+  }
+
+  package main;
+
+  use Faker;
+
+  my $f = Faker->new;
+
+  $f->_person_name(under => 'ja_jp')
+
+=cut
+
 =method address_city_name
 
 The address_city_name method returns a random fake address city name. See the
@@ -1223,6 +1280,18 @@ $subs->synopsis(fun($tryable) {
   ok $result->does('Data::Object::Role::Throwable');
 
   $result
+});
+
+$subs->scenario('autoloading', fun($tryable) {
+  ok my $result = $tryable->result, 'result ok';
+
+  $result;
+});
+
+$subs->scenario('autoloading-under', fun($tryable) {
+  ok my $result = $tryable->result, 'result ok';
+
+  $result;
 });
 
 $subs->example(-1, 'address_city_name', 'method', fun($tryable) {
