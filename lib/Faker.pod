@@ -52,6 +52,65 @@ L<Types::Standard>
 
 =cut
 
+=head1 SCENARIOS
+
+This package supports the following scenarios:
+
+=cut
+
+=head2 autoloading
+
+  package Faker::Plugin::FileExt;
+
+  use Data::Object::Class;
+  use Data::Object::ClassHas;
+
+  has 'faker';
+
+  sub execute {
+    'video/mpeg'
+  }
+
+  package main;
+
+  use Faker;
+
+  my $f = Faker->new;
+
+  $f->_file_ext
+
+This package supports the auto-loading of plugins, which means that anyone can
+create non-core plugins (fake data generators) and load and control them using
+Faker.
+
+=cut
+
+=head2 autoloading-under
+
+  package Faker::Plugin::JaJp::PersonName;
+
+  use Data::Object::Class;
+  use Data::Object::ClassHas;
+
+  has 'faker';
+
+  sub execute {
+    '鈴木 陽一'
+  }
+
+  package main;
+
+  use Faker;
+
+  my $f = Faker->new;
+
+  $f->_person_name(under => 'ja_jp')
+
+This package also supports auto-loading plugins under a specific sub-namespace
+which is typical in creating fake data plugins for locales.
+
+=cut
+
 =head1 METHODS
 
 This package implements the following methods:
@@ -1283,13 +1342,13 @@ file"|https://github.com/iamalnewkirk/faker/blob/master/LICENSE>.
 
 Parts of this library were inspired by the following implementations:
 
-L<"PHP Faker"|https://github.com/fzaninotto/Faker>
+L<PHP Faker|https://github.com/fzaninotto/Faker>
 
-L<"Ruby Faker"|https://github.com/stympy/faker>
+L<Ruby Faker|https://github.com/stympy/faker>
 
-L<"Python Faker"|https://github.com/joke2k/faker>
+L<Python Faker|https://github.com/joke2k/faker>
 
-L<"JS Faker"|https://github.com/Marak/faker.js>
+L<JS Faker|https://github.com/Marak/faker.js>
 
 =head1 PROJECT
 

@@ -111,6 +111,21 @@ method address_street_suffix(%args) {
   return $self->plugin('address_street_suffix', %args)->execute;
 }
 
+method build_proxy($package, $method, %args) {
+  $args{faker} = $self;
+
+  my $under = delete $args{under};
+
+  $method = "$under/$method" if $under;
+
+  if (my $plugin = eval { $self->plugin($method, %args) }) {
+
+    return sub { $plugin->execute };
+  }
+
+  return undef;
+}
+
 method color_hex_code(%args) {
   $args{faker} = $self;
 

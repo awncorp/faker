@@ -41,6 +41,14 @@ L<Data::Object::Plugin>
 
 =cut
 
+=head1 LIBRARIES
+
+This package uses type constraints from:
+
+L<Types::Standard>
+
+=cut
+
 =head1 ATTRIBUTES
 
 This package has the following attributes:
@@ -95,13 +103,13 @@ file"|https://github.com/iamalnewkirk/faker/blob/master/LICENSE>.
 
 Parts of this library were inspired by the following implementations:
 
-L<"PHP Faker"|https://github.com/fzaninotto/Faker>
+L<PHP Faker|https://github.com/fzaninotto/Faker>
 
-L<"Ruby Faker"|https://github.com/stympy/faker>
+L<Ruby Faker|https://github.com/stympy/faker>
 
-L<"Python Faker"|https://github.com/joke2k/faker>
+L<Python Faker|https://github.com/joke2k/faker>
 
-L<"JS Faker"|https://github.com/Marak/faker.js>
+L<JS Faker|https://github.com/Marak/faker.js>
 
 =head1 PROJECT
 

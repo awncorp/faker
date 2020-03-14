@@ -1,6 +1,15 @@
 Changelog for Faker
 
-1.00 2020-03-14T02:15:26
+1.01 2020-03-14T19:00:51
+ - Added release updates
+ - Explain autoloading plugins
+ - Add type-library to plugin docs
+ - Add missing D/O/Role dependency
+ - Remove quotes from acknowledgments
+ - Configure proxyable
+
+1.00 2020-03-14T02:15:31
+ - Built release version 1.00
  - Added release updates
  - Refactor library using plugin architecture
 
