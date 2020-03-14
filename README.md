@@ -37,6 +37,59 @@ This package uses type constraints from:
 
 [Types::Standard](https://metacpan.org/pod/Types%3A%3AStandard)
 
+# SCENARIOS
+
+This package supports the following scenarios:
+
+## autoloading
+
+    package Faker::Plugin::FileExt;
+
+    use Data::Object::Class;
+    use Data::Object::ClassHas;
+
+    has 'faker';
+
+    sub execute {
+      'video/mpeg'
+    }
+
+    package main;
+
+    use Faker;
+
+    my $f = Faker->new;
+
+    $f->_file_ext
+
+This package supports the auto-loading of plugins, which means that anyone can
+create non-core plugins (fake data generators) and load and control them using
+Faker.
+
+## autoloading-under
+
+    package Faker::Plugin::JaJp::PersonName;
+
+    use Data::Object::Class;
+    use Data::Object::ClassHas;
+
+    has 'faker';
+
+    sub execute {
+      '鈴木 陽一'
+    }
+
+    package main;
+
+    use Faker;
+
+    my $f = Faker->new;
+
+    $f->_person_name(under => 'ja_jp')
+
+This package also supports auto-loading plugins under a specific sub-namespace
+which is typical in creating fake data plugins for locales.
+
 # METHODS
 
 This package implements the following methods:
@@ -924,13 +977,13 @@ file"](https://github.com/iamalnewkirk/faker/blob/master/LICENSE).
 
 Parts of this library were inspired by the following implementations:
 
-["PHP Faker"](https://github.com/fzaninotto/Faker)
+[PHP Faker](https://github.com/fzaninotto/Faker)
 
-["Ruby Faker"](https://github.com/stympy/faker)
+[Ruby Faker](https://github.com/stympy/faker)
 
-["Python Faker"](https://github.com/joke2k/faker)
+[Python Faker](https://github.com/joke2k/faker)
 
-["JS Faker"](https://github.com/Marak/faker.js)
+[JS Faker](https://github.com/Marak/faker.js)
 
 # PROJECT
 
