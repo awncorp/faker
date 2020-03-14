@@ -920,6 +920,18 @@ This is free software; you can redistribute it and/or modify it under the terms
 of the The Apache License, Version 2.0, as elucidated in the ["license
 file"](https://github.com/iamalnewkirk/faker/blob/master/LICENSE).
 
+# ACKNOWLEDGEMENTS
+
+Parts of this library were inspired by the following implementations:
+
+["PHP Faker"](https://github.com/fzaninotto/Faker)
+
+["Ruby Faker"](https://github.com/stympy/faker)
+
+["Python Faker"](https://github.com/joke2k/faker)
+
+["JS Faker"](https://github.com/Marak/faker.js)
+
 # PROJECT
 
 [Wiki](https://github.com/iamalnewkirk/faker/wiki)
