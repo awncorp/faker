@@ -3,13 +3,13 @@
 
 =head1 NAME
 
-Faker::Plugin::AddressCityName
+Faker::Plugin::ColorRgbcolorsArray
 
 =cut
 
 =head1 ABSTRACT
 
-Address City Name Plugin for Faker
+Color Rgbcolors Array Plugin for Faker
 
 =cut
 
@@ -18,10 +18,10 @@ Address City Name Plugin for Faker
   package main;
 
   use Faker;
-  use Faker::Plugin::AddressCityName;
+  use Faker::Plugin::ColorRgbcolorsArray;
 
   my $f = Faker->new;
-  my $p = Faker::Plugin::AddressCityName->new(faker => $f);
+  my $p = Faker::Plugin::ColorRgbcolorsArray->new(faker => $f);
 
   my $plugin = $p;
 
@@ -29,7 +29,7 @@ Address City Name Plugin for Faker
 
 =head1 DESCRIPTION
 
-This package provides methods for generating fake address city name data.
+This package provides methods for generating fake color rgbcolors array data.
 
 =cut
 
@@ -63,9 +63,9 @@ This package implements the following methods:
 
 =head2 execute
 
-  execute() : Str
+  execute() : ArrayRef
 
-The execute method returns a random fake address city name.
+The execute method returns a random fake color rgbcolors array.
 
 =over 4
 

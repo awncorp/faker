@@ -3,13 +3,13 @@
 
 =head1 NAME
 
-Faker::Plugin::AddressCityName
+Faker::Plugin::InternetDomainWord
 
 =cut
 
 =head1 ABSTRACT
 
-Address City Name Plugin for Faker
+Internet Domain Word Plugin for Faker
 
 =cut
 
@@ -18,10 +18,10 @@ Address City Name Plugin for Faker
   package main;
 
   use Faker;
-  use Faker::Plugin::AddressCityName;
+  use Faker::Plugin::InternetDomainWord;
 
   my $f = Faker->new;
-  my $p = Faker::Plugin::AddressCityName->new(faker => $f);
+  my $p = Faker::Plugin::InternetDomainWord->new(faker => $f);
 
   my $plugin = $p;
 
@@ -29,7 +29,7 @@ Address City Name Plugin for Faker
 
 =head1 DESCRIPTION
 
-This package provides methods for generating fake address city name data.
+This package provides methods for generating fake internet domain word data.
 
 =cut
 
@@ -65,7 +65,7 @@ This package implements the following methods:
 
   execute() : Str
 
-The execute method returns a random fake address city name.
+The execute method returns a random fake internet domain word.
 
 =over 4
 
