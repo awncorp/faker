@@ -11,11 +11,8 @@ use routines;
 use Data::Object::Class;
 use Data::Object::ClassHas;
 
-with 'Data::Object::Role::Pluggable';
 with 'Data::Object::Role::Proxyable';
-with 'Data::Object::Role::Throwable';
-
-with 'Faker::Process';
+with 'Faker::Maker';
 
 # VERSION
 

@@ -1,4 +1,4 @@
-package Faker::Process;
+package Faker::Maker;
 
 use 5.014;
 
@@ -9,6 +9,9 @@ use registry;
 use routines;
 
 use Data::Object::Role;
+
+with 'Data::Object::Role::Pluggable';
+with 'Data::Object::Role::Throwable';
 
 requires 'plugin';
 requires 'throw';
@@ -128,15 +131,16 @@ method random_digit() {
 
 method random_digit_not_zero() {
 
-  return 1 + int rand(8);
+  return 1 + int rand(9);
 }
 
 method random_float(Maybe[Int] $place, Maybe[Int] $min, Maybe[Int] $max) {
-  my $min = shift // 0;
-  my $max = shift // $self->random_number;
+  $min //= 0;
+  $max //= $self->random_number;
+
   my $tmp; $tmp = $min and $min = $max and $max = $tmp if $min > $max;
 
-  $place //= $self->random_digit;
+  $place //= $self->random_digit_not_zero;
 
   return sprintf "%.${place}f", $min + rand() * ($max - $min);
 }
