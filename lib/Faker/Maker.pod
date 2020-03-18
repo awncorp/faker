@@ -9,7 +9,7 @@ Faker::Maker
 
 =head1 ABSTRACT
 
-Utility Role for Fake Data Generation
+Abstract Base Class for Faker
 
 =cut
 
@@ -112,7 +112,7 @@ digit, and each C<%> with a random non-zero digit.
 The parse_format method replaces each C<{{plugin.name}}> in the string with the
 result of the evaluation of the plugin specified in the token, e.g.
 C<{{person.name}}> is replaced with the result of executing the
-C<Example::Plugin::PersonName> plugin.
+L<Faker::Plugin::PersonName> plugin.
 
 =over 4
 

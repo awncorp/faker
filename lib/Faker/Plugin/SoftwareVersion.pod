@@ -3,13 +3,13 @@
 
 =head1 NAME
 
-Faker::Plugin::PersonUsername
+Faker::Plugin::SoftwareVersion
 
 =cut
 
 =head1 ABSTRACT
 
-Person Username Plugin for Faker
+Software Version Plugin for Faker
 
 =cut
 
@@ -18,10 +18,10 @@ Person Username Plugin for Faker
   package main;
 
   use Faker;
-  use Faker::Plugin::PersonUsername;
+  use Faker::Plugin::SoftwareVersion;
 
   my $f = Faker->new;
-  my $p = Faker::Plugin::PersonUsername->new(faker => $f);
+  my $p = Faker::Plugin::SoftwareVersion->new(faker => $f);
 
   my $plugin = $p;
 
@@ -29,7 +29,7 @@ Person Username Plugin for Faker
 
 =head1 DESCRIPTION
 
-This package provides methods for generating fake person username data.
+This package provides methods for generating fake software version data.
 
 =cut
 
@@ -38,14 +38,6 @@ This package provides methods for generating fake person username data.
 This package inherits behaviors from:
 
 L<Data::Object::Plugin>
-
-=cut
-
-=head1 LIBRARIES
-
-This package uses type constraints from:
-
-L<Types::Standard>
 
 =cut
 
@@ -73,7 +65,7 @@ This package implements the following methods:
 
   execute() : Str
 
-The execute method returns a random fake person username.
+The execute method returns a random fake software version.
 
 =over 4
 
@@ -81,7 +73,7 @@ The execute method returns a random fake person username.
 
   # given: synopsis
 
-  $p->execute;
+  $p->execute
 
 =back
 
