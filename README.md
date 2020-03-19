@@ -987,6 +987,8 @@ Parts of this library were inspired by the following implementations:
 
 [JS Faker](https://github.com/Marak/faker.js)
 
+[Elixir Faker](https://github.com/elixirs/faker)
+
 # PROJECT
 
 [Wiki](https://github.com/iamalnewkirk/faker/wiki)
