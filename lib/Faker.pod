@@ -1352,6 +1352,8 @@ L<Python Faker|https://github.com/joke2k/faker>
 
 L<JS Faker|https://github.com/Marak/faker.js>
 
+L<Elixir Faker|https://github.com/elixirs/faker>
+
 =head1 PROJECT
 
 L<Wiki|https://github.com/iamalnewkirk/faker/wiki>
