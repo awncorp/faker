@@ -15,7 +15,7 @@ Faker::Maker
 
 =abstract
 
-Abstract Base Class for Faker
+Utility Role for Generating Fake Data
 
 =cut
 
@@ -63,8 +63,7 @@ Types::Standard
 
 =description
 
-This package provides provides methods for generating and selecting random
-data.
+This package provides methods for generating and selecting data randomly.
 
 =cut
 
