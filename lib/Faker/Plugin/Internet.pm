@@ -19,7 +19,7 @@ extends 'Data::Object::Plugin';
 
 has 'faker' => (
   is => 'ro',
-  isa => 'InstanceOf["Faker"]',
+  isa => 'ConsumerOf["Faker::Maker"]',
   req => 1,
 );
 

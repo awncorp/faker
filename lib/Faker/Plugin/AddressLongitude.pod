@@ -57,9 +57,9 @@ This package has the following attributes:
 
 =head2 faker
 
-  faker(InstanceOf["Faker"])
+  faker(ConsumerOf["Faker::Maker"])
 
-This attribute is read-only, accepts C<(InstanceOf["Faker"])> values, and is required.
+This attribute is read-only, accepts C<(ConsumerOf["Faker::Maker"])> values, and is required.
 
 =cut
 

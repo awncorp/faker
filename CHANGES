@@ -1,6 +1,11 @@
 Changelog for Faker
 
-1.01 2020-03-14T19:00:51
+1.02 2020-03-18T22:37:12
+ - Added release updates
+ - Replace F/Process with Faker/Maker
+
+1.01 2020-03-14T19:00:56
+ - Built release version 1.01
  - Added release updates
  - Explain autoloading plugins
  - Add type-library to plugin docs

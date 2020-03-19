@@ -42,6 +42,8 @@ L<Data::Object::Role::Proxyable>
 
 L<Data::Object::Role::Throwable>
 
+L<Faker::Maker>
+
 =cut
 
 =head1 LIBRARIES

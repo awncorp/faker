@@ -31,6 +31,8 @@ This package integrates behaviors from:
 
 [Data::Object::Role::Throwable](https://metacpan.org/pod/Data%3A%3AObject%3A%3ARole%3A%3AThrowable)
 
+[Faker::Maker](https://metacpan.org/pod/Faker%3A%3AMaker)
+
 # LIBRARIES
 
 This package uses type constraints from:
