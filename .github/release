@@ -32,8 +32,7 @@ echo $V > VERSION
 find lib -type f -name \*.pod -exec rm {} \;
 
 # Regenerate all necessary POD documents
-testauto -o lib -t TEMPLATE_REST
-testauto -o lib -t TEMPLATE_MAIN -p t/Zing.t
+testauto -o lib -t TEMPLATE
 
 # Push generated POD changes
 if ! git diff-index --quiet HEAD --; then
