@@ -1,6 +1,16 @@
 Changelog for Faker
 
-1.02 2020-03-18T22:37:12
+1.04 2021-01-15T04:42:12
+ - Add release updates
+ - Fix inaccurate random array item selection (#22)
+
+1.03 2020-03-19T00:58:19
+ - Built release version 1.03
+ - Added release updates
+ - Update documentation and acknowledgements
+
+1.02 2020-03-18T22:37:17
+ - Built release version 1.02
  - Added release updates
  - Replace F/Process with Faker/Maker
 
