@@ -155,7 +155,7 @@ method random_item(ArrayRef | HashRef $items) {
 
 method random_array_item(ArrayRef $items) {
 
-  return $items->[$self->random_between(0, $#{$items})];
+  return $items->[$self->random_between(0, scalar(@$items))];
 }
 
 method random_hash_item(HashRef $items) {
