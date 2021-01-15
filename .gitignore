@@ -12,6 +12,8 @@
 !LICENSE
 !Makefile.PL
 !MANIFEST.SKIP
+!META.json
+!META.yml
 !OVERVIEW.md
 !README
 !README.md

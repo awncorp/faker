@@ -187,6 +187,14 @@ jobs:
     - name: Cleanup Build Environment
       run: dzil clean
     - name: Build Project Distribution
-      run: V=$(cat VERSION) DZIL_RELEASE=1 dzil build
+      run: V=$(cat VERSION) DZIL_RELEASING=1 dzil build
+    - name: Discard Generated Changelog
+      run: git checkout CHANGES
+    - name: Discard Generated Tarball
+      run: rm $(ls *.tar.gz)
+    - name: Copy CHANGES to Build Directory
+      run: cp -f CHANGES $(echo *-$(cat VERSION))
+    - name: Manually Create Release Tarball
+      run: tar czf $(echo *-$(cat VERSION)).tar.gz $(echo *-$(cat VERSION))
     - name: Upload to CPAN
       run: cpan-upload -u ${{ secrets.CpanUser }} -p ${{ secrets.CpanPass }} $(ls *.tar.gz)
