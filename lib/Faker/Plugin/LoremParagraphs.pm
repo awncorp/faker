@@ -1,52 +1,22 @@
 package Faker::Plugin::LoremParagraphs;
 
-use 5.014;
+use 5.018;
 
 use strict;
 use warnings;
 
-use registry;
-use routines;
+use Venus::Class 'base';
 
-use Data::Object::Class;
-use Data::Object::ClassHas;
-
-extends 'Data::Object::Plugin';
-
-# VERSION
-
-# ATTRIBUTES
-
-has 'faker' => (
-  is => 'ro',
-  isa => 'ConsumerOf["Faker::Maker"]',
-  req => 1,
-);
-
-has 'count' => (
-  is => 'ro',
-  isa => 'Int',
-  def => 2,
-);
-
-has 'sentences' => (
-  is => 'ro',
-  isa => 'Int',
-  def => 5,
-);
+base 'Faker::Plugin';
 
 # METHODS
 
-method execute() {
-  my $faker = $self->faker;
-  my $pcount = $self->count;
-  my $scount = $self->sentences;
+sub execute {
+  my ($self, $data) = @_;
 
-  return join ' ', map {
-    $scount > 4 ?
-      $faker->lorem_paragraph(sentences => $faker->random_between(4, $scount)) :
-      $faker->lorem_paragraph
-  } 1..$pcount;
+  my $count = $data->{count} //= 2;
+
+  return join "\n\n", map $self->faker->lorem_paragraph, 1..$count;
 }
 
 1;

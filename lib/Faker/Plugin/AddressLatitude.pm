@@ -1,32 +1,24 @@
 package Faker::Plugin::AddressLatitude;
 
-use 5.014;
+use 5.018;
 
 use strict;
 use warnings;
 
-use registry;
-use routines;
+use Venus::Class 'base';
 
-use Data::Object::Class;
-use Data::Object::ClassHas;
-
-extends 'Data::Object::Plugin';
-
-# VERSION
-
-# ATTRIBUTES
-
-has 'faker' => (
-  is => 'ro',
-  isa => 'ConsumerOf["Faker::Maker"]',
-  req => 1,
-);
+base 'Faker::Plugin';
 
 # METHODS
 
-method execute() {
-  my $string = (int(rand(90000000)), int(rand(-90000000)))[rand 2];
+sub execute {
+  my ($self, $data) = @_;
+
+  my $random = $self->faker->random;
+
+  my $string = $random->select(
+    [int($random->make(90000000)), int($random->make(-90000000))]
+  );
 
   $string =~ s/\d*(\d\d)(\d{6})$/$1.$2/;
 

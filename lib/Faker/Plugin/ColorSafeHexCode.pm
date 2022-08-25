@@ -1,33 +1,20 @@
 package Faker::Plugin::ColorSafeHexCode;
 
-use 5.014;
+use 5.018;
 
 use strict;
 use warnings;
 
-use registry;
-use routines;
+use Venus::Class 'base';
 
-use Data::Object::Class;
-use Data::Object::ClassHas;
-
-extends 'Data::Object::Plugin';
-
-# VERSION
-
-# ATTRIBUTES
-
-has 'faker' => (
-  is => 'ro',
-  isa => 'ConsumerOf["Faker::Maker"]',
-  req => 1,
-);
+base 'Faker::Plugin';
 
 # METHODS
 
-method execute() {
-  my $faker = $self->faker;
-  my $number = $faker->random_between(0, 255);
+sub execute {
+  my ($self, $data) = @_;
+
+  my $number = $self->faker->random->range(0, 255);
 
   return '#' . sprintf("ff00%02x", $number);
 }

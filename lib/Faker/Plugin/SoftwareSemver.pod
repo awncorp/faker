@@ -1,15 +1,13 @@
 
-=encoding utf8
-
 =head1 NAME
 
-Faker::Plugin::SoftwareSemver
+Faker::Plugin::SoftwareSemver - Software Semver
 
 =cut
 
 =head1 ABSTRACT
 
-Software Semver Plugin for Faker
+Software Semver for Faker
 
 =cut
 
@@ -17,19 +15,19 @@ Software Semver Plugin for Faker
 
   package main;
 
-  use Faker;
   use Faker::Plugin::SoftwareSemver;
 
-  my $f = Faker->new;
-  my $p = Faker::Plugin::SoftwareSemver->new(faker => $f);
+  my $plugin = Faker::Plugin::SoftwareSemver->new;
 
-  my $plugin = $p;
+  # bless(..., "Faker::Plugin::SoftwareSemver")
 
 =cut
 
 =head1 DESCRIPTION
 
-This package provides methods for generating fake software semantic version data.
+This package provides methods for generating fake data for software semver.
+
+=encoding utf8
 
 =cut
 
@@ -37,84 +35,72 @@ This package provides methods for generating fake software semantic version data
 
 This package inherits behaviors from:
 
-L<Data::Object::Plugin>
-
-=cut
-
-=head1 ATTRIBUTES
-
-This package has the following attributes:
-
-=cut
-
-=head2 faker
-
-  faker(ConsumerOf["Faker::Maker"])
-
-This attribute is read-only, accepts C<(ConsumerOf["Faker::Maker"])> values, and is required.
+L<Faker::Plugin>
 
 =cut
 
 =head1 METHODS
 
-This package implements the following methods:
+This package provides the following methods:
 
 =cut
 
 =head2 execute
 
-  execute() : Str
+  execute(HashRef $data) (Str)
 
-The execute method returns a random fake software semantic version.
+The execute method returns a returns a random fake software semver.
+
+I<Since C<1.10>>
 
 =over 4
 
-=item execute example #1
+=item execute example 1
 
-  # given: synopsis
+  package main;
 
-  $p->execute
+  use Faker::Plugin::SoftwareSemver;
+
+  my $plugin = Faker::Plugin::SoftwareSemver->new;
+
+  # bless(..., "Faker::Plugin::SoftwareSemver")
+
+  # my $result = $plugin->execute;
+
+  # "1.4.0";
+
+  # my $result = $plugin->execute;
+
+  # "4.6.8";
+
+  # my $result = $plugin->execute;
+
+  # "5.0.7";
 
 =back
 
 =cut
 
-=head1 AUTHOR
+=head2 new
 
-Al Newkirk, C<awncorp@cpan.org>
+  new(HashRef $data) (Plugin)
 
-=head1 LICENSE
+The new method returns a new instance of the class.
 
-Copyright (C) 2011-2019, Al Newkirk, et al.
+I<Since C<1.10>>
 
-This is free software; you can redistribute it and/or modify it under the terms
-of the The Apache License, Version 2.0, as elucidated in the L<"license
-file"|https://github.com/cpanery/faker/blob/master/LICENSE>.
+=over 4
 
-=head1 ACKNOWLEDGEMENTS
+=item new example 1
 
-Parts of this library were inspired by the following implementations:
+  package main;
 
-L<PHP Faker|https://github.com/fzaninotto/Faker>
+  use Faker::Plugin::SoftwareSemver;
 
-L<Ruby Faker|https://github.com/stympy/faker>
+  my $plugin = Faker::Plugin::SoftwareSemver->new;
 
-L<Python Faker|https://github.com/joke2k/faker>
+  # bless(..., "Faker::Plugin::SoftwareSemver")
 
-L<JS Faker|https://github.com/Marak/faker.js>
-
-=head1 PROJECT
-
-L<Wiki|https://github.com/cpanery/faker/wiki>
-
-L<Project|https://github.com/cpanery/faker>
-
-L<Initiatives|https://github.com/cpanery/faker/projects>
-
-L<Milestones|https://github.com/cpanery/faker/milestones>
-
-L<Contributing|https://github.com/cpanery/faker/blob/master/CONTRIBUTE.md>
-
-L<Issues|https://github.com/cpanery/faker/issues>
+=back
 
 =cut

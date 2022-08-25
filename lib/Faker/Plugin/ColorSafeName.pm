@@ -1,34 +1,40 @@
 package Faker::Plugin::ColorSafeName;
 
-use 5.014;
+use 5.018;
 
 use strict;
 use warnings;
 
-use registry;
-use routines;
+use Venus::Class 'base';
 
-use Data::Object::Class;
-use Data::Object::ClassHas;
-
-extends 'Data::Object::Plugin';
-
-# VERSION
-
-# ATTRIBUTES
-
-has 'faker' => (
-  is => 'ro',
-  isa => 'ConsumerOf["Faker::Maker"]',
-  req => 1,
-);
+base 'Faker::Plugin';
 
 # METHODS
 
-method execute() {
-  my $faker = $self->faker;
+sub execute {
+  my ($self, $data) = @_;
 
-  return $faker->process(['color', 'safe_name']);
+  return $self->faker->random->select(data_for_color_safe_name());
+}
+
+sub data_for_color_safe_name {
+  state $color_safe_name = [
+    'black',
+    'maroon',
+    'green',
+    'navy',
+    'olive',
+    'purple',
+    'teal',
+    'lime',
+    'blue',
+    'silver',
+    'gray',
+    'yellow',
+    'fuchsia',
+    'aqua',
+    'white',
+  ]
 }
 
 1;

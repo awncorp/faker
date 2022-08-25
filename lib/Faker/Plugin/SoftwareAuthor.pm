@@ -1,34 +1,33 @@
 package Faker::Plugin::SoftwareAuthor;
 
-use 5.014;
+use 5.018;
 
 use strict;
 use warnings;
 
-use registry;
-use routines;
+use Venus::Class 'base';
 
-use Data::Object::Class;
-use Data::Object::ClassHas;
-
-extends 'Data::Object::Plugin';
-
-# VERSION
-
-# ATTRIBUTES
-
-has 'faker' => (
-  is => 'ro',
-  isa => 'ConsumerOf["Faker::Maker"]',
-  req => 1,
-);
+base 'Faker::Plugin';
 
 # METHODS
 
-method execute() {
-  my $faker = $self->faker;
+sub execute {
+  my ($self, $data) = @_;
 
-  return $faker->process(['software', 'author']);
+  return $self->process_format(
+    $self->faker->random->select(format_for_software_author())
+  );
+}
+
+sub format_for_software_author {
+  state $software_author = [
+    map([
+      '{{person_name}}'
+    ], 1..3),
+    [
+      '{{company_name}}',
+    ],
+  ]
 }
 
 1;

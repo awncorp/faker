@@ -2,34 +2,143 @@ name: Testing
 
 on:
   push:
-    branches:
-    - issue-*
-    - milestone-*
-    - project-*
+    tags:
+    - '*'
 
 jobs:
-  Perl-0000:
+  Test:
     runs-on: ubuntu-latest
+    container:
+      image: perl:5.32
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Setup Git User
-      run: git config --global user.name "Al Newkirk"
-    - name: Setup Git Email
-      run: git config --global user.email "awncorp@cpan.org"
-    - name: Setup GitHub User
-      run: git config --global github.user ${{ secrets.GithubUser }}
-    - name: Setup GitHub Token
-      run: git config --global github.user ${{ secrets.GithubToken }}
-    - name: Install CPANM
-      run: sudo apt install -y cpanminus
+    - uses: actions/checkout@v2
+    - name: Advertise Perl Version
+      run: perl -V
     - name: Install Perl::Critic
-      run: sudo cpanm -qn Perl::Critic
+      run: cpanm -qn Perl::Critic
     - name: Install Project Dependencies
-      run: sudo cpanm -qn --reinstall --installdeps .
+      run: cpanm -qn --reinstall --installdeps .
     - name: Critiquing Project
       run: perlcritic lib t
     - name: Testing Project
       run: prove -Ilib -r t
       env:
         HARNESS_OPTIONS: j9
+
+  Test-Environment:
+    runs-on: ubuntu-latest
+    container:
+      image: perl:${{ matrix.version }}
+    needs:
+      - Test
+    strategy:
+      matrix:
+        version:
+        - '5.30'
+        - '5.28'
+        - '5.26'
+        - '5.24'
+        - '5.22'
+        - '5.18'
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Advertise Perl Version
+      run: perl -V
+    - name: Install Project Dependencies
+      run: cpanm -qn --reinstall --installdeps .
+    - name: Testing Project
+      run: prove -Ilib -r t
+      env:
+        HARNESS_OPTIONS: j9
+        RENDER: 1
+
+  Test-MacOs:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup GitHub (autocrlf)
+      run: git config --global core.autocrlf false
+    - name: Setup GitHub (eol)
+      run: git config --global core.eol lf
+    - name: Setup Perl
+      run: brew install perl
+    - name: Advertise Perl Version
+      run: perl -V
+    - name: Install App::cpanminus
+      run: brew install cpanminus
+    - name: Install Project Dependencies
+      run: cpanm -qn --reinstall --installdeps .
+    - name: Testing Project
+      run: prove -Ilib -r t
+      env:
+        HARNESS_OPTIONS: j9
+
+  Test-Windows:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup GitHub (autocrlf)
+      run: git config --global core.autocrlf false
+    - name: Setup GitHub (eol)
+      run: git config --global core.eol lf
+    - name: Setup Perl
+      run: choco install strawberryperl
+    - name: Advertise Perl Version
+      run: perl -V
+    - name: Install App::cpanminus
+      run: curl -L https://cpanmin.us | perl - App::cpanminus
+    - name: Install Project Dependencies
+      run: cpanm -qn --reinstall --installdeps .
+    - name: Testing Project
+      run: prove -Ilib -r t
+      env:
+        HARNESS_OPTIONS: j9
+
+  Release:
+    runs-on: ubuntu-latest
+    needs:
+      - Test-Environment
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ncipollo/release-action@v1
+      with:
+        bodyFile: RELEASE.md
+        token: ${{ secrets.REPO_USER_TOKEN }}
+
+  Archive:
+    runs-on: ubuntu-latest
+    needs:
+      - Test-Environment
+    container:
+      image: perl:5.32
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Git User
+      run: git config --global user.name "${{ secrets.REPO_USER_NAME }}"
+    - name: Setup Git Email
+      run: git config --global user.email ${{ secrets.REPO_USER_EMAIL }}
+    - name: Setup GitHub User
+      run: git config --global github.user ${{ secrets.REPO_USER_HANDLE }}
+    - name: Setup GitHub Token
+      run: git config --global github.token ${{ secrets.REPO_USER_TOKEN }}
+    - name: Advertise Perl Version
+      run: perl -V
+    - name: Install Dist::Zilla
+      run: cpanm -qn Dist::Zilla
+    - name: Install Dist::Zilla Dependencies
+      run: dzil authordeps | cpanm -qn
+    - name: Install Project Dependencies
+      run: cpanm -qn --reinstall --installdeps .
+    - name: Cleanup Environment
+      run: dzil clean
+    - name: Build Distribution
+      run: V=$(cat VERSION) DZIL_RELEASING=0 dzil build
+    - name: Upload to CPAN
+      run: cpan-upload -u ${{ secrets.CPAN_USER }} -p ${{ secrets.CPAN_PASS }} $(ls *.tar.gz)
+      continue-on-error: true

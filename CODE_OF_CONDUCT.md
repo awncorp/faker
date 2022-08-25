@@ -52,18 +52,11 @@ activities online or offline, of any participant of this project, maintainer
 and individual contributor alike. Representation of the project may be further
 defined and clarified by project maintainers.
 
-Incidents reported in bad faith, or maliciously, and/or in an attempt to use
-this project and its Code of Conduct to address activities unrelated to the
-project and/or outside of its official project spaces, mediums, and accounts
-owned by and representative of the project will not be considered and may face
-temporary or permanent repercussions where applicable as determined by members
-of the project's leadership.
-
 ### Policy Enforcement
 
-Instances of violations may be reported by contacting the project maintainers
-at al@iamalnewkirk.com. All complaints will be reviewed and investigated and
-will result in a response that is deemed necessary and appropriate to the
-circumstances. The project team is obligated to maintain confidentiality with
-regard to the reporter of an incident. Further details of specific enforcement
-policies may be posted separately.
+Instances of violations may be reported by contacting the project maintainers.
+All complaints will be reviewed and investigated and will result in a response
+that is deemed necessary and appropriate to the circumstances. The project team
+is obligated to maintain confidentiality with regard to the reporter of an
+incident. Further details of specific enforcement policies may be posted
+separately.

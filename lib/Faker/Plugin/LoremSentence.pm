@@ -1,41 +1,22 @@
 package Faker::Plugin::LoremSentence;
 
-use 5.014;
+use 5.018;
 
 use strict;
 use warnings;
 
-use registry;
-use routines;
+use Venus::Class 'base';
 
-use Data::Object::Class;
-use Data::Object::ClassHas;
-
-extends 'Data::Object::Plugin';
-
-# VERSION
-
-# ATTRIBUTES
-
-has 'faker' => (
-  is => 'ro',
-  isa => 'ConsumerOf["Faker::Maker"]',
-  req => 1,
-);
-
-has 'words' => (
-  is => 'ro',
-  isa => 'Int',
-  def => 10,
-);
+base 'Faker::Plugin';
 
 # METHODS
 
-method execute() {
-  my $faker = $self->faker;
-  my $count = $self->words;
+sub execute {
+  my ($self, $data) = @_;
 
-  return $faker->lorem_words(count => $count) . '.';
+  return $self->faker->lorem_words({
+    count => $self->faker->random->range(6, 20),
+  }) . '.';
 }
 
 1;

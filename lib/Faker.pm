@@ -1,378 +1,148 @@
 package Faker;
 
-use 5.014;
+use 5.018;
 
 use strict;
 use warnings;
 
-use registry;
-use routines;
+use Venus::Class 'attr', 'with';
 
-use Data::Object::Class;
-use Data::Object::ClassHas;
-
-with 'Data::Object::Role::Proxyable';
-with 'Faker::Maker';
+with 'Venus::Role::Buildable';
+with 'Venus::Role::Coercible';
+with 'Venus::Role::Doable';
+with 'Venus::Role::Proxyable';
 
 # VERSION
 
+our $VERSION = '1.10';
+
+# AUTHORITY
+
+our $AUTHORITY = 'cpan:AWNCORP';
+
+# STATE
+
+state $sources = {};
+
+# ATTRIBUTES
+
+attr 'caches';
+attr 'locales';
+
+# MODIFIERS
+
+sub caches {
+  my ($self, $data) = @_;
+
+  if ($data) {
+    return $self->{caches} = $self->coercion({caches => $data})->{caches};
+  }
+  else {
+    return $self->{caches};
+  }
+}
+
+sub locales {
+  my ($self, $data) = @_;
+
+  if ($data) {
+    return $self->{locales} = $self->coercion({locales => $data})->{locales};
+  }
+  else {
+    return $self->{locales};
+  }
+}
+
+# BUILDERS
+
+sub build_arg {
+  my ($self, $data) = @_;
+
+  return {
+    locales => ref $data eq 'ARRAY' ? $data : [$data],
+  };
+}
+
+sub build_args {
+  my ($self, $data) = @_;
+
+  $data->{caches} ||= {};
+  $data->{locales} ||= [];
+
+  return $data;
+}
+
+sub build_proxy {
+  my ($self, $package, $method, @args) = @_;
+
+  return sub { $self->caches->get($method) } if $self->caches->exists($method);
+
+  return unless my $source = $self->sources($method)->random;
+
+  return sub { $source->build(faker => $self)->execute(@args) };
+}
+
+# COERCIONS
+
+sub coerce {
+  {
+    caches => 'Venus::Hash',
+    locales => 'Venus::Array',
+  }
+}
+
 # METHODS
 
-method address_city_name(%args) {
-  $args{faker} = $self;
+sub cache {
+  my ($self, $method, @args) = @_;
 
-  return $self->plugin('address_city_name', %args)->execute;
+  return if !$method;
+
+  my $result = $self->caches->set($method, $self->$method(@args));
+
+  return $result;
 }
 
-method address_city_prefix(%args) {
-  $args{faker} = $self;
+sub plugin {
+  my ($self, @args) = @_;
 
-  return $self->plugin('address_city_prefix', %args)->execute;
+  return $self->space->child('plugin', @args);
 }
 
-method address_city_suffix(%args) {
-  $args{faker} = $self;
+sub random {
+  my ($self) = @_;
 
-  return $self->plugin('address_city_suffix', %args)->execute;
+  require Venus::Random;
+
+  state $random = Venus::Random->new;
+
+  return $random;
 }
 
-method address_country_name(%args) {
-  $args{faker} = $self;
+sub space {
+  my ($self) = @_;
 
-  return $self->plugin('address_country_name', %args)->execute;
+  require Venus::Space;
+
+  state $space = Venus::Space->new(ref $self || $self);
+
+  return $space;
 }
 
-method address_latitude(%args) {
-  $args{faker} = $self;
+sub sources {
+  my ($self, $method) = @_;
 
-  return $self->plugin('address_latitude', %args)->execute;
-}
+  return if !$method;
 
-method address_line1(%args) {
-  $args{faker} = $self;
+  require Venus::Array;
 
-  return $self->plugin('address_line1', %args)->execute;
-}
+  my $plugins = Venus::Array->new([$self->plugin($method)]);
 
-method address_line2(%args) {
-  $args{faker} = $self;
+  $plugins->push(map {$self->plugin($_, $method)} $self->locales->list);
 
-  return $self->plugin('address_line2', %args)->execute;
-}
+  $plugins->value([grep {$$sources{"$_"} //= $_->tryload} $plugins->list]);
 
-method address_lines(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('address_lines', %args)->execute;
-}
-
-method address_longitude(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('address_longitude', %args)->execute;
-}
-
-method address_number(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('address_number', %args)->execute;
-}
-
-method address_postal_code(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('address_postal_code', %args)->execute;
-}
-
-method address_state_abbr(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('address_state_abbr', %args)->execute;
-}
-
-method address_state_name(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('address_state_name', %args)->execute;
-}
-
-method address_street_name(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('address_street_name', %args)->execute;
-}
-
-method address_street_suffix(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('address_street_suffix', %args)->execute;
-}
-
-method build_proxy($package, $method, %args) {
-  $args{faker} = $self;
-
-  my $under = delete $args{under};
-
-  $method = "$under/$method" if $under;
-
-  if (my $plugin = eval { $self->plugin($method, %args) }) {
-
-    return sub { $plugin->execute };
-  }
-
-  return undef;
-}
-
-method color_hex_code(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('color_hex_code', %args)->execute;
-}
-
-method color_name(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('color_name', %args)->execute;
-}
-
-method color_rgbcolors(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('color_rgbcolors', %args)->execute;
-}
-
-method color_rgbcolors_array(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('color_rgbcolors_array', %args)->execute;
-}
-
-method color_rgbcolors_css(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('color_rgbcolors_css', %args)->execute;
-}
-
-method color_safe_hex_code(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('color_safe_hex_code', %args)->execute;
-}
-
-method color_safe_name(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('color_safe_name', %args)->execute;
-}
-
-method company_buzzword_type1(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('company_buzzword_type1', %args)->execute;
-}
-
-method company_buzzword_type2(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('company_buzzword_type2', %args)->execute;
-}
-
-method company_buzzword_type3(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('company_buzzword_type3', %args)->execute;
-}
-
-method company_description(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('company_description', %args)->execute;
-}
-
-method company_jargon_buzz_word(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('company_jargon_buzz_word', %args)->execute;
-}
-
-method company_jargon_edge_word(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('company_jargon_edge_word', %args)->execute;
-}
-
-method company_jargon_prop_word(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('company_jargon_prop_word', %args)->execute;
-}
-
-method company_name(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('company_name', %args)->execute;
-}
-
-method company_name_suffix(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('company_name_suffix', %args)->execute;
-}
-
-method company_tagline(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('company_tagline', %args)->execute;
-}
-
-method internet_domain_name(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('internet_domain_name', %args)->execute;
-}
-
-method internet_domain_word(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('internet_domain_word', %args)->execute;
-}
-
-method internet_email_address(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('internet_email_address', %args)->execute;
-}
-
-method internet_email_domain(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('internet_email_domain', %args)->execute;
-}
-
-method internet_ip_address(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('internet_ip_address', %args)->execute;
-}
-
-method internet_ip_address_v4(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('internet_ip_address_v4', %args)->execute;
-}
-
-method internet_ip_address_v6(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('internet_ip_address_v6', %args)->execute;
-}
-
-method internet_root_domain(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('internet_root_domain', %args)->execute;
-}
-
-method internet_url(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('internet_url', %args)->execute;
-}
-
-method lorem_paragraph(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('lorem_paragraph', %args)->execute;
-}
-
-method lorem_paragraphs(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('lorem_paragraphs', %args)->execute;
-}
-
-method lorem_sentence(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('lorem_sentence', %args)->execute;
-}
-
-method lorem_sentences(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('lorem_sentences', %args)->execute;
-}
-
-method lorem_word(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('lorem_word', %args)->execute;
-}
-
-method lorem_words(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('lorem_words', %args)->execute;
-}
-
-method payment_card_expiration(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('payment_card_expiration', %args)->execute;
-}
-
-method payment_card_number(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('payment_card_number', %args)->execute;
-}
-
-method payment_vendor(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('payment_vendor', %args)->execute;
-}
-
-method person_first_name(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('person_first_name', %args)->execute;
-}
-
-method person_last_name(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('person_last_name', %args)->execute;
-}
-
-method person_name(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('person_name', %args)->execute;
-}
-
-method person_name_prefix(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('person_name_prefix', %args)->execute;
-}
-
-method person_name_suffix(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('person_name_suffix', %args)->execute;
-}
-
-method person_username(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('person_username', %args)->execute;
-}
-
-method telephone_number(%args) {
-  $args{faker} = $self;
-
-  return $self->plugin('telephone_number', %args)->execute;
+  return $plugins;
 }
 
 1;

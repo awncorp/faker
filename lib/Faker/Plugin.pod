@@ -1,0 +1,402 @@
+
+=head1 NAME
+
+Faker::Plugin - Fake Data Plugin
+
+=cut
+
+=head1 ABSTRACT
+
+Fake Data Plugin Base
+
+=cut
+
+=head1 SYNOPSIS
+
+  package main;
+
+  use Faker::Plugin;
+
+  my $plugin = Faker::Plugin->new;
+
+  # bless(..., "Faker::Plugin")
+
+  # my $result = $plugin->execute;
+
+  # ""
+
+=cut
+
+=head1 DESCRIPTION
+
+This distribution provides a library of fake data generators and a framework
+for extending the library via plugins.
+
+=encoding utf8
+
+=cut
+
+=head1 ATTRIBUTES
+
+This package has the following attributes:
+
+=cut
+
+=head2 faker
+
+  faker(Object $data) (Object)
+
+The faker attribute holds the L<Faker> object.
+
+I<Since C<1.10>>
+
+=over 4
+
+=item faker example 1
+
+  # given: synopsis
+
+  package main;
+
+  my $faker = $plugin->faker;
+
+  # bless(..., "Faker")
+
+=back
+
+=over 4
+
+=item faker example 2
+
+  # given: synopsis
+
+  package main;
+
+  my $faker = $plugin->faker({});
+
+  # bless(..., "Faker")
+
+=back
+
+=over 4
+
+=item faker example 3
+
+  # given: synopsis
+
+  package main;
+
+  use Faker;
+
+  my $faker = $plugin->faker(Faker->new);
+
+  # bless(..., "Faker")
+
+=back
+
+=cut
+
+=head1 INTEGRATES
+
+This package integrates behaviors from:
+
+L<Venus::Role::Buildable>
+
+=cut
+
+=head1 METHODS
+
+This package provides the following methods:
+
+=cut
+
+=head2 execute
+
+  execute(HashRef $data) (Str)
+
+The execute method should be overridden by a plugin subclass, and should
+generate and return a random string.
+
+I<Since C<1.10>>
+
+=over 4
+
+=item execute example 1
+
+  # given: synopsis
+
+  package main;
+
+  my $data = $plugin->execute;
+
+  # ""
+
+=back
+
+=cut
+
+=head2 new
+
+  new(HashRef $data) (Plugin)
+
+The new method returns a new instance of the class.
+
+I<Since C<1.10>>
+
+=over 4
+
+=item new example 1
+
+  package main;
+
+  use Faker::Plugin;
+
+  my $plugin = Faker::Plugin->new;
+
+  # bless(... "Faker::Plugin")
+
+=back
+
+=over 4
+
+=item new example 2
+
+  package main;
+
+  use Faker::Plugin;
+
+  my $plugin = Faker::Plugin->new({faker => ['en-us', 'es-es']});
+
+  # bless(... "Faker::Plugin")
+
+=back
+
+=over 4
+
+=item new example 3
+
+  package main;
+
+  use Faker::Plugin;
+
+  my $plugin = Faker::Plugin->new({faker => Faker->new('ja-jp')});
+
+  # bless(... "Faker::Plugin")
+
+=back
+
+=cut
+
+=head2 process
+
+  process(Str $data) (Str)
+
+The process method accepts a data template and calls L</process_format> and
+L</process_markers> with the arguments provided and returns the result.
+
+I<Since C<1.10>>
+
+=over 4
+
+=item process example 1
+
+  # given: synopsis
+
+  package main;
+
+  $plugin->faker->locales(['en-us']);
+
+  my $process = $plugin->process('@?{{person_last_name}}####');
+
+  # "\@ZWilkinson4226"
+
+=back
+
+=cut
+
+=head2 process_format
+
+  process_format(Str $data) (Str)
+
+The process_format method accepts a data template replacing any tokens found
+with the return value from L</resolve>.
+
+I<Since C<1.10>>
+
+=over 4
+
+=item process_format example 1
+
+  # given: synopsis
+
+  package main;
+
+  my $process_format = $plugin->process_format('Version {{software_version}}');
+
+  # "Version 0.78"
+
+=back
+
+=cut
+
+=head2 process_markers
+
+  process_markers(Str $data, Str @types) (Str)
+
+The process_markers method accepts a string with markers, replaces the markers
+(i.e. special symbols) and returns the result. This method also, optionally,
+accepts a list of the types of replacements to be performed. The markers are:
+C<#> (see L<Venus::Random/digit>), C<%> (see L<Venus::Random/nonzero>), C<?>
+(see L<Venus::Random/letter>), and C<\n>. The replacement types are:
+I<"letters">, I<"numbers">, and I<"newlines">.
+
+I<Since C<1.10>>
+
+=over 4
+
+=item process_markers example 1
+
+  # given: synopsis
+
+  package main;
+
+  my $process_markers = $plugin->process_markers('Version %##');
+
+  # "Version 342"
+
+=back
+
+=over 4
+
+=item process_markers example 2
+
+  # given: synopsis
+
+  package main;
+
+  my $process_markers = $plugin->process_markers('Version %##', 'numbers');
+
+  # "Version 185"
+
+=back
+
+=over 4
+
+=item process_markers example 3
+
+  # given: synopsis
+
+  package main;
+
+  my $process_markers = $plugin->process_markers('Dept. %-??', 'letters', 'numbers');
+
+  # "Dept. 6-EL"
+
+=back
+
+=over 4
+
+=item process_markers example 4
+
+  # given: synopsis
+
+  package main;
+
+  my $process_markers = $plugin->process_markers('root\nsecret', 'newlines');
+
+  # "root\nsecret"
+
+=back
+
+=cut
+
+=head2 resolve
+
+  resolve(Str $name) (Str)
+
+The resolve method replaces tokens from L</process_format> with the return
+value from their corresponding plugins.
+
+I<Since C<1.10>>
+
+=over 4
+
+=item resolve example 1
+
+  # given: synopsis
+
+  package main;
+
+  my $color_hex_code = $plugin->resolve('color_hex_code');
+
+  # "#adfc4b"
+
+=back
+
+=over 4
+
+=item resolve example 2
+
+  # given: synopsis
+
+  package main;
+
+  my $internet_ip_address = $plugin->resolve('internet_ip_address');
+
+  # "edb6:0311:c3e3:fdc1:597d:115c:c179:3998"
+
+=back
+
+=over 4
+
+=item resolve example 3
+
+  # given: synopsis
+
+  package main;
+
+  my $color_name = $plugin->resolve('color_name');
+
+  # "MintCream"
+
+=back
+
+=cut
+
+=head1 FEATURES
+
+This package provides the following features:
+
+=cut
+
+=over 4
+
+=item subclass-feature
+
+This package is meant to be subclassed.
+
+B<example 1>
+
+  package Faker::Plugin::UserId;
+
+  use base 'Faker::Plugin';
+
+  sub execute {
+    my ($self) = @_;
+
+    return $self->process('####-####');
+  }
+
+  package main;
+
+  use Faker;
+
+  my $faker = Faker->new;
+
+  # bless(..., "Faker")
+
+  my $result = $faker->user_id;
+
+  # "8359-6325"
+
+=back

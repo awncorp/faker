@@ -1,15 +1,13 @@
 
-=encoding utf8
-
 =head1 NAME
 
-Faker::Plugin::InternetIpAddressV4
+Faker::Plugin::InternetIpAddressV4 - Internet Ip Address V4
 
 =cut
 
 =head1 ABSTRACT
 
-Internet Ip Address V4 Plugin for Faker
+Internet Ip Address V4 for Faker
 
 =cut
 
@@ -17,19 +15,19 @@ Internet Ip Address V4 Plugin for Faker
 
   package main;
 
-  use Faker;
   use Faker::Plugin::InternetIpAddressV4;
 
-  my $f = Faker->new;
-  my $p = Faker::Plugin::InternetIpAddressV4->new(faker => $f);
+  my $plugin = Faker::Plugin::InternetIpAddressV4->new;
 
-  my $plugin = $p;
+  # bless(..., "Faker::Plugin::InternetIpAddressV4")
 
 =cut
 
 =head1 DESCRIPTION
 
-This package provides methods for generating fake internet ip address v4 data.
+This package provides methods for generating fake data for internet ip address v4.
+
+=encoding utf8
 
 =cut
 
@@ -37,92 +35,72 @@ This package provides methods for generating fake internet ip address v4 data.
 
 This package inherits behaviors from:
 
-L<Data::Object::Plugin>
-
-=cut
-
-=head1 LIBRARIES
-
-This package uses type constraints from:
-
-L<Types::Standard>
-
-=cut
-
-=head1 ATTRIBUTES
-
-This package has the following attributes:
-
-=cut
-
-=head2 faker
-
-  faker(ConsumerOf["Faker::Maker"])
-
-This attribute is read-only, accepts C<(ConsumerOf["Faker::Maker"])> values, and is required.
+L<Faker::Plugin>
 
 =cut
 
 =head1 METHODS
 
-This package implements the following methods:
+This package provides the following methods:
 
 =cut
 
 =head2 execute
 
-  execute() : Str
+  execute(HashRef $data) (Str)
 
-The execute method returns a random fake internet ip address v4.
+The execute method returns a returns a random fake internet ip address v4.
+
+I<Since C<1.10>>
 
 =over 4
 
-=item execute example #1
+=item execute example 1
 
-  # given: synopsis
+  package main;
 
-  $p->execute;
+  use Faker::Plugin::InternetIpAddressV4;
+
+  my $plugin = Faker::Plugin::InternetIpAddressV4->new;
+
+  # bless(..., "Faker::Plugin::InternetIpAddressV4")
+
+  # my $result = $plugin->execute;
+
+  # "87.28.108.20";
+
+  # my $result = $plugin->execute;
+
+  # "127.122.176.213";
+
+  # my $result = $plugin->execute;
+
+  # "147.136.6.197";
 
 =back
 
 =cut
 
-=head1 AUTHOR
+=head2 new
 
-Al Newkirk, C<awncorp@cpan.org>
+  new(HashRef $data) (Plugin)
 
-=head1 LICENSE
+The new method returns a new instance of the class.
 
-Copyright (C) 2011-2019, Al Newkirk, et al.
+I<Since C<1.10>>
 
-This is free software; you can redistribute it and/or modify it under the terms
-of the The Apache License, Version 2.0, as elucidated in the L<"license
-file"|https://github.com/cpanery/faker/blob/master/LICENSE>.
+=over 4
 
-=head1 ACKNOWLEDGEMENTS
+=item new example 1
 
-Parts of this library were inspired by the following implementations:
+  package main;
 
-L<PHP Faker|https://github.com/fzaninotto/Faker>
+  use Faker::Plugin::InternetIpAddressV4;
 
-L<Ruby Faker|https://github.com/stympy/faker>
+  my $plugin = Faker::Plugin::InternetIpAddressV4->new;
 
-L<Python Faker|https://github.com/joke2k/faker>
+  # bless(..., "Faker::Plugin::InternetIpAddressV4")
 
-L<JS Faker|https://github.com/Marak/faker.js>
-
-=head1 PROJECT
-
-L<Wiki|https://github.com/cpanery/faker/wiki>
-
-L<Project|https://github.com/cpanery/faker>
-
-L<Initiatives|https://github.com/cpanery/faker/projects>
-
-L<Milestones|https://github.com/cpanery/faker/milestones>
-
-L<Contributing|https://github.com/cpanery/faker/blob/master/CONTRIBUTE.md>
-
-L<Issues|https://github.com/cpanery/faker/issues>
+=back
 
 =cut

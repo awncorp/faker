@@ -1,35 +1,21 @@
 package Faker::Plugin::PaymentCardExpiration;
 
-use 5.014;
+use 5.018;
 
 use strict;
 use warnings;
 
-use registry;
-use routines;
+use Venus::Class 'base';
 
-use Data::Object::Class;
-use Data::Object::ClassHas;
-
-extends 'Data::Object::Plugin';
-
-# VERSION
-
-# ATTRIBUTES
-
-has 'faker' => (
-  is => 'ro',
-  isa => 'ConsumerOf["Faker::Maker"]',
-  req => 1,
-);
+base 'Faker::Plugin';
 
 # METHODS
 
-method execute() {
-  my $faker = $self->faker;
+sub execute {
+  my ($self, $data) = @_;
 
-  my $pad = $faker->random_between(1,3);
-  my $month = sprintf('%02d', $faker->random_between(1,12));
+  my $pad = $self->faker->random->range(1,3);
+  my $month = sprintf('%02d', $self->faker->random->range(1,12));
   my $year = sprintf('%02d', ((localtime)[5] % 100) + $pad);
 
   return "$month/$year";

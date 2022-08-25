@@ -1,38 +1,33 @@
 package Faker::Plugin::SoftwareVersion;
 
-use 5.014;
+use 5.018;
 
 use strict;
 use warnings;
 
-use registry;
-use routines;
+use Venus::Class 'base';
 
-use Data::Object::Class;
-use Data::Object::ClassHas;
-
-extends 'Data::Object::Plugin';
-
-# VERSION
-
-# ATTRIBUTES
-
-has 'faker' => (
-  is => 'ro',
-  isa => 'ConsumerOf["Faker::Maker"]',
-  req => 1,
-);
+base 'Faker::Plugin';
 
 # METHODS
 
-method execute() {
-  my $faker = $self->faker;
+sub execute {
+  my ($self, $data) = @_;
 
-  my $options = {
-    number_markers => 1
-  };
+  return $self->process_markers(
+    $self->faker->random->select(data_for_software_version()),
+    'numbers',
+  );
+}
 
-  return $faker->process(['software', 'version'], $options);
+sub data_for_software_version {
+  state $software_version = [
+    '#.##',
+    '#.#',
+    '#.#.#',
+    '0.##',
+    '0.#.#',
+  ]
 }
 
 1;

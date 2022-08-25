@@ -1,0 +1,106 @@
+
+=head1 NAME
+
+Faker::Plugin::EnUs::AddressLines - Address Lines
+
+=cut
+
+=head1 ABSTRACT
+
+Address Lines for Faker
+
+=cut
+
+=head1 SYNOPSIS
+
+  package main;
+
+  use Faker::Plugin::EnUs::AddressLines;
+
+  my $plugin = Faker::Plugin::EnUs::AddressLines->new;
+
+  # bless(..., "Faker::Plugin::EnUs::AddressLines")
+
+=cut
+
+=head1 DESCRIPTION
+
+This package provides methods for generating fake data for address lines.
+
+=encoding utf8
+
+=cut
+
+=head1 INHERITS
+
+This package inherits behaviors from:
+
+L<Faker::Plugin::EnUs>
+
+=cut
+
+=head1 METHODS
+
+This package provides the following methods:
+
+=cut
+
+=head2 execute
+
+  execute(HashRef $data) (Str)
+
+The execute method returns a returns a random fake address lines.
+
+I<Since C<1.10>>
+
+=over 4
+
+=item execute example 1
+
+  package main;
+
+  use Faker::Plugin::EnUs::AddressLines;
+
+  my $plugin = Faker::Plugin::EnUs::AddressLines->new;
+
+  # bless(..., "Faker::Plugin::EnUs::AddressLines")
+
+  # my $result = $plugin->execute;
+
+  # "4 Koelpin Plaza Unit 694\nWest Viviane, IA 37022";
+
+  # my $result = $plugin->execute;
+
+  # "90558 Greenholt Orchard\nApt. 250\nPfannerstillberg, New Mexico 52836";
+
+  # my $result = $plugin->execute;
+
+  # "68768 Weissnat Point\nRitchieburgh, New Mexico 53892";
+
+=back
+
+=cut
+
+=head2 new
+
+  new(HashRef $data) (Plugin)
+
+The new method returns a new instance of the class.
+
+I<Since C<1.10>>
+
+=over 4
+
+=item new example 1
+
+  package main;
+
+  use Faker::Plugin::EnUs::AddressLines;
+
+  my $plugin = Faker::Plugin::EnUs::AddressLines->new;
+
+  # bless(..., "Faker::Plugin::EnUs::AddressLines")
+
+=back
+
+=cut
