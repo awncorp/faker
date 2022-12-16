@@ -11,7 +11,7 @@ base 'Faker::Plugin::EnUs';
 
 # VERSION
 
-our $VERSION = '1.16';
+our $VERSION = '1.17';
 
 # METHODS
 

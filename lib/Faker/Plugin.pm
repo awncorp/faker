@@ -12,7 +12,7 @@ with 'Venus::Role::Optional';
 
 # VERSION
 
-our $VERSION = '1.16';
+our $VERSION = '1.17';
 
 # ATTRIBUTES
 

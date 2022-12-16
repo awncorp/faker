@@ -1,11 +1,4 @@
-1.16 2022-12-16
-
-- [feature] Include Faker command-line interface
-- [update] Resolve test failures
-- [update] Make lorem-plugins more performant
-- [update] Document Faker#cache method
-
-1.15 2022-12-16
+1.17 2022-12-16
 
 - [feature] Include Faker command-line interface
 - [update] Resolve test failures

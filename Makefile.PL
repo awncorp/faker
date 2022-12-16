@@ -25,7 +25,7 @@ my %WriteMakefileArgs = (
   "TEST_REQUIRES" => {
     "Venus" => "1.68"
   },
-  "VERSION" => "1.16",
+  "VERSION" => "1.17",
   "test" => {
     "TESTS" => "t/*.t"
   }
