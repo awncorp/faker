@@ -1,6 +1,6 @@
 # Release
 
-## Version: 1.15
+## Version: 1.16
 
 - [feature] Include Faker command-line interface
 - [update] Resolve test failures

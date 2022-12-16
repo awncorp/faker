@@ -13,6 +13,9 @@ my %WriteMakefileArgs = (
     "ExtUtils::MakeMaker" => 0
   },
   "DISTNAME" => "Faker",
+  "EXE_FILES" => [
+    "bin/faker"
+  ],
   "LICENSE" => "apache",
   "MIN_PERL_VERSION" => "5.018",
   "NAME" => "Faker",
@@ -22,7 +25,7 @@ my %WriteMakefileArgs = (
   "TEST_REQUIRES" => {
     "Venus" => "1.68"
   },
-  "VERSION" => "1.15",
+  "VERSION" => "1.16",
   "test" => {
     "TESTS" => "t/*.t"
   }
