@@ -11,6 +11,12 @@ Fake Data Plugin Base
 
 =cut
 
+=head1 VERSION
+
+1.15
+
+=cut
+
 =head1 SYNOPSIS
 
   package main;
@@ -101,6 +107,8 @@ I<Since C<1.10>>
 This package integrates behaviors from:
 
 L<Venus::Role::Buildable>
+
+L<Venus::Role::Optional>
 
 =cut
 

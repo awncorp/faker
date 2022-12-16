@@ -8,43 +8,24 @@ use warnings;
 use Venus::Class 'attr', 'with';
 
 with 'Venus::Role::Buildable';
-with 'Venus::Role::Coercible';
+with 'Venus::Role::Optional';
 
-use Faker;
+# VERSION
+
+our $VERSION = '1.15';
 
 # ATTRIBUTES
 
 attr 'faker';
 
-# MODIFIERS
+# DEFAULTS
 
-sub faker {
-  my ($self, $data) = @_;
-
-  if ($data) {
-    return $self->{faker} = $self->coercion({faker => $data})->{faker};
-  }
-  else {
-    return $self->{faker};
-  }
+sub coerce_faker {
+  return 'Faker';
 }
 
-# BUILDERS
-
-sub build_self {
-  my ($self, $data) = @_;
-
-  $self->faker(Faker->new) if !$self->faker;
-
-  return $self;
-}
-
-# COERCIONS
-
-sub coerce {
-  {
-    faker => 'Faker',
-  }
+sub default_faker {
+  return {};
 }
 
 # METHODS

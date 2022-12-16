@@ -8,13 +8,12 @@ use warnings;
 use Venus::Class 'attr', 'with';
 
 with 'Venus::Role::Buildable';
-with 'Venus::Role::Coercible';
-with 'Venus::Role::Doable';
 with 'Venus::Role::Proxyable';
+with 'Venus::Role::Optional';
 
 # VERSION
 
-our $VERSION = '1.10';
+our $VERSION = '1.15';
 
 # AUTHORITY
 
@@ -29,28 +28,22 @@ state $sources = {};
 attr 'caches';
 attr 'locales';
 
-# MODIFIERS
+# DEFAULTS
 
-sub caches {
-  my ($self, $data) = @_;
-
-  if ($data) {
-    return $self->{caches} = $self->coercion({caches => $data})->{caches};
-  }
-  else {
-    return $self->{caches};
-  }
+sub coerce_caches {
+  return 'Venus::Hash';
 }
 
-sub locales {
-  my ($self, $data) = @_;
+sub default_caches {
+  return {};
+}
 
-  if ($data) {
-    return $self->{locales} = $self->coercion({locales => $data})->{locales};
-  }
-  else {
-    return $self->{locales};
-  }
+sub coerce_locales {
+  return 'Venus::Array';
+}
+
+sub default_locales {
+  return [];
 }
 
 # BUILDERS
@@ -63,15 +56,6 @@ sub build_arg {
   };
 }
 
-sub build_args {
-  my ($self, $data) = @_;
-
-  $data->{caches} ||= {};
-  $data->{locales} ||= [];
-
-  return $data;
-}
-
 sub build_proxy {
   my ($self, $package, $method, @args) = @_;
 
@@ -80,15 +64,6 @@ sub build_proxy {
   return unless my $source = $self->sources($method)->random;
 
   return sub { $source->build(faker => $self)->execute(@args) };
-}
-
-# COERCIONS
-
-sub coerce {
-  {
-    caches => 'Venus::Hash',
-    locales => 'Venus::Array',
-  }
 }
 
 # METHODS

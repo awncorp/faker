@@ -1,7 +1,10 @@
 # Release
 
-## Version: 1.10
+## Version: 1.15
 
-- [feature] Reengineered with locales and better documentation
+- [feature] Include Faker command-line interface
+- [update] Resolve test failures
+- [update] Make lorem-plugins more performant
+- [update] Document Faker#cache method
 
 

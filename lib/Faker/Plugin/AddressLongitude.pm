@@ -9,6 +9,10 @@ use Venus::Class 'base';
 
 base 'Faker::Plugin';
 
+# VERSION
+
+our $VERSION = '1.15';
+
 # METHODS
 
 sub execute {
@@ -17,7 +21,7 @@ sub execute {
   my $random = $self->faker->random;
 
   my $string = $random->select(
-    [int($random->make(90000000)), int($random->make(-90000000))]
+    [int($random->pick(90000000)), int($random->pick(-90000000))]
   );
 
   $string =~ s/\d*(\d\d)(\d{6})$/$1.$2/;

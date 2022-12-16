@@ -13,7 +13,7 @@ Extensible Fake Data Generator
 
 =head1 VERSION
 
-1.10
+1.15
 
 =cut
 
@@ -133,11 +133,9 @@ This package integrates behaviors from:
 
 L<Venus::Role::Buildable>
 
-L<Venus::Role::Coercible>
-
-L<Venus::Role::Doable>
-
 L<Venus::Role::Proxyable>
+
+L<Venus::Role::Optional>
 
 =cut
 
@@ -720,6 +718,58 @@ I<Since C<1.10>>
   # $address_street_suffix = $faker->address_street_suffix;
 
   # "Street"
+
+=back
+
+=cut
+
+=head2 cache
+
+  cache(Str $method, Any @args) (Str)
+
+The cache method dispatches to the method specified, caches the method name and
+return value, and returns the value. Subsequent calls will return the cached
+value.
+
+I<Since C<1.10>>
+
+=over 4
+
+=item cache example 1
+
+  package main;
+
+  use Faker;
+
+  my $faker = Faker->new('en-us');
+
+  # my $cache = $faker->cache('person_name');
+
+  # "Keeley Balistreri"
+
+  # $cache = $faker->cache('person_name');
+
+  # "Keeley Balistreri"
+
+=back
+
+=over 4
+
+=item cache example 2
+
+  package main;
+
+  use Faker;
+
+  my $faker = Faker->new('en-us');
+
+  # my $cache = $faker->cache('company_tagline');
+
+  # "iterate back-end content"
+
+  # $cache = $faker->cache('company_tagline');
+
+  # "iterate back-end content"
 
 =back
 

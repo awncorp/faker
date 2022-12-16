@@ -11,6 +11,12 @@ Company Name Suffix for Faker
 
 =cut
 
+=head1 VERSION
+
+1.15
+
+=cut
+
 =head1 SYNOPSIS
 
   package main;
