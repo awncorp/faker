@@ -3,7 +3,7 @@ abstract: 'Extensible Fake Data Generator'
 author:
   - 'AWNCORP <awncorp@cpan.org>'
 build_requires:
-  Venus: '1.68'
+  Venus: '2.32'
   perl: '5.018'
 configure_requires:
   ExtUtils::MakeMaker: '0'
@@ -15,14 +15,14 @@ meta-spec:
   version: '1.4'
 name: Faker
 requires:
-  Venus: '1.68'
+  Venus: '2.32'
   perl: '5.018'
 resources:
   bugtracker: http://github.com/awncorp/faker/issues
   homepage: https://metacpan.org/dist/Faker
   license: https://opensource.org/licenses/apache-2.0
   repository: git://github.com/awncorp/faker.git
-version: '1.17'
+version: '1.18'
 x_authority: cpan:AWNCORP
 x_generated_by_perl: v5.34.0
 x_serialization_backend: 'YAML::Tiny version 1.73'

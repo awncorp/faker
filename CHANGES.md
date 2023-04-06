@@ -1,5 +1,11 @@
 # Changelog
 
+## Version: 1.18
+
+- [feature] Implement user-agent plugin
+- [update] Resolve test failure reports
+- [update] Update architecture and documentation
+
 ## Version: 1.17
 
 - [feature] Include Faker command-line interface

@@ -21,13 +21,13 @@
       },
       "runtime" : {
          "requires" : {
-            "Venus" : "1.68",
+            "Venus" : "2.32",
             "perl" : "5.018"
          }
       },
       "test" : {
          "requires" : {
-            "Venus" : "1.68",
+            "Venus" : "2.32",
             "perl" : "5.018"
          }
       }
@@ -47,7 +47,7 @@
          "web" : "http://github.com/awncorp/faker"
       }
    },
-   "version" : "1.17",
+   "version" : "1.18",
    "x_authority" : "cpan:AWNCORP",
    "x_generated_by_perl" : "v5.34.0",
    "x_serialization_backend" : "Cpanel::JSON::XS version 4.32",

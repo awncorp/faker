@@ -1,0 +1,127 @@
+
+=head1 NAME
+
+Faker::Plugin::HttpUserAgent - HTTP User-Agent
+
+=cut
+
+=head1 ABSTRACT
+
+HTTP User-Agent for Faker
+
+=cut
+
+=head1 VERSION
+
+1.18
+
+=cut
+
+=head1 SYNOPSIS
+
+  package main;
+
+  use Faker::Plugin::HttpUserAgent;
+
+  my $plugin = Faker::Plugin::HttpUserAgent->new;
+
+  # bless(..., "Faker::Plugin::HttpUserAgent")
+
+=cut
+
+=head1 DESCRIPTION
+
+This package provides methods for generating fake data for HTTP user-agents.
+
+=encoding utf8
+
+=cut
+
+=head1 INHERITS
+
+This package inherits behaviors from:
+
+L<Faker::Plugin>
+
+=cut
+
+=head1 METHODS
+
+This package provides the following methods:
+
+=cut
+
+=head2 execute
+
+  execute(HashRef $data) (Str)
+
+The execute method returns a returns a random fake HTTP user-agent.
+
+I<Since C<1.17>>
+
+=over 4
+
+=item execute example 1
+
+  package main;
+
+  use Faker::Plugin::HttpUserAgent;
+
+  my $plugin = Faker::Plugin::HttpUserAgent->new;
+
+  # bless(..., "Faker::Plugin::HttpUserAgent")
+
+  # my $result = $plugin->execute;
+
+  # "Mozilla/6.1 (Macintosh; U; Max OS X 50.7; rv:6.8.4) ... Safari/5.4.4";
+
+  # my $result = $plugin->execute;
+
+  # "Mozilla/9.0 (X11; U; Linux x86_64; rv:0.3) Gecko/20210406 X11 Chrome/5.8";
+
+  # my $result = $plugin->execute;
+
+  # "Mozilla/9.8 (Macintosh; U; Max OS X 52.3; rv:0.9.1) ... Chrome/2.50";
+
+=back
+
+=cut
+
+=head2 new
+
+  new(HashRef $data) (Plugin)
+
+The new method returns a new instance of the class.
+
+I<Since C<1.17>>
+
+=over 4
+
+=item new example 1
+
+  package main;
+
+  use Faker::Plugin::HttpUserAgent;
+
+  my $plugin = Faker::Plugin::HttpUserAgent->new;
+
+  # bless(..., "Faker::Plugin::HttpUserAgent")
+
+=back
+
+=cut
+
+=head1 AUTHORS
+
+Awncorp, C<awncorp@cpan.org>
+
+=cut
+
+=head1 LICENSE
+
+Copyright (C) 2000, Al Newkirk.
+
+This program is free software, you can redistribute it and/or modify it under
+the terms of the Apache license version 2.0.
+
+=cut

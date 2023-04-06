@@ -127,6 +127,8 @@ jobs:
       run: git config --global github.user ${{ secrets.REPO_USER_HANDLE }}
     - name: Setup GitHub Token
       run: git config --global github.token ${{ secrets.REPO_USER_TOKEN }}
+    - name: Setup Safe Directory
+      run: git config --global --add safe.directory "*"
     - name: Advertise Perl Version
       run: perl -V
     - name: Install Dist::Zilla
@@ -141,4 +143,3 @@ jobs:
       run: V=$(cat VERSION) DZIL_RELEASING=0 dzil build
     - name: Upload to CPAN
       run: cpan-upload -u ${{ secrets.CPAN_USER }} -p ${{ secrets.CPAN_PASS }} $(ls *.tar.gz)
-      continue-on-error: true

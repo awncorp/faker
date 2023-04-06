@@ -13,7 +13,7 @@ with 'Venus::Role::Optional';
 
 # VERSION
 
-our $VERSION = '1.17';
+our $VERSION = '1.18';
 
 # AUTHORITY
 
@@ -61,7 +61,7 @@ sub build_proxy {
 
   return sub { $self->caches->get($method) } if $self->caches->exists($method);
 
-  return unless my $source = $self->sources($method)->random;
+  return if !(my $source = $self->sources($method)->random);
 
   return sub { $source->build(faker => $self)->execute(@args) };
 }

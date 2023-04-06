@@ -20,12 +20,12 @@ my %WriteMakefileArgs = (
   "MIN_PERL_VERSION" => "5.018",
   "NAME" => "Faker",
   "PREREQ_PM" => {
-    "Venus" => "1.68"
+    "Venus" => "2.32"
   },
   "TEST_REQUIRES" => {
-    "Venus" => "1.68"
+    "Venus" => "2.32"
   },
-  "VERSION" => "1.17",
+  "VERSION" => "1.18",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -33,7 +33,7 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
-  "Venus" => "1.68"
+  "Venus" => "2.32"
 );
 
 
