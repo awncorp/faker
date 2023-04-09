@@ -13,7 +13,7 @@ use POSIX 'strftime';
 
 # VERSION
 
-our $VERSION = '1.18';
+our $VERSION = '1.19';
 
 # METHODS
 
@@ -27,7 +27,9 @@ sub execute {
   my $product = join '/', $class, $version;
   my $this_year = strftime '%Y', localtime;
   my $rand_year = $random->select([($this_year-20)..$this_year]);
-  my $engine = join '/', 'Gecko', join('', $rand_year, (strftime '%m%d', localtime));
+  my $rand_month = sprintf('%.2d', $random->range(1, 12));
+  my $rand_day = sprintf('%.2d', $random->range(1, 28));
+  my $engine = join '/', 'Gecko', join('', $rand_year, $rand_month, $rand_day);
   my $platform = $random->select([
     ['Macintosh', ['Mac OS ##.#', 'Max OS X ##.#'], ['Chrome', 'Safari']],
     ['Windows', ['Windows ##.#', 'Windows NT ##.#'], ['Chrome', 'Edge', 'Firefox']],

@@ -13,7 +13,7 @@ Software Version for Faker
 
 =head1 VERSION
 
-1.18
+1.19
 
 =cut
 

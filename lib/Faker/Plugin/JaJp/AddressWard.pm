@@ -11,7 +11,7 @@ base 'Faker::Plugin::JaJp';
 
 # VERSION
 
-our $VERSION = '1.18';
+our $VERSION = '1.19';
 
 # METHODS
 

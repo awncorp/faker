@@ -1,5 +1,9 @@
 # Changelog
 
+## Version: 1.19
+
+- [update] Fix CPANTs test failures
+
 ## Version: 1.18
 
 - [feature] Implement user-agent plugin

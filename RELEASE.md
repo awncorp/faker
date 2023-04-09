@@ -1,9 +1,7 @@
 # Release
 
-## Version: 1.18
+## Version: 1.19
 
-- [feature] Implement user-agent plugin
-- [update] Resolve test failure reports
-- [update] Update architecture and documentation
+- [update] Fix CPANTs test failures
 
 

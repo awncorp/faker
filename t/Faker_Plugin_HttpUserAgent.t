@@ -108,15 +108,15 @@ The execute method returns a returns a random fake HTTP user-agent.
 
   # my $result = $plugin->execute;
 
-  # "Mozilla/6.1 (Macintosh; U; Max OS X 50.7; rv:6.8.4) ... Safari/5.4.4";
+  # "Mozilla/6.1 (Windows; U; Windows NT 07.6; rv:0.4.5) ... Windows Firefox/4.4.3";
 
   # my $result = $plugin->execute;
 
-  # "Mozilla/9.0 (X11; U; Linux x86_64; rv:0.3) Gecko/20210406 X11 Chrome/5.8";
+  # "Mozilla/5.8 (Macintosh; U; Mac OS 58.2; rv:0.02) ... Macintosh Safari/0.5";
 
   # my $result = $plugin->execute;
 
-  # "Mozilla/9.8 (Macintosh; U; Max OS X 52.3; rv:0.9.1) ... Chrome/2.50";
+  # "Mozilla/9.9 (Macintosh; U; Mac OS 58.9; rv:1.25) ... Macintosh Safari/0.6";
 
 =cut
 
@@ -127,11 +127,11 @@ $test->for('example', 1, 'execute', sub {
   ok $result->faker;
   ok $result->faker->random->reseed($seed);
   ok $result->faker->random->pick; # reset randomizer
-  is $result->execute, 'Mozilla/6.1 (Macintosh; U; Max OS X 50.7; rv:6.8.4) Gecko/20110406 Macintosh Safari/5.4.4';
+  is $result->execute, 'Mozilla/6.1 (Windows; U; Windows NT 07.6; rv:0.4.5) Gecko/20110124 Windows Firefox/4.4.3';
   ok $result->faker->random->pick; # reset randomizer
-  is $result->execute, 'Mozilla/9.0 (X11; U; Linux x86_64; rv:0.3) Gecko/20210406 X11 Chrome/5.8';
+  is $result->execute, 'Mozilla/5.8 (Macintosh; U; Mac OS 58.2; rv:0.02) Gecko/20231108 Macintosh Safari/0.5';
   ok $result->faker->random->pick; # reset randomizer
-  is $result->execute, 'Mozilla/9.8 (Macintosh; U; Max OS X 52.3; rv:0.9.1) Gecko/20070406 Macintosh Chrome/2.50';
+  is $result->execute, 'Mozilla/9.9 (Macintosh; U; Mac OS 58.9; rv:1.25) Gecko/20050715 Macintosh Safari/0.6';
 
   $result
 });
